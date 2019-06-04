@@ -1,0 +1,42 @@
+{
+  "name": "borodutch",
+  "version": "1.0.0",
+  "description": "Borodutch profile page",
+  "repository": "https://github.com/backmeupplz/borodutch",
+  "author": "backmeupplz <backmeupplz@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build && rm -rf docs && mv dist docs",
+    "distribute": "vue-cli-service serve --mode development"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-property-decorator": "^8.1.1",
+    "vue-router": "^3.0.3",
+    "vuetify": "^1.5.14"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-typescript": "^3.6.0",
+    "@vue/cli-service": "^3.6.0",
+    "sass": "^1.18.0",
+    "sass-loader": "^7.1.0",
+    "typescript": "^3.4.3",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
