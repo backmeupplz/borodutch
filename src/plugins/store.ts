@@ -36,6 +36,6 @@ export const setStats = (stats: any) => {
 
 // Get state
 async function getState() {
-  setStats((await axios.get('http://localhost:1339/stats')).data)
+  setStats((await axios.get('https://stats.borodutch.com/stats')).data)
 }
 getState()
