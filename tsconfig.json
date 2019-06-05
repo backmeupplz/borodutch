@@ -32,5 +32,9 @@
     "tests/**/*.tsx"
   ],
   "exclude": ["node_modules"],
-  "files": ["types/shims-tsx.d.ts", "types/shims-vue.d.ts"]
+  "files": [
+    "types/shims-tsx.d.ts",
+    "types/shims-vue.d.ts",
+    "types/vue-morris.d.ts"
+  ]
 }
