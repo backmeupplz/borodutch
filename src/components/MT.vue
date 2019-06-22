@@ -12,6 +12,10 @@
       p Mamkin Trade was used by {{stats ? stats.userCount : '~'}} users who created {{stats ? stats.orderCount : '~'}} orders trading ${{stats ? stats.website.totalUSDTraded.toFixed(2) : '~'}}.
       bar-chart(:chart-data='userData')
       bar-chart(:chart-data='orderData')
+      .title.pb-2 Publications
+      ul
+        li(v-for='link in links')
+          a(:href='link.link' target="_blank") {{link.name}}
 </template>
 
 <script lang="ts">
@@ -26,6 +30,18 @@ import { daysAgo } from "../helpers/daysAgo";
   components: { BarChart }
 })
 export default class MT extends Vue {
+  links = [
+    {
+      link: "https://www.producthunt.com/posts/mamkin-trade",
+      name: "Product Hunt: Mamkin Trade"
+    },
+    {
+      link:
+        "https://vc.ru/dev/68012-kak-ya-zapustil-simulyator-torgov-kriptoy-mamkin-treyder-za-dve-nedeli",
+      name:
+        "VC: Как я запустил симулятор торгов криптой «Мамкин Трейдер» за две недели"
+    }
+  ];
   userData: any = {
     labels: [],
     datasets: []
