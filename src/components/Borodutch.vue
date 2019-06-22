@@ -1,11 +1,16 @@
 <template lang="pug">
-  v-layout.column.align-center.pt-3
-    v-card(max-width="600px")
-      v-card-title
-        .headline Borodutch
-      v-card-text
-        p This is this website! Quite spectacular that you can check the requests to it as well, right? Don't expect it to have much as it's mainly visited by myself to check on metrics.
-        bar-chart(:chart-data='datacollection')
+  v-card
+    v-card-title
+      .headline Borodutch
+    v-card-text
+      p This is this website! Quite spectacular that you can check the requests to it as well in 21st century, right? Don't expect it to have many hits though as it's mainly visited by myself to check on the projects metrics.
+      p
+        | It's open source. Here's the code for 
+        a(href="https://github.com/backmeupplz/borodutch") the website
+        |  and for 
+        a(href="https://github.com/backmeupplz/borodutch-stats") the stats server
+        | .
+      bar-chart(:chart-data='datacollection')
 </template>
 
 <script lang="ts">

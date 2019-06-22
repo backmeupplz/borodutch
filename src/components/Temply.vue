@@ -1,11 +1,15 @@
 <template lang="pug">
   v-card
     v-card-title
-      .headline ResetBot
-      v-btn(flat icon color='grey' @click='open("https://resetbot.com")')
+      .headline Temply
+      v-btn(flat icon color='grey' @click='open("https://t.me/temply_bot")')
         v-icon(small) link
     v-card-text
-      p This website is intended to reset your Telegram bot getUpdates method. Usefull, when bot updates get stuck for some unknown reason.
+      p
+        | Inline Telegram bot allowing users to create varios text templates an quickly use them later. Pretty useful for support workers as well as channel administrators. Completely free and 
+        a(href="https://github.com/backmeupplz/temply") open source
+        | .
+      p Temply was used by {{stats ? stats.userCount : '~'}} users, who created {{stats ? stats.templatesCount : '~'}} templates.
       bar-chart(:chart-data='datacollection')
 </template>
 
@@ -20,25 +24,25 @@ import { daysAgo } from "../helpers/daysAgo";
 @Component({
   components: { BarChart }
 })
-export default class Resetbot extends Vue {
+export default class Temply extends Vue {
   datacollection: any = {
     labels: [],
     datasets: []
   };
 
   get stats() {
-    return store.stats().resetbot;
+    return store.stats().temply;
   }
 
   @Watch("stats")
   statsChanged() {
     this.datacollection = {
-      labels: this.stats.map((a: any, i: number) => daysAgo(i)).reverse(),
+      labels: this.stats.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
       datasets: [
         {
-          label: "Number of visits",
+          label: "Number of new users",
           backgroundColor: "#f87979",
-          data: this.stats
+          data: this.stats.userDaily.map((o: any) => o.count)
         }
       ]
     };

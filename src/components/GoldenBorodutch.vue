@@ -1,12 +1,11 @@
 <template lang="pug">
-  v-layout.column.align-center.pt-3
-    v-card(max-width="600px")
-      v-card-title
-        .headline Golden Borodutch
-        v-btn(flat icon color='grey' @click='open("https://t.me/golden_borodutch")')
-          v-icon(small) link
-      v-card-text
-        p It's my personal blog with {{stats ? stats.subCount : '~'}} subscribers. Nothing special, just some thoughts about business, IT, development, etc. You know, yet another personal blog. You should subscribe though. Careful: it's in Russian.
+  v-card
+    v-card-title
+      .headline Golden Borodutch
+      v-btn(flat icon color='grey' @click='open("https://t.me/golden_borodutch")')
+        v-icon(small) link
+    v-card-text
+      p It's my personal blog with {{stats ? stats.subCount : '~'}} subscribers. Nothing special, just some thoughts about business, IT, development, book reviews, lifestyle facts, etc. You know, yet another personal blog. I'd be pleased if you subscribed though. Careful: it's in Russian.
 </template>
 
 <script lang="ts">

@@ -1,17 +1,19 @@
 <template lang="pug">
-  v-layout.column.align-center.pt-3
-    v-card(max-width="600px")
-      v-card-title
-        .headline Fondu
-        v-btn(flat icon color='grey' @click='open("https://fondu.io")')
-          v-icon(small) link
-      v-card-text
-        p ERC-20 Ethereum smart-contract builder. Completely free and open source. Hosted on the GitHub Pages.
-        bar-chart(:chart-data='datacollection')
-        .title.pb-2 Publications
-        ul
-          li(v-for='link in links')
-            a(:href='link.link' target="_blank") {{link.name}}
+  v-card
+    v-card-title
+      .headline Fondu
+      v-btn(flat icon color='grey' @click='open("https://fondu.io")')
+        v-icon(small) link
+    v-card-text
+      p
+        | ERC-20 Ethereum smart-contract builder. Completely free and 
+        a(href="https://github.com/backmeupplz/fondu") open source
+        | . Hosted on the GitHub Pages.
+      bar-chart(:chart-data='datacollection')
+      .title.pb-2 Publications
+      ul
+        li(v-for='link in links')
+          a(:href='link.link' target="_blank") {{link.name}}
 </template>
 
 <script lang="ts">

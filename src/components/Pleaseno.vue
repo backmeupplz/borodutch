@@ -1,17 +1,19 @@
 <template lang="pug">
-  v-layout.column.align-center.pt-3
-    v-card(max-width="600px")
-      v-card-title
-        .headline Please, no
-        v-btn(flat icon color='grey' @click='open("https://pleaseno.me")')
-          v-icon(small) link
-      v-card-text
-        p A simple webpage that has two pages: one just shows "Please, no" text, another also shows a "Please, no" GIF. I use it when I can simply answer "Please, no" to particular things. Completely free and open source. Hosted on the GitHub Pages as well.
-        bar-chart(:chart-data='datacollection')
-        .title.pb-2 Publications
-        ul
-          li(v-for='link in links')
-            a(:href='link.link' target="_blank") {{link.name}}
+  v-card
+    v-card-title
+      .headline Please, no
+      v-btn(flat icon color='grey' @click='open("https://pleaseno.me")')
+        v-icon(small) link
+    v-card-text
+      p
+        | A simple webpage that has two pages: one just shows "Please, no" text, another also shows a "Please, no" GIF. I use it when I can simply answer "Please, no" to particular things. Completely free and 
+        a(href="https://github.com/backmeupplz/pleaseno") open source
+        | . Hosted on the GitHub Pages as well.
+      bar-chart(:chart-data='datacollection')
+      .title.pb-2 Publications
+      ul
+        li(v-for='link in links')
+          a(:href='link.link' target="_blank") {{link.name}}
 </template>
 
 <script lang="ts">

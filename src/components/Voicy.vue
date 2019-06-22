@@ -1,23 +1,25 @@
 <template lang="pug">
-  v-layout.column.align-center.pt-3
-    v-card(max-width="600px")
-      v-card-title
-        .headline Voicy
-        v-btn(flat icon color='grey' @click='open("https://t.me/voicybot")')
-          v-icon(small) link
-      v-card-text
-        p Voicy is a Telegram bot that converts speech to text from any voice messages and audio files it receives. This is one of my favorite pet projects. It supports over 100 languages and works with either Wit or Google speech recognition neural networks.
-        p If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time.
-        p Voicy is currently installed at {{stats.stats ? stats.stats.chatCount : '~'}} chats, recognized {{stats.stats ? stats.stats.voiceCount : '~'}} voice messages resulting in {{stats.stats ? (stats.stats.duration / 60 / 60 / 24 / 365).toFixed(2) : '~'}} years of speech.
-        bar-chart(:chart-data='cloudflareData')
-        bar-chart(:chart-data='voicePerDayData')
-        bar-chart(:chart-data='messagesPerDayData')
-        bar-chart(:chart-data='chatsPerDayData')
-        bar-chart(:chart-data='responseDelay')
-        .title.pb-2 Publications
-        ul
-          li(v-for='link in links')
-            a(:href='link.link' target="_blank") {{link.name}}
+  v-card
+    v-card-title
+      .headline Voicy
+      v-btn(flat icon color='grey' @click='open("https://t.me/voicybot")')
+        v-icon(small) link
+    v-card-text
+      p Voicy is a Telegram bot that converts speech to text from any voice messages and audio files it receives. This is one of my favorite pet projects. It supports over 100 languages and works with either Wit or Google speech recognition neural networks.
+      p Voicy is currently installed at {{stats.stats ? stats.stats.chatCount : '~'}} chats, recognized {{stats.stats ? stats.stats.voiceCount : '~'}} voice messages resulting in {{stats.stats ? (stats.stats.duration / 60 / 60 / 24 / 365).toFixed(2) : '~'}} years of speech.
+      p
+        | If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time. It's 
+        a(href="https://github.com/backmeupplz/voicy") open source
+        |.
+      bar-chart(:chart-data='cloudflareData')
+      bar-chart(:chart-data='voicePerDayData')
+      bar-chart(:chart-data='messagesPerDayData')
+      bar-chart(:chart-data='chatsPerDayData')
+      bar-chart(:chart-data='responseDelay')
+      .title.pb-2 Publications
+      ul
+        li(v-for='link in links')
+          a(:href='link.link' target="_blank") {{link.name}}
 </template>
 
 <script lang="ts">
