@@ -7,6 +7,7 @@
             Profile.ma-1
             Voicy.ma-1
             Shieldy.ma-1
+            TLGCoin.ma-1
         v-flex(xs12 md4)
           v-layout(column)
             GoldenBorodutch.ma-1
@@ -21,7 +22,6 @@
             Arbeitbot.ma-1
             Temply.ma-1
             Randym.ma-1
-            TLGCoin.ma-1
 </template>
 
 <script lang="ts">
