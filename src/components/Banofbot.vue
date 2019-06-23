@@ -79,7 +79,7 @@ export default class Banofbot extends Vue {
         {
           label: "Number of new requests",
           backgroundColor: "#f87979",
-          data: this.stats.chatDaily.map((o: any) => o.count)
+          data: this.stats.requestDaily.map((o: any) => o.count)
         }
       ]
     };
