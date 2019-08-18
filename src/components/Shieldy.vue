@@ -47,13 +47,18 @@ export default class Shieldy extends Vue {
 
   @Watch("stats")
   statsChanged() {
+    console.log(this.stats.chatDaily);
+    const labels = this.stats.chatDaily
+      .map((a: any) => daysAgo(a._id))
+      .reverse();
+    const data = this.stats.chatDaily.map((o: any) => o.count).reverse();
     this.chatData = {
-      labels: this.stats.chatDaily.map((a: any) => daysAgo(a._id)).reverse(),
+      labels,
       datasets: [
         {
           label: "Number of new chats",
           backgroundColor: "#f87979",
-          data: this.stats.chatDaily.map((o: any) => o.count)
+          data
         }
       ]
     };
