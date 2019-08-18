@@ -58,17 +58,12 @@ export default class MT extends Vue {
   @Watch("stats")
   statsChanged() {
     this.userData = {
-      labels: this.stats.userDaily
-        .filter((o: any) => o._id !== null)
-        .map((a: any) => daysAgo(a._id))
-        .reverse(),
+      labels: this.stats.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
       datasets: [
         {
           label: "Number of new users",
           backgroundColor: "#f87979",
-          data: this.stats.userDaily
-            .filter((o: any) => o._id !== null)
-            .map((o: any) => o.count)
+          data: this.stats.userDaily.map((o: any) => o.count).reverse()
         }
       ]
     };
@@ -79,7 +74,7 @@ export default class MT extends Vue {
         {
           label: "Number of new orders",
           backgroundColor: "#f87979",
-          data: this.stats.orderDaily.map((o: any) => o.count)
+          data: this.stats.orderDaily.map((o: any) => o.count).reverse()
         }
       ]
     };

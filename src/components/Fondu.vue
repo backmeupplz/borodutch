@@ -82,7 +82,7 @@ export default class Fondu extends Vue {
         {
           label: "Number of visits",
           backgroundColor: "#f87979",
-          data: this.stats
+          data: this.stats.map((v: any) => v)
         }
       ]
     };

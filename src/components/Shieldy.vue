@@ -47,7 +47,6 @@ export default class Shieldy extends Vue {
 
   @Watch("stats")
   statsChanged() {
-    console.log(this.stats.chatDaily);
     const labels = this.stats.chatDaily
       .map((a: any) => daysAgo(a._id))
       .reverse();

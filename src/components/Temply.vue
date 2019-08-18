@@ -42,7 +42,7 @@ export default class Temply extends Vue {
         {
           label: "Number of new users",
           backgroundColor: "#f87979",
-          data: this.stats.userDaily.map((o: any) => o.count)
+          data: this.stats.userDaily.map((o: any) => o.count).reverse()
         }
       ]
     };

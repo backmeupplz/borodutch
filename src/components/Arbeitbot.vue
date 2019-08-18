@@ -81,23 +81,18 @@ export default class Arbeitbot extends Vue {
         {
           label: "Number of new users",
           backgroundColor: "#f87979",
-          data: this.stats.userDaily.map((o: any) => o.count)
+          data: this.stats.userDaily.map((o: any) => o.count).reverse()
         }
       ]
     };
 
     this.jobData = {
-      labels: this.stats.jobDaily
-        .filter((o: any) => o._id !== null)
-        .map((a: any) => daysAgo(a._id))
-        .reverse(),
+      labels: this.stats.jobDaily.map((a: any) => daysAgo(a._id)).reverse(),
       datasets: [
         {
           label: "Number of new jobs",
           backgroundColor: "#f87979",
-          data: this.stats.jobDaily
-            .filter((o: any) => o._id !== null)
-            .map((o: any) => o.count)
+          data: this.stats.jobDaily.map((o: any) => o.count).reverse()
         }
       ]
     };
