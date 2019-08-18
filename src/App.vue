@@ -13,6 +13,7 @@
             GoldenBorodutch.ma-1
             MT.ma-1
             Fondu.ma-1
+            Todorant.ma-1
             Pleaseno.ma-1
             Resetbot.ma-1
             Borodutch.ma-1
@@ -39,6 +40,7 @@ import Randym from "./components/Randym.vue";
 import Temply from "./components/Temply.vue";
 import Shieldy from "./components/Shieldy.vue";
 import Arbeitbot from "./components/Arbeitbot.vue";
+import Todorant from "./components/Todorant.vue";
 import MT from "./components/MT.vue";
 
 export default {
@@ -56,6 +58,7 @@ export default {
     Temply,
     Shieldy,
     Arbeitbot,
+    Todorant,
     MT
   }
 };

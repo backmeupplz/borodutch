@@ -100,7 +100,7 @@ export default class Voicy extends Vue {
     };
     this.voicePerDayData = {
       labels: this.stats.stats.hourlyStats
-        .map((a: any, i: number) => daysAgo(i))
+        .map((a: any) => daysAgo(a._id))
         .reverse(),
       datasets: [
         {
@@ -139,9 +139,9 @@ export default class Voicy extends Vue {
       ]
     };
     this.responseDelay = {
-      labels: Object.keys(this.stats.stats.responseTime)
-        .map((a: any) => formatTime(new Date(parseInt(a, 10))))
-        .reverse(),
+      labels: Object.keys(this.stats.stats.responseTime).map((a: any) =>
+        formatTime(new Date(parseInt(a, 10) * 1000))
+      ),
       datasets: [
         {
           label: "Average response delay (s)",
