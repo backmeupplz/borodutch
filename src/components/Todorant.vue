@@ -1,11 +1,11 @@
 <template lang="pug">
   v-card
     v-card-title
-      .headline [WIP] Todorant
+      .headline Todorant
       v-btn(flat icon color='grey' @click='open("https://todorant.com")')
         v-icon(small) link
     v-card-text
-      p Todorant is the only todo manager you will ever need again. It doesn't just help you to keep track of tasks, it manages them for you. Based on "Getting Things Done", "Willpower" and "Eat Your Frog" books.
+      p Todorant is the only todo manager you will ever need again. It doesn't just help you to keep track of tasks, it manages them for you. Based on "Getting Things Done", "Willpower" and "Eat That Frog" books.
       p Todorant is used by {{stats ? stats.db.userCount : '~'}} users who created {{stats ? stats.db.todoCount : '~'}} todos.
       bar-chart(:chart-data='cloudflareData')
       bar-chart(:chart-data='userData')
