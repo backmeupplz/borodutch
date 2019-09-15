@@ -2,7 +2,7 @@
   v-card
     v-card-title
       .headline Shieldy
-      v-btn(flat icon color='grey' @click='open("https://t.me/shieldy")')
+      v-btn(flat icon color='grey' @click='open("https://t.me/shieldy_bot")')
         v-icon(small) link
     v-card-text
       p
