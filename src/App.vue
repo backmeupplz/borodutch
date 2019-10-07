@@ -10,10 +10,10 @@
             TLGCoin.ma-1
         v-flex(xs12 md4)
           v-layout(column)
+            Todorant.ma-1
             GoldenBorodutch.ma-1
             MT.ma-1
             Fondu.ma-1
-            Todorant.ma-1
             Pleaseno.ma-1
             Resetbot.ma-1
             Borodutch.ma-1
