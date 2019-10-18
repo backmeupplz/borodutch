@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: borodutch.com
+Token: ef4c4671c1622103eb7e6740e70cc10bf47a96c5d01ae766fb6061936c244bae
