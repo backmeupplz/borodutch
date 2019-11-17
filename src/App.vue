@@ -10,19 +10,20 @@
             TLGCoin.ma-1
         v-flex(xs12 md4)
           v-layout(column)
-            Todorant.ma-1
             GoldenBorodutch.ma-1
+            Todorant.ma-1
+            Feedr.ma-1
             MT.ma-1
             Fondu.ma-1
             Pleaseno.ma-1
             Resetbot.ma-1
-            Borodutch.ma-1
         v-flex(xs12 md4)
           v-layout(column)
             Banofbot.ma-1
             Arbeitbot.ma-1
             Temply.ma-1
             Randym.ma-1
+            Borodutch.ma-1
 </template>
 
 <script lang="ts">
@@ -41,6 +42,7 @@ import Temply from "./components/Temply.vue";
 import Shieldy from "./components/Shieldy.vue";
 import Arbeitbot from "./components/Arbeitbot.vue";
 import Todorant from "./components/Todorant.vue";
+import Feedr from "./components/Feedr.vue";
 import MT from "./components/MT.vue";
 
 export default {
@@ -59,6 +61,7 @@ export default {
     Shieldy,
     Arbeitbot,
     Todorant,
+    Feedr,
     MT
   }
 };

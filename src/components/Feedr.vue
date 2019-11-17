@@ -1,15 +1,13 @@
 <template lang="pug">
   v-card
     v-card-title
-      .headline Todorant
-      v-btn(flat icon color='grey' @click='open("https://todorant.com")')
+      .headline [WIP] Feedr
+      v-btn(flat icon color='grey' @click='open("https://feedr.chat")')
         v-icon(small) link
     v-card-text
-      p Todorant is the only todo manager you will ever need again. It doesn't just help you to keep track of tasks, it manages them for you. Based on "Getting Things Done", "Willpower" and "Eat That Frog" books.
-      p Todorant is used by {{stats ? stats.db.userCount : '~'}} users who created {{stats ? stats.db.todoCount : '~'}} todos.
-      //- bar-chart(:chart-data='cloudflareData')
+      p Feedr is a simple multi-channel support desk. Feedr is used by {{stats ? stats.db.userCount : '~'}} users who configured {{stats ? stats.db.botCount : '~'}} bots.
       bar-chart(:chart-data='userData')
-      bar-chart(:chart-data='todoData')
+      bar-chart(:chart-data='botData')
 </template>
 
 <script lang="ts">
@@ -23,7 +21,7 @@ import { daysAgo } from "../helpers/daysAgo";
 @Component({
   components: { BarChart }
 })
-export default class Todorant extends Vue {
+export default class Feedr extends Vue {
   cloudflareData: any = {
     labels: [],
     datasets: []
@@ -32,13 +30,13 @@ export default class Todorant extends Vue {
     labels: [],
     datasets: []
   };
-  todoData: any = {
+  botData: any = {
     labels: [],
     datasets: []
   };
 
   get stats() {
-    return store.stats().todorant;
+    return store.stats().feedr;
   }
 
   @Watch("stats")
@@ -49,7 +47,7 @@ export default class Todorant extends Vue {
         .reverse(),
       datasets: [
         {
-          label: "Number of todorant.com visits",
+          label: "Number of feedr.chat visits",
           backgroundColor: "#f87979",
           data: this.stats.cloudflare
         }
@@ -67,13 +65,13 @@ export default class Todorant extends Vue {
       ]
     };
 
-    this.todoData = {
-      labels: this.stats.db.todoDaily.map((a: any) => daysAgo(a._id)).reverse(),
+    this.botData = {
+      labels: this.stats.db.botDaily.map((a: any) => daysAgo(a._id)).reverse(),
       datasets: [
         {
-          label: "Number of new todos",
+          label: "Number of new bots",
           backgroundColor: "#f87979",
-          data: this.stats.db.todoDaily.map((o: any) => o.count).reverse()
+          data: this.stats.db.botDaily.map((o: any) => o.count).reverse()
         }
       ]
     };
