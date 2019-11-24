@@ -24,6 +24,7 @@
             Temply.ma-1
             Randym.ma-1
             Borodutch.ma-1
+            CheckMyTextBot.ma-1
 </template>
 
 <script lang="ts">
@@ -44,6 +45,7 @@ import Arbeitbot from "./components/Arbeitbot.vue";
 import Todorant from "./components/Todorant.vue";
 import Feedr from "./components/Feedr.vue";
 import MT from "./components/MT.vue";
+import CheckMyTextBot from "./components/CheckMyTextBot.vue";
 
 export default {
   components: {
@@ -62,7 +64,8 @@ export default {
     Arbeitbot,
     Todorant,
     Feedr,
-    MT
+    MT,
+    CheckMyTextBot
   }
 };
 </script>
