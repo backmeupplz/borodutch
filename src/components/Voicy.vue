@@ -99,9 +99,7 @@ export default class Voicy extends Vue {
       ]
     };
     this.voicePerDayData = {
-      labels: this.stats.stats.hourlyStats
-        .map((a: any) => daysAgo(a._id))
-        .reverse(),
+      labels: this.stats.stats.hourlyStats.map((a: any) => daysAgo(a._id)),
       datasets: [
         {
           label: "Number of voice messages recognized per day",
