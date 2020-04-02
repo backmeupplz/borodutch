@@ -5,7 +5,7 @@
       v-btn(flat icon color='grey' @click='open("https://resetbot.com")')
         v-icon(small) link
     v-card-text
-      p This website is intended to reset your Telegram bot getUpdates method. Usefull, when bot updates get stuck for some unknown reason.
+      p This website is intended to reset your Telegram bot getUpdates method. Useful, when bot updates get stuck for some unknown reason.
       bar-chart(:chart-data='datacollection')
 </template>
 
