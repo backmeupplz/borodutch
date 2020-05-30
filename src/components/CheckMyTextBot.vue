@@ -7,53 +7,53 @@
     v-card-text
       p
         | Spellcheck Telegram bot. Just add it to your channel, active in private messages and get notified of any typos you post! Completely free and 
-        a(href="https://github.com/backmeupplz/check_my_text_bot") open source
+        a(href="https://github.com/backmeupplz/check_my_text_bot" target="_blank") open source
         | .
       p Check my text bot is used by {{stats ? stats.userCount : '~'}} users.
       bar-chart(:chart-data='userData')
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
-import BarChart from "./BarChart.vue";
-import * as store from "../plugins/store";
-import { daysAgo } from "../helpers/daysAgo";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
+import BarChart from './BarChart.vue'
+import * as store from '../plugins/store'
+import { daysAgo } from '../helpers/daysAgo'
 
 @Component({
-  components: { BarChart }
+  components: { BarChart },
 })
 export default class Shieldy extends Vue {
   userData: any = {
     labels: [],
-    datasets: []
-  };
-
-  get stats() {
-    return store.stats().checkMyTextBot;
+    datasets: [],
   }
 
-  @Watch("stats")
+  get stats() {
+    return store.stats().checkMyTextBot
+  }
+
+  @Watch('stats')
   statsChanged() {
     const labels = this.stats.userDaily
       .map((a: any) => daysAgo(a._id))
-      .reverse();
-    const data = this.stats.userDaily.map((o: any) => o.count).reverse();
+      .reverse()
+    const data = this.stats.userDaily.map((o: any) => o.count).reverse()
     this.userData = {
       labels,
       datasets: [
         {
-          label: "Number of new users",
-          backgroundColor: "#f87979",
-          data
-        }
-      ]
-    };
+          label: 'Number of new users',
+          backgroundColor: '#f87979',
+          data,
+        },
+      ],
+    }
   }
 
   open(link: string) {
-    window.open(link, "_blank");
+    window.open(link, '_blank')
   }
 }
 </script>

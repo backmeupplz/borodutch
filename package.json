@@ -9,7 +9,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build && rm -rf docs && mv dist docs && cp CNAME docs/CNAME",
-    "distribute": "vue-cli-service serve --mode development"
+    "distribute": "vue-cli-service serve --mode development",
+    "update": "yarn build && git add . && git commit -m 'update' && git push"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",

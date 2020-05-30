@@ -7,7 +7,7 @@
     v-card-text
       p
         | Telegram votekick bot. Allows to fight spammers or introduce democracy to chats by allowing users to vote for kicking specific members. Completely free and 
-        a(href="https://github.com/backmeupplz/banofbot") open source
+        a(href="https://github.com/backmeupplz/banofbot" target="_blank") open source
         | .
       p Banofbot was used by {{stats ? stats.userCount : '~'}} users who created {{stats ? stats.requestCount : '~'}} votekick requests in {{stats ? stats.chatCount : '~'}} chats.
       bar-chart(:chart-data='userData')
@@ -16,72 +16,72 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
-import BarChart from "./BarChart.vue";
-import * as store from "../plugins/store";
-import { daysAgo } from "../helpers/daysAgo";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
+import BarChart from './BarChart.vue'
+import * as store from '../plugins/store'
+import { daysAgo } from '../helpers/daysAgo'
 
 @Component({
-  components: { BarChart }
+  components: { BarChart },
 })
 export default class Banofbot extends Vue {
   userData: any = {
     labels: [],
-    datasets: []
-  };
+    datasets: [],
+  }
   chatData: any = {
     labels: [],
-    datasets: []
-  };
+    datasets: [],
+  }
   requestData: any = {
     labels: [],
-    datasets: []
-  };
-
-  get stats() {
-    return store.stats().banofbot;
+    datasets: [],
   }
 
-  @Watch("stats")
+  get stats() {
+    return store.stats().banofbot
+  }
+
+  @Watch('stats')
   statsChanged() {
     this.userData = {
       labels: this.stats.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
       datasets: [
         {
-          label: "Number of new users",
-          backgroundColor: "#f87979",
-          data: this.stats.userDaily.map((o: any) => o.count).reverse()
-        }
-      ]
-    };
+          label: 'Number of new users',
+          backgroundColor: '#f87979',
+          data: this.stats.userDaily.map((o: any) => o.count).reverse(),
+        },
+      ],
+    }
 
     this.chatData = {
       labels: this.stats.chatDaily.map((a: any) => daysAgo(a._id)).reverse(),
       datasets: [
         {
-          label: "Number of new chats",
-          backgroundColor: "#f87979",
-          data: this.stats.chatDaily.map((o: any) => o.count).reverse()
-        }
-      ]
-    };
+          label: 'Number of new chats',
+          backgroundColor: '#f87979',
+          data: this.stats.chatDaily.map((o: any) => o.count).reverse(),
+        },
+      ],
+    }
 
     this.requestData = {
       labels: this.stats.requestDaily.map((a: any) => daysAgo(a._id)).reverse(),
       datasets: [
         {
-          label: "Number of new requests",
-          backgroundColor: "#f87979",
-          data: this.stats.requestDaily.map((o: any) => o.count).reverse()
-        }
-      ]
-    };
+          label: 'Number of new requests',
+          backgroundColor: '#f87979',
+          data: this.stats.requestDaily.map((o: any) => o.count).reverse(),
+        },
+      ],
+    }
   }
 
   open(link: string) {
-    window.open(link, "_blank");
+    window.open(link, '_blank')
   }
 }
 </script>

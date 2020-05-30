@@ -6,24 +6,24 @@ div
         img(src="/images/avatar.jpg")
       h1 Nikita Kolmogorov
       .subheading.mx-2
-        a(href="https://t.me/borodutch") Telegram
+        a(href="https://t.me/borodutch" target="_blank") Telegram
         | , 
-        a(href="https://m.me/borodutch") Facebook
+        a(href="https://m.me/borodutch" target="_blank") Facebook
         | , 
-        a(href="https://linkedin.com/in/nikitakolmogorov") LinkedIn
+        a(href="https://linkedin.com/in/nikitakolmogorov" target="_blank") LinkedIn
         | , 
-        a(href="https://github.com/backmeupplz") GitHub
+        a(href="https://github.com/backmeupplz" target="_blank") GitHub
         | , 
-        a(href="https://vk.com/borodutch") VK
+        a(href="https://vk.com/borodutch" target="_blank") VK
         | , 
-        a(href="mailto:n@borodutch.com") Email
+        a(href="mailto:n@borodutch.com" target="_blank") Email
     v-card-text(v-if='!!numberOfUsers')
       center
         h1 {{numberOfUsers}}
         .title people used my apps today
       p.mt-4.mb-0
         | Updated daily. Curious how I calculated this number? Check out the code 
-        a(href="https://github.com/backmeupplz/borodutch-stats/blob/master/src/helpers/userCount.ts") here
+        a(href="https://github.com/backmeupplz/borodutch-stats/blob/master/src/helpers/userCount.ts" target="_blank") here
         | . Careful: it's not the prettiest code I've written.
   v-card
     v-card-text

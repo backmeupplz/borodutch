@@ -1,14 +1,18 @@
 <template lang="pug">
   v-card
     v-card-title
-      .headline Please, no
-      v-btn(flat icon color='grey' @click='open("https://pleaseno.me")')
+      .headline Localizer
+      v-btn(flat icon color='grey' @click='open("https://localizer.dev")')
         v-icon(small) link
     v-card-text
       p
-        | A simple webpage that has two pages: one just shows "Please, no" text, another also shows a "Please, no" GIF. I use it when I can simply answer "Please, no" to particular things. Completely free and 
-        a(href="https://github.com/backmeupplz/pleaseno" target="_blank") open source
-        | . Hosted on the GitHub Pages as well.
+        | A free open-source self-hosted crowd-translating service. Check out examples at 
+        a(href="https://localize.todorant.com" target="_blank") localize.todorant.com
+        |  and 
+        a(href="https://localize.borodutch.com" target="_blank") localize.borodutch.com
+        | . It is also 
+        a(href="https://github.com/backmeupplz/localizer-backend" target="_blank") open source
+        | .
       bar-chart(:chart-data='datacollection')
       .title.pb-2 Publications
       ul
@@ -27,11 +31,11 @@ import { daysAgo } from '../helpers/daysAgo'
 @Component({
   components: { BarChart },
 })
-export default class Pleaseno extends Vue {
+export default class Localizer extends Vue {
   links = [
     {
-      link: 'https://www.producthunt.com/posts/please-no',
-      name: 'Product Hunt: Please, no',
+      link: 'https://www.producthunt.com/posts/localizer',
+      name: 'Product Hunt: Localizer',
     },
   ]
 
@@ -41,7 +45,7 @@ export default class Pleaseno extends Vue {
   }
 
   get stats() {
-    return store.stats().pleaseno
+    return store.stats().localizer
   }
 
   @Watch('stats')

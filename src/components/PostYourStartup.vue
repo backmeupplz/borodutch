@@ -1,14 +1,16 @@
 <template lang="pug">
   v-card
     v-card-title
-      .headline Please, no
-      v-btn(flat icon color='grey' @click='open("https://pleaseno.me")')
+      .headline Post Your Startup
+      v-btn(flat icon color='grey' @click='open("https://localizer.dev")')
         v-icon(small) link
     v-card-text
       p
-        | A simple webpage that has two pages: one just shows "Please, no" text, another also shows a "Please, no" GIF. I use it when I can simply answer "Please, no" to particular things. Completely free and 
-        a(href="https://github.com/backmeupplz/pleaseno" target="_blank") open source
-        | . Hosted on the GitHub Pages as well.
+        | A list of >120 places to post your startup. I went through 
+        a(href="https://www.placestopostyourstartup.com/") placestopostyourstartup.com
+        | , posted Todorant everywhere and left notes along the way. You can sort and filter the result any way you want. It is also 
+        a(href="https://github.com/backmeupplz/postyourstartup" target="_blank") open source
+        | .
       bar-chart(:chart-data='datacollection')
       .title.pb-2 Publications
       ul
@@ -27,11 +29,11 @@ import { daysAgo } from '../helpers/daysAgo'
 @Component({
   components: { BarChart },
 })
-export default class Pleaseno extends Vue {
+export default class PostYourStartup extends Vue {
   links = [
     {
-      link: 'https://www.producthunt.com/posts/please-no',
-      name: 'Product Hunt: Please, no',
+      link: 'https://www.producthunt.com/posts/post-your-startup',
+      name: 'Product Hunt: Post Your Startup',
     },
   ]
 
@@ -41,7 +43,7 @@ export default class Pleaseno extends Vue {
   }
 
   get stats() {
-    return store.stats().pleaseno
+    return store.stats().postyourstartup
   }
 
   @Watch('stats')
