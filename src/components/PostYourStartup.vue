@@ -2,7 +2,7 @@
   v-card
     v-card-title
       .headline Post Your Startup
-      v-btn(flat icon color='grey' @click='open("https://localizer.dev")')
+      v-btn(flat icon color='grey' @click='open("https://postyourstartup.com")')
         v-icon(small) link
     v-card-text
       p
