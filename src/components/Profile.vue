@@ -17,6 +17,8 @@ div
         a(href="https://vk.com/borodutch" target="_blank") VK
         | , 
         a(href="mailto:n@borodutch.com" target="_blank") Email
+        | , 
+        a(href="https://blog.borodutch.com" target="_blank") English Blog
     v-card-text(v-if='!!numberOfUsers')
       center
         h1 {{numberOfUsers}}
