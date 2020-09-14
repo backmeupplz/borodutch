@@ -11,6 +11,7 @@
         | If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time. It's 
         a(href="https://github.com/backmeupplz/voicy" target="_blank") open source
         |.
+      p Total number of users is {{stats.stats && stats.numberOfUsers ? stats.numberOfUsers : '~' }}.
       bar-chart(:chart-data='cloudflareData')
       bar-chart(:chart-data='voicePerDayData')
       bar-chart(:chart-data='messagesPerDayData')
@@ -78,6 +79,9 @@ export default class Voicy extends Vue {
 
   get stats() {
     const voicy = store.stats().voicy
+    if (voicy) {
+      voicy.numberOfUsers = store.stats().userCountSeparate.voicy
+    }
     return voicy ? voicy : {}
   }
 

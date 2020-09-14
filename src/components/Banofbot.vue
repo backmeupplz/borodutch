@@ -9,8 +9,7 @@
         | Telegram votekick bot. Allows to fight spammers or introduce democracy to chats by allowing users to vote for kicking specific members. Completely free and 
         a(href="https://github.com/backmeupplz/banofbot" target="_blank") open source
         | .
-      p Banofbot was used by {{stats ? stats.userCount : '~'}} users who created {{stats ? stats.requestCount : '~'}} votekick requests in {{stats ? stats.chatCount : '~'}} chats.
-      bar-chart(:chart-data='userData')
+      p Banofbot was used by {{stats && stats.numberOfUsers ? stats.numberOfUsers : '~'}} users who created {{stats ? stats.requestCount : '~'}} votekick requests in {{stats ? stats.chatCount : '~'}} chats.
       bar-chart(:chart-data='chatData')
       bar-chart(:chart-data='requestData')
 </template>
@@ -41,22 +40,15 @@ export default class Banofbot extends Vue {
   }
 
   get stats() {
-    return store.stats().banofbot
+    const banofbotStats = store.stats().banofbot
+    if (banofbotStats) {
+      banofbotStats.numberOfUsers = store.stats().userCountSeparate.banofbot
+    }
+    return banofbotStats
   }
 
   @Watch('stats')
   statsChanged() {
-    this.userData = {
-      labels: this.stats.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
-      datasets: [
-        {
-          label: 'Number of new users',
-          backgroundColor: '#f87979',
-          data: this.stats.userDaily.map((o: any) => o.count).reverse(),
-        },
-      ],
-    }
-
     this.chatData = {
       labels: this.stats.chatDaily.map((a: any) => daysAgo(a._id)).reverse(),
       datasets: [

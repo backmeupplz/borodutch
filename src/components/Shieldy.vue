@@ -9,7 +9,7 @@
         | Anti-spam Telegram bot that stops 99.99% of annoying spammers by asking users to go throug a very simple captcha-like process and restricting newcomers to only being able to send text (no media). Completely free and 
         a(href="https://github.com/backmeupplz/shieldy" target="_blank") open source
         | .
-      p Shieldy is used by {{stats ? stats.chatCount : '~'}} chats.
+      p Shieldy is used by {{stats ? stats.chatCount : '~'}} chats. Total number of users is {{stats && stats.numberOfUsers ? stats.numberOfUsers : '~' }}.
       bar-chart(:chart-data='chatData')
       .title.pb-2 Publications
       ul
@@ -42,7 +42,11 @@ export default class Shieldy extends Vue {
   }
 
   get stats() {
-    return store.stats().shieldy
+    const shieldyStats = store.stats().shieldy
+    if (shieldyStats) {
+      shieldyStats.numberOfUsers = store.stats().userCountSeparate.shieldy
+    }
+    return shieldyStats
   }
 
   @Watch('stats')

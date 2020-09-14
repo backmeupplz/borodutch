@@ -9,7 +9,7 @@
         | Spellcheck Telegram bot. Just add it to your channel, active in private messages and get notified of any typos you post! Completely free and 
         a(href="https://github.com/backmeupplz/check_my_text_bot" target="_blank") open source
         | .
-      p Check my text bot is used by {{stats ? stats.userCount : '~'}} users.
+      p Check my text bot is used by {{stats ? stats.userCount : '~'}} users. Total number of users is {{stats && stats.numberOfUsers ? stats.numberOfUsers : '~' }}.
       bar-chart(:chart-data='userData')
 </template>
 
@@ -31,7 +31,11 @@ export default class Shieldy extends Vue {
   }
 
   get stats() {
-    return store.stats().checkMyTextBot
+    const check = store.stats().checkMyTextBot
+    if (check) {
+      check.numberOfUsers = store.stats().userCountSeparate.speller
+    }
+    return check
   }
 
   @Watch('stats')

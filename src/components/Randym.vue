@@ -9,7 +9,7 @@
         | Telegram raffle bot that allows channel and group admins to execute raffles with prizes among chat members or channel subscribers. Completely free and 
         a(href="https://github.com/backmeupplz/randymbot" target="_blank") open source
         | .
-      p Randy was used in {{stats ? stats.chatCount : '~'}} chats to execute {{stats ? stats.raffleCount : '~'}} raffles.
+      p Randy was used in {{stats ? stats.chatCount : '~'}} chats to execute {{stats ? stats.raffleCount : '~'}} raffles. Total number of users is {{stats && stats.numberOfUsers ? stats.numberOfUsers : '~' }}.
 </template>
 
 <script lang="ts">
@@ -20,7 +20,11 @@ import * as store from '../plugins/store'
 @Component
 export default class Randym extends Vue {
   get stats() {
-    return store.stats().randym
+    const randyStats = store.stats().randym
+    if (randyStats) {
+      randyStats.numberOfUsers = store.stats().userCountSeparate.randy
+    }
+    return randyStats
   }
 
   open(link: string) {
