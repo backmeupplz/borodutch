@@ -1,59 +1,42 @@
 <template lang="pug">
-  v-card
-    v-card-title
-      .headline Check my text bot
-      v-btn(flat icon color='grey' @click='open("https://t.me/check_my_text_bot")')
-        v-icon(small) link
-    v-card-text
-      p
-        | Spellcheck Telegram bot. Just add it to your channel, active in private messages and get notified of any typos you post! Completely free and 
-        a(href="https://github.com/backmeupplz/check_my_text_bot" target="_blank") open source
-        | .
-      p Check my text bot is used by {{stats ? stats.userCount : '~'}} users. Total number of users is {{stats && stats.numberOfUsers ? stats.numberOfUsers : '~' }}.
-      bar-chart(:chart-data='userData')
+ProjectCard(
+  title='Check my text bot',
+  link='https://t.me/check_my_text_bot',
+  :numberOfUsers='numberOfUsers',
+  :index='7',
+  :noExtra='true'
+)
+  div(slot='description')
+    p
+      | Spellcheck Telegram bot. Just add it to your channel, active in private messages and get notified of any typos you post! Completely free and
+      | {{ " " }}
+      Link(url='https://github.com/backmeupplz/check_my_text_bot') open source
+      | .
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Watch } from 'vue-property-decorator'
-import BarChart from './BarChart.vue'
-import { daysAgo } from '../helpers/daysAgo'
+import ProjectCard from '@/components/ProjectCard.vue'
+import BarChart from '@/components/BarChart.vue'
+import Loader from '@/components/Loader.vue'
+import Link from '@/components/Link.vue'
+import { namespace } from 'vuex-class'
+import { toSpaces } from '@/helpers/toSpaces'
+
+const AppStore = namespace('AppStore')
 
 @Component({
-  components: { BarChart },
+  components: { BarChart, ProjectCard, Loader, Link },
 })
 export default class Shieldy extends Vue {
-  // userData: any = {
-  //   labels: [],
-  //   datasets: [],
-  // }
-  // get stats() {
-  //   const check = store.stats().checkMyTextBot
-  //   if (check) {
-  //     check.numberOfUsers = store.stats().userCountSeparate.speller
-  //   }
-  //   return check
-  // }
-  // @Watch('stats')
-  // statsChanged() {
-  //   const labels = this.stats.userDaily
-  //     .map((a: any) => daysAgo(a._id))
-  //     .reverse()
-  //   const data = this.stats.userDaily.map((o: any) => o.count).reverse()
-  //   this.userData = {
-  //     labels,
-  //     datasets: [
-  //       {
-  //         label: 'Number of new users',
-  //         backgroundColor: '#f87979',
-  //         data,
-  //       },
-  //     ],
-  //   }
-  // }
-  // open(link: string) {
-  //   window.open(link, '_blank')
-  // }
+  @AppStore.State stats?: any
+  @AppStore.State color!: string
+
+  get numberOfUsers() {
+    return this.stats.userCountSeparate && this.stats.userCountSeparate.speller
+      ? toSpaces(this.stats.userCountSeparate.speller)
+      : undefined
+  }
 }
 </script>

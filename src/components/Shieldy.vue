@@ -20,8 +20,8 @@ ProjectCard(
       | {{ " " }}
       | chats.
   div(slot='charts')
-    v-row(v-show='!!stats.shieldy')
-      v-col(cols='12')
+    v-row.flex-row.justify-center(v-show='!!stats.shieldy')
+      v-col(cols='12', md='6')
         BarChart(:chartData='chartData')
     v-row.d-flex.flex-row.justify-center.align-center.my-4(
       v-if='!stats.shieldy'

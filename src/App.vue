@@ -12,28 +12,40 @@ v-app
       Shieldy
     v-row
       Banofbot
+    v-row
+      Randym
+    v-row
+      Todorant
+    v-row
+      Feedr
+    v-row
+      GoldenBorodutch
+    v-row
+      CheckMyTextBot
+    v-row
+      TLGCoin
+    v-row
+      Borodutch
+    v-row
+      Temply
+    v-row
+      Arbeitbot
+    v-row
+      Localizer
     //- v-layout(row wrap)
     //-   v-flex(xs12 md4)
     //-     v-layout(column)
-    //-       Localizer.ma-1
     //-       PostYourStartup.ma-1
     //-   v-flex(xs12 md4)
     //-     v-layout(column)
-    //-       GoldenBorodutch.ma-1
-    //-       Todorant.ma-1
-    //-       Feedr.ma-1
     //-       MT.ma-1
     //-       Fondu.ma-1
     //-       Pleaseno.ma-1
     //-       Resetbot.ma-1
     //-   v-flex(xs12 md4)
     //-     v-layout(column)
-    //-       Arbeitbot.ma-1
-    //-       Temply.ma-1
-    //-       Randym.ma-1
-    //-       Borodutch.ma-1
-    //-       CheckMyTextBot.ma-1
-    //-       TLGCoin.ma-1
+    v-row.justify-center.mt-4
+      .thank-you Thank you for scrolling!
 </template>
 
 <script lang="ts">
@@ -45,6 +57,16 @@ import ShowStatsButton from '@/components/ShowStatsButton.vue'
 import Voicy from '@/components/Voicy.vue'
 import Shieldy from '@/components/Shieldy.vue'
 import Banofbot from '@/components/Banofbot.vue'
+import Randym from '@/components/Randym.vue'
+import Todorant from '@/components/Todorant.vue'
+import Feedr from '@/components/Feedr.vue'
+import GoldenBorodutch from '@/components/GoldenBorodutch.vue'
+import CheckMyTextBot from '@/components/CheckMyTextBot.vue'
+import TLGCoin from '@/components/TLGCoin.vue'
+import Borodutch from '@/components/Borodutch.vue'
+import Temply from '@/components/Temply.vue'
+import Arbeitbot from '@/components/Arbeitbot.vue'
+import Localizer from '@/components/Localizer.vue'
 import { namespace } from 'vuex-class'
 
 const AppStore = namespace('AppStore')
@@ -59,6 +81,16 @@ const length = 1
     Voicy,
     Shieldy,
     Banofbot,
+    Randym,
+    Todorant,
+    Feedr,
+    GoldenBorodutch,
+    CheckMyTextBot,
+    TLGCoin,
+    Borodutch,
+    Temply,
+    Arbeitbot,
+    Localizer,
   },
 })
 export default class App extends Vue {
@@ -89,5 +121,19 @@ export default class App extends Vue {
 .container,
 .v-application--wrap {
   background-color: black !important;
+}
+.thank-you {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.01em;
+
+  color: #ffffff;
+
+  opacity: 0.6;
 }
 </style>

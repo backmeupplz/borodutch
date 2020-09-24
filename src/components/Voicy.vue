@@ -31,7 +31,7 @@ ProjectCard(
       Link(url='https://github.com/backmeupplz/voicy') open source
       | .
   div(slot='charts')
-    v-row(v-show='!!stats.voicy')
+    v-row.flex-row.justify-center(v-show='!!stats.voicy')
       v-col(cols='12', md='6')
         BarChart(:chartData='cloudflareData')
       v-col(cols='12', md='6')
@@ -57,7 +57,6 @@ import { daysAgo, daysAgoLong, formatTime } from '@/helpers/daysAgo'
 import { namespace } from 'vuex-class'
 import { toSpaces } from '@/helpers/toSpaces'
 import { emptyDataSet } from '@/helpers/emptyDataSet'
-import { Watch } from 'vue-property-decorator'
 
 const AppStore = namespace('AppStore')
 

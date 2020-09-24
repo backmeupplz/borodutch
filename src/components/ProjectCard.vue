@@ -7,7 +7,7 @@
         v-btn.ml-2(text, icon, color='grey', :href='link', target='_blank')
           v-icon(small) $arrow
       span.number-of-users(v-if='numberOfUsers') {{ numberOfUsers }} users
-    ShowStatsButton(:click='expandOrCollapse') {{ isOpen ? "Hide stats" : "Show stats" }}
+    ShowStatsButton(v-if='!noExtra', :click='expandOrCollapse') {{ isOpen ? "Hide stats" : "Show stats" }}
   .card-text
     slot(name='description')
   div(v-show='isOpen')
@@ -39,6 +39,7 @@ export default class ProjectCard extends Vue {
   @Prop({ required: false }) numberOfUsers?: number
   @Prop({ required: true }) link!: string
   @Prop({ required: false }) publications?: Publication[]
+  @Prop({ required: false }) noExtra?: boolean
 
   @AppStore.State openPanels!: number[]
   @AppStore.Mutation togglePanel!: (index: number) => void
@@ -60,6 +61,7 @@ export default class ProjectCard extends Vue {
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 12px;
+  width: 100%;
 }
 .title-container {
   display: flex;

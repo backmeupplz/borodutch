@@ -1,80 +1,115 @@
 <template lang="pug">
-  v-card
-    v-card-title
-      .headline Todorant
-      v-btn(flat icon color='grey' @click='open("https://todorant.com")')
-        v-icon(small) link
-    v-card-text
-      p Todorant is the only todo manager you will ever need again. It doesn't just help you to keep track of tasks, it manages them for you. Based on "Getting Things Done", "Willpower" and "Eat That Frog" books.
-      p Todorant is used by {{stats ? stats.db.userCount : '~'}} users who created {{stats ? stats.db.todoCount : '~'}} todos.
-      //- bar-chart(:chart-data='cloudflareData')
-      bar-chart(:chart-data='userData')
-      bar-chart(:chart-data='todoData')
+ProjectCard(
+  title='Todorant',
+  link='https://todorant.com',
+  :numberOfUsers='numberOfUsers',
+  :index='4'
+)
+  div(slot='description')
+    p Todorant is the only todo manager you will ever need again. It doesn't just help you to keep track of tasks, it manages them for you. Based on "Getting Things Done", "Willpower" and "Eat That Frog" books.
+    p
+      | Users on Todorant created
+      | {{ " " }}
+      span(v-if='todoCount') {{ todoCount }}
+      Loader(v-else)
+      | {{ " " }}
+      | todos.
+  div(slot='charts')
+    v-row.flex-row.justify-center(v-show='!!stats.voicy')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='cloudflareData')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='userData')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='todoData')
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
-import BarChart from './BarChart.vue'
-import { daysAgo } from '../helpers/daysAgo'
+import { namespace } from 'vuex-class'
+import ProjectCard from '@/components/ProjectCard.vue'
+import BarChart from '@/components/BarChart.vue'
+import Loader from '@/components/Loader.vue'
+import Link from '@/components/Link.vue'
+import { toSpaces } from '@/helpers/toSpaces'
+import { emptyDataSet } from '@/helpers/emptyDataSet'
+import { daysAgo } from '@/helpers/daysAgo'
+
+const AppStore = namespace('AppStore')
 
 @Component({
-  components: { BarChart },
+  components: { BarChart, ProjectCard, Loader, Link },
 })
 export default class Todorant extends Vue {
-  // cloudflareData: any = {
-  //   labels: [],
-  //   datasets: []
-  // };
-  // userData: any = {
-  //   labels: [],
-  //   datasets: []
-  // };
-  // todoData: any = {
-  //   labels: [],
-  //   datasets: []
-  // };
-  // get stats() {
-  //   return store.stats().todorant;
-  // }
-  // @Watch("stats")
-  // statsChanged() {
-  //   this.cloudflareData = {
-  //     labels: this.stats.cloudflare
-  //       .map((a: any, i: number) => daysAgo(i))
-  //       .reverse(),
-  //     datasets: [
-  //       {
-  //         label: "Number of todorant.com visits",
-  //         backgroundColor: "#f87979",
-  //         data: this.stats.cloudflare
-  //       }
-  //     ]
-  //   };
-  //   this.userData = {
-  //     labels: this.stats.db.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
-  //     datasets: [
-  //       {
-  //         label: "Number of new users",
-  //         backgroundColor: "#f87979",
-  //         data: this.stats.db.userDaily.map((o: any) => o.count).reverse()
-  //       }
-  //     ]
-  //   };
-  //   this.todoData = {
-  //     labels: this.stats.db.todoDaily.map((a: any) => daysAgo(a._id)).reverse(),
-  //     datasets: [
-  //       {
-  //         label: "Number of new todos",
-  //         backgroundColor: "#f87979",
-  //         data: this.stats.db.todoDaily.map((o: any) => o.count).reverse()
-  //       }
-  //     ]
-  //   };
-  // }
-  // open(link: string) {
-  //   window.open(link, "_blank");
-  // }
+  @AppStore.State stats?: any
+  @AppStore.State color!: string
+
+  get numberOfUsers() {
+    return this.stats.userCountSeparate && this.stats.userCountSeparate.todorant
+      ? toSpaces(this.stats.userCountSeparate.todorant)
+      : undefined
+  }
+
+  get todoCount() {
+    return this.stats.todorant
+      ? toSpaces(this.stats.todorant.db.todoCount)
+      : undefined
+  }
+
+  get cloudflareData() {
+    return !this.stats.todorant
+      ? emptyDataSet
+      : {
+          labels: this.stats.todorant.cloudflare
+            .map((a: any, i: number) => daysAgo(i))
+            .reverse(),
+          datasets: [
+            {
+              label: 'Number of todorant.com visits',
+              backgroundColor: this.color,
+              data: this.stats.todorant.cloudflare,
+            },
+          ],
+        }
+  }
+
+  get userData() {
+    return !this.stats.todorant
+      ? emptyDataSet
+      : {
+          labels: this.stats.todorant.db.userDaily
+            .map((a: any) => daysAgo(a._id))
+            .reverse(),
+          datasets: [
+            {
+              label: 'Number of new users',
+              backgroundColor: this.color,
+              data: this.stats.todorant.db.userDaily
+                .map((o: any) => o.count)
+                .reverse(),
+            },
+          ],
+        }
+  }
+  get todoData() {
+    return !this.stats.todorant
+      ? emptyDataSet
+      : {
+          labels: this.stats.todorant.db.todoDaily
+            .map((a: any) => daysAgo(a._id))
+            .reverse(),
+          datasets: [
+            {
+              label: 'Number of new todos',
+              backgroundColor: this.color,
+              data: this.stats.todorant.db.todoDaily
+                .map((o: any) => o.count)
+                .reverse(),
+            },
+          ],
+        }
+  }
 }
 </script>
