@@ -22,53 +22,48 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
 import BarChart from './BarChart.vue'
-import * as store from '../plugins/store'
 import { daysAgo } from '../helpers/daysAgo'
 
 @Component({
   components: { BarChart },
 })
 export default class Shieldy extends Vue {
-  links = [
-    {
-      link: 'https://www.producthunt.com/posts/shieldy',
-      name: 'Product Hunt: Shieldy',
-    },
-  ]
-
-  chatData: any = {
-    labels: [],
-    datasets: [],
-  }
-
-  get stats() {
-    const shieldyStats = store.stats().shieldy
-    if (shieldyStats) {
-      shieldyStats.numberOfUsers = store.stats().userCountSeparate.shieldy
-    }
-    return shieldyStats
-  }
-
-  @Watch('stats')
-  statsChanged() {
-    const labels = this.stats.chatDaily
-      .map((a: any) => daysAgo(a._id))
-      .reverse()
-    const data = this.stats.chatDaily.map((o: any) => o.count).reverse()
-    this.chatData = {
-      labels,
-      datasets: [
-        {
-          label: 'Number of new chats',
-          backgroundColor: '#f87979',
-          data,
-        },
-      ],
-    }
-  }
-
-  open(link: string) {
-    window.open(link, '_blank')
-  }
+  // links = [
+  //   {
+  //     link: 'https://www.producthunt.com/posts/shieldy',
+  //     name: 'Product Hunt: Shieldy',
+  //   },
+  // ]
+  // chatData: any = {
+  //   labels: [],
+  //   datasets: [],
+  // }
+  // get stats() {
+  //   const shieldyStats = store.stats().shieldy
+  //   if (shieldyStats) {
+  //     shieldyStats.numberOfUsers = store.stats().userCountSeparate.shieldy
+  //   }
+  //   return shieldyStats
+  // }
+  // @Watch('stats')
+  // statsChanged() {
+  //   const labels = this.stats.chatDaily
+  //     .map((a: any) => daysAgo(a._id))
+  //     .reverse()
+  //   const data = this.stats.chatDaily.map((o: any) => o.count).reverse()
+  //   this.chatData = {
+  //     labels,
+  //     datasets: [
+  //       {
+  //         label: 'Number of new chats',
+  //         backgroundColor: '#f87979',
+  //         data,
+  //       },
+  //     ],
+  //   }
+  // }
+  // open(link: string) {
+  //   window.open(link, '_blank')
+  // }
 }
 </script>

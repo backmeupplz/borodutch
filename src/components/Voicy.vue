@@ -1,41 +1,51 @@
 <template lang="pug">
-  v-card
-    v-card-title
-      .headline Voicy
-      v-btn(flat icon color='grey' @click='open("https://t.me/voicybot")')
-        v-icon(small) link
-    v-card-text
+  ProjectCard(title='Voicy' link='https://t.me/voicybot' :publications='publications' :numberOfUsers='numberOfUsers')
+    div(slot='description')
       p Voicy is a Telegram bot that converts speech to text from any voice messages and audio files it receives. This is one of my favorite pet projects. It supports over 100 languages and works with either Wit or Google speech recognition neural networks.
-      p Voicy is currently installed at {{stats.stats ? stats.stats.chatCount : '~'}} chats, recognized {{stats.stats ? stats.stats.voiceCount : '~'}} voice messages resulting in {{stats.stats ? (stats.stats.duration / 60 / 60 / 24 / 365).toFixed(2) : '~'}} years of speech.
+      p
+        | Voicy is currently installed at 
+        span(v-if='chatCount') {{chatCount}}
+        Loader(v-else)
+        |  chats, recognized 
+        span(v-if='voiceCount') {{voiceCount}}
+        Loader(v-else)
+        |  voice messages resulting in 
+        span(v-if='duration') {{duration}}
+        Loader(v-else)
+        |  years of speech.
       p
         | If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time. It's 
-        a(href="https://github.com/backmeupplz/voicy" target="_blank") open source
-        |.
-      p Total number of users is {{stats.stats && stats.numberOfUsers ? stats.numberOfUsers : '~' }}.
+        Link(url="https://github.com/backmeupplz/voicy") open source
+        | .
+    div(slot='charts')
       bar-chart(:chart-data='cloudflareData')
       bar-chart(:chart-data='voicePerDayData')
       bar-chart(:chart-data='messagesPerDayData')
       bar-chart(:chart-data='chatsPerDayData')
       bar-chart(:chart-data='responseDelay')
-      .title.pb-2 Publications
-      ul
-        li(v-for='link in links')
-          a(:href='link.link' target="_blank") {{link.name}}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Watch } from 'vue-property-decorator'
-import BarChart from './BarChart.vue'
-import * as store from '../plugins/store'
-import { daysAgo, daysAgoLong, formatTime } from '../helpers/daysAgo'
+import ProjectCard from '@/components/ProjectCard.vue'
+import BarChart from '@/components/BarChart.vue'
+import Loader from '@/components/Loader.vue'
+import Link from '@/components/Link.vue'
+import { daysAgo, daysAgoLong, formatTime } from '@/helpers/daysAgo'
+import { namespace } from 'vuex-class'
+import { toSpaces } from '@/helpers/toSpaces'
+import { emptyDataSet } from '@/helpers/emptyDataSet'
+
+const AppStore = namespace('AppStore')
 
 @Component({
-  components: { BarChart },
+  components: { BarChart, ProjectCard, Loader, Link },
 })
 export default class Voicy extends Vue {
-  links = [
+  @AppStore.State stats?: any
+
+  publications = [
     {
       link: 'https://www.producthunt.com/posts/voicy',
       name: 'Product Hunt: Voicy',
@@ -56,106 +66,120 @@ export default class Voicy extends Vue {
     },
   ]
 
-  cloudflareData: any = {
-    labels: [],
-    datasets: [],
-  }
-  voicePerDayData: any = {
-    labels: [],
-    datasets: [],
-  }
-  messagesPerDayData: any = {
-    labels: [],
-    datasets: [],
-  }
-  chatsPerDayData: any = {
-    labels: [],
-    datasets: [],
-  }
-  responseDelay: any = {
-    labels: [],
-    datasets: [],
+  get numberOfUsers() {
+    return this.stats.userCountSeparate && this.stats.userCountSeparate.voicy
+      ? toSpaces(this.stats.userCountSeparate.voicy)
+      : undefined
   }
 
-  get stats() {
-    const voicy = store.stats().voicy
-    if (voicy) {
-      voicy.numberOfUsers = store.stats().userCountSeparate.voicy
-    }
-    return voicy ? voicy : {}
+  get chatCount() {
+    return !this.stats.voicy
+      ? undefined
+      : toSpaces(this.stats.voicy.stats.chatCount)
   }
 
-  @Watch('stats')
-  statsChanged() {
-    if (!this.stats.cloudflare) {
-      return
-    }
-    this.cloudflareData = {
-      labels: this.stats.cloudflare
-        .map((a: any, i: number) => daysAgo(i))
-        .reverse(),
-      datasets: [
-        {
-          label: 'Number of voicybot.com visits',
-          backgroundColor: '#f87979',
-          data: this.stats.cloudflare,
-        },
-      ],
-    }
-    this.voicePerDayData = {
-      labels: this.stats.stats.hourlyStats.map((a: any) => daysAgo(a._id)),
-      datasets: [
-        {
-          label: 'Number of voice messages recognized per day',
-          backgroundColor: '#f87979',
-          data: this.stats.stats.hourlyStats.map((v: any) => v.count),
-        },
-      ],
-    }
-    this.messagesPerDayData = {
-      labels: this.stats.stats.messageStats
-        .map((a: any, i: number) => daysAgo(i))
-        .reverse(),
-      datasets: [
-        {
-          label: 'Number of messages received per day',
-          backgroundColor: '#f87979',
-          data: this.stats.stats.messageStats.map((v: any) => v.count),
-        },
-      ],
-    }
+  get voiceCount() {
+    return !this.stats.voicy
+      ? undefined
+      : toSpaces(this.stats.voicy.stats.voiceCount)
+  }
+
+  get duration() {
+    return !this.stats.voicy
+      ? undefined
+      : (this.stats.voicy.stats.duration / 60 / 60 / 24 / 365).toFixed(2)
+  }
+
+  get cloudflareData() {
+    return !this.stats.voicy
+      ? emptyDataSet
+      : {
+          labels: this.stats.voicy.cloudflare
+            .map((a: any, i: number) => daysAgo(i))
+            .reverse(),
+          datasets: [
+            {
+              label: 'Number of voicybot.com visits',
+              backgroundColor: '#f87979',
+              data: this.stats.voicy.cloudflare,
+            },
+          ],
+        }
+  }
+
+  get voicePerDayData() {
+    return !this.stats.voicy
+      ? emptyDataSet
+      : {
+          labels: this.stats.voicy.stats.hourlyStats.map((a: any) =>
+            daysAgo(a._id)
+          ),
+          datasets: [
+            {
+              label: 'Number of voice messages recognized per day',
+              backgroundColor: '#f87979',
+              data: this.stats.voicy.stats.hourlyStats.map((v: any) => v.count),
+            },
+          ],
+        }
+  }
+
+  get messagesPerDayData() {
+    return !this.stats.voicy
+      ? emptyDataSet
+      : {
+          labels: this.stats.voicy.stats.messageStats
+            .map((a: any, i: number) => daysAgo(i))
+            .reverse(),
+          datasets: [
+            {
+              label: 'Number of messages received per day',
+              backgroundColor: '#f87979',
+              data: this.stats.voicy.stats.messageStats.map(
+                (v: any) => v.count
+              ),
+            },
+          ],
+        }
+  }
+
+  get chatsPerDayData() {
     let numOfChats = 0
-    this.chatsPerDayData = {
-      labels: this.stats.stats.chatDailyStats
-        .map((a: any, i: number) => daysAgoLong(i))
-        .reverse(),
-      datasets: [
-        {
-          label: 'Total number of chats per day',
-          backgroundColor: '#f87979',
-          data: this.stats.stats.chatDailyStats.map((v: any) => {
-            numOfChats = numOfChats + v.count
-            return numOfChats
-          }),
-        },
-      ],
-    }
-    this.responseDelay = {
-      labels: Object.keys(this.stats.stats.responseTime).map((a: any) =>
-        formatTime(new Date(parseInt(a, 10) * 1000))
-      ),
-      datasets: [
-        {
-          label: 'Average response delay (s)',
-          backgroundColor: '#f87979',
-          data: Object.values(this.stats.stats.responseTime),
-        },
-      ],
-    }
+    return !this.stats.voicy
+      ? emptyDataSet
+      : {
+          labels: this.stats.voicy.stats.chatDailyStats
+            .map((a: any, i: number) => daysAgoLong(i))
+            .reverse(),
+          datasets: [
+            {
+              label: 'Total number of chats per day',
+              backgroundColor: '#f87979',
+              data: this.stats.voicy.stats.chatDailyStats.map((v: any) => {
+                numOfChats = numOfChats + v.count
+                return numOfChats
+              }),
+            },
+          ],
+        }
   }
 
-  open(link: string) {
-    window.open(link, '_blank')
+  get responseDelay() {
+    let numOfChats = 0
+    return !this.stats.voicy
+      ? emptyDataSet
+      : {
+          labels: Object.keys(this.stats.voicy.stats.responseTime).map(
+            (a: any) => formatTime(new Date(parseInt(a, 10) * 1000))
+          ),
+          datasets: [
+            {
+              label: 'Average response delay (s)',
+              backgroundColor: '#f87979',
+              data: Object.values(this.stats.voicy.stats.responseTime),
+            },
+          ],
+        }
   }
 }
 </script>

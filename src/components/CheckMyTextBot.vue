@@ -18,46 +18,42 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
 import BarChart from './BarChart.vue'
-import * as store from '../plugins/store'
 import { daysAgo } from '../helpers/daysAgo'
 
 @Component({
   components: { BarChart },
 })
 export default class Shieldy extends Vue {
-  userData: any = {
-    labels: [],
-    datasets: [],
-  }
-
-  get stats() {
-    const check = store.stats().checkMyTextBot
-    if (check) {
-      check.numberOfUsers = store.stats().userCountSeparate.speller
-    }
-    return check
-  }
-
-  @Watch('stats')
-  statsChanged() {
-    const labels = this.stats.userDaily
-      .map((a: any) => daysAgo(a._id))
-      .reverse()
-    const data = this.stats.userDaily.map((o: any) => o.count).reverse()
-    this.userData = {
-      labels,
-      datasets: [
-        {
-          label: 'Number of new users',
-          backgroundColor: '#f87979',
-          data,
-        },
-      ],
-    }
-  }
-
-  open(link: string) {
-    window.open(link, '_blank')
-  }
+  // userData: any = {
+  //   labels: [],
+  //   datasets: [],
+  // }
+  // get stats() {
+  //   const check = store.stats().checkMyTextBot
+  //   if (check) {
+  //     check.numberOfUsers = store.stats().userCountSeparate.speller
+  //   }
+  //   return check
+  // }
+  // @Watch('stats')
+  // statsChanged() {
+  //   const labels = this.stats.userDaily
+  //     .map((a: any) => daysAgo(a._id))
+  //     .reverse()
+  //   const data = this.stats.userDaily.map((o: any) => o.count).reverse()
+  //   this.userData = {
+  //     labels,
+  //     datasets: [
+  //       {
+  //         label: 'Number of new users',
+  //         backgroundColor: '#f87979',
+  //         data,
+  //       },
+  //     ],
+  //   }
+  // }
+  // open(link: string) {
+  //   window.open(link, '_blank')
+  // }
 }
 </script>

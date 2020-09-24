@@ -15,20 +15,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import * as store from '../plugins/store'
 
 @Component
 export default class Randym extends Vue {
-  get stats() {
-    const randyStats = store.stats().randym
-    if (randyStats) {
-      randyStats.numberOfUsers = store.stats().userCountSeparate.randy
-    }
-    return randyStats
-  }
-
-  open(link: string) {
-    window.open(link, '_blank')
-  }
+  // get stats() {
+  //   const randyStats = store.stats().randym
+  //   if (randyStats) {
+  //     randyStats.numberOfUsers = store.stats().userCountSeparate.randy
+  //   }
+  //   return randyStats
+  // }
+  // open(link: string) {
+  //   window.open(link, '_blank')
+  // }
 }
 </script>

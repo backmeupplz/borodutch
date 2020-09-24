@@ -14,16 +14,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import * as store from '../plugins/store'
 
 @Component
 export default class GoldenBorodutch extends Vue {
-  get stats() {
-    return store.stats().goldenBorodutch
-  }
-
-  open(link: string) {
-    window.open(link, '_blank')
-  }
+  // get stats() {
+  //   return store.stats().goldenBorodutch
+  // }
+  // open(link: string) {
+  //   window.open(link, '_blank')
+  // }
 }
 </script>

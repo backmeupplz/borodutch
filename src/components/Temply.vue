@@ -18,38 +18,34 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch } from 'vue-property-decorator'
 import BarChart from './BarChart.vue'
-import * as store from '../plugins/store'
 import { daysAgo } from '../helpers/daysAgo'
 
 @Component({
   components: { BarChart },
 })
 export default class Temply extends Vue {
-  datacollection: any = {
-    labels: [],
-    datasets: [],
-  }
-
-  get stats() {
-    return store.stats().temply
-  }
-
-  @Watch('stats')
-  statsChanged() {
-    this.datacollection = {
-      labels: this.stats.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
-      datasets: [
-        {
-          label: 'Number of new users',
-          backgroundColor: '#f87979',
-          data: this.stats.userDaily.map((o: any) => o.count).reverse(),
-        },
-      ],
-    }
-  }
-
-  open(link: string) {
-    window.open(link, '_blank')
-  }
+  // datacollection: any = {
+  //   labels: [],
+  //   datasets: [],
+  // }
+  // get stats() {
+  //   return store.stats().temply
+  // }
+  // @Watch('stats')
+  // statsChanged() {
+  //   this.datacollection = {
+  //     labels: this.stats.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
+  //     datasets: [
+  //       {
+  //         label: 'Number of new users',
+  //         backgroundColor: '#f87979',
+  //         data: this.stats.userDaily.map((o: any) => o.count).reverse(),
+  //       },
+  //     ],
+  //   }
+  // }
+  // open(link: string) {
+  //   window.open(link, '_blank')
+  // }
 }
 </script>

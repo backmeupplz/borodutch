@@ -1,4 +1,3 @@
-// Dependencies
 import moment = require('moment')
 
 export function daysAgo(numberOfDays: number) {

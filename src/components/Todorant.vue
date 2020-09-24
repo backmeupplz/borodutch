@@ -13,74 +13,68 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
-import BarChart from "./BarChart.vue";
-import * as store from "../plugins/store";
-import { daysAgo } from "../helpers/daysAgo";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
+import BarChart from './BarChart.vue'
+import { daysAgo } from '../helpers/daysAgo'
 
 @Component({
-  components: { BarChart }
+  components: { BarChart },
 })
 export default class Todorant extends Vue {
-  cloudflareData: any = {
-    labels: [],
-    datasets: []
-  };
-  userData: any = {
-    labels: [],
-    datasets: []
-  };
-  todoData: any = {
-    labels: [],
-    datasets: []
-  };
-
-  get stats() {
-    return store.stats().todorant;
-  }
-
-  @Watch("stats")
-  statsChanged() {
-    this.cloudflareData = {
-      labels: this.stats.cloudflare
-        .map((a: any, i: number) => daysAgo(i))
-        .reverse(),
-      datasets: [
-        {
-          label: "Number of todorant.com visits",
-          backgroundColor: "#f87979",
-          data: this.stats.cloudflare
-        }
-      ]
-    };
-
-    this.userData = {
-      labels: this.stats.db.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
-      datasets: [
-        {
-          label: "Number of new users",
-          backgroundColor: "#f87979",
-          data: this.stats.db.userDaily.map((o: any) => o.count).reverse()
-        }
-      ]
-    };
-
-    this.todoData = {
-      labels: this.stats.db.todoDaily.map((a: any) => daysAgo(a._id)).reverse(),
-      datasets: [
-        {
-          label: "Number of new todos",
-          backgroundColor: "#f87979",
-          data: this.stats.db.todoDaily.map((o: any) => o.count).reverse()
-        }
-      ]
-    };
-  }
-
-  open(link: string) {
-    window.open(link, "_blank");
-  }
+  // cloudflareData: any = {
+  //   labels: [],
+  //   datasets: []
+  // };
+  // userData: any = {
+  //   labels: [],
+  //   datasets: []
+  // };
+  // todoData: any = {
+  //   labels: [],
+  //   datasets: []
+  // };
+  // get stats() {
+  //   return store.stats().todorant;
+  // }
+  // @Watch("stats")
+  // statsChanged() {
+  //   this.cloudflareData = {
+  //     labels: this.stats.cloudflare
+  //       .map((a: any, i: number) => daysAgo(i))
+  //       .reverse(),
+  //     datasets: [
+  //       {
+  //         label: "Number of todorant.com visits",
+  //         backgroundColor: "#f87979",
+  //         data: this.stats.cloudflare
+  //       }
+  //     ]
+  //   };
+  //   this.userData = {
+  //     labels: this.stats.db.userDaily.map((a: any) => daysAgo(a._id)).reverse(),
+  //     datasets: [
+  //       {
+  //         label: "Number of new users",
+  //         backgroundColor: "#f87979",
+  //         data: this.stats.db.userDaily.map((o: any) => o.count).reverse()
+  //       }
+  //     ]
+  //   };
+  //   this.todoData = {
+  //     labels: this.stats.db.todoDaily.map((a: any) => daysAgo(a._id)).reverse(),
+  //     datasets: [
+  //       {
+  //         label: "Number of new todos",
+  //         backgroundColor: "#f87979",
+  //         data: this.stats.db.todoDaily.map((o: any) => o.count).reverse()
+  //       }
+  //     ]
+  //   };
+  // }
+  // open(link: string) {
+  //   window.open(link, "_blank");
+  // }
 }
 </script>
