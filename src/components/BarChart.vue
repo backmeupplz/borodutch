@@ -8,10 +8,5 @@ export default {
   mounted() {
     this.renderChart(this.chartdata)
   },
-  watch: {
-    chartData() {
-      console.log('Chart data changed')
-    },
-  },
 }
 </script>
