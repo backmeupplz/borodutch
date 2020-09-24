@@ -1,74 +1,115 @@
 <template lang="pug">
-  v-card
-    v-card-title
-      .headline Banofbot
-      v-btn(flat icon color='grey' @click='open("https://t.me/banofbot")')
-        v-icon(small) link
-    v-card-text
-      p
-        | Telegram votekick bot. Allows to fight spammers or introduce democracy to chats by allowing users to vote for kicking specific members. Completely free and 
-        a(href="https://github.com/backmeupplz/banofbot" target="_blank") open source
-        | .
-      p Banofbot was used by {{stats && stats.numberOfUsers ? stats.numberOfUsers : '~'}} users who created {{stats ? stats.requestCount : '~'}} votekick requests in {{stats ? stats.chatCount : '~'}} chats.
-      bar-chart(:chart-data='chatData')
-      bar-chart(:chart-data='requestData')
+ProjectCard(
+  title='Banofbot',
+  link='https://t.me/banofbot',
+  :numberOfUsers='numberOfUsers',
+  :index='2'
+)
+  div(slot='description')
+    p
+      | Telegram votekick bot. Allows to fight spammers or introduce democracy to chats by allowing users to vote for kicking specific members. Completely free and
+      | {{ " " }}
+      Link(url='https://github.com/backmeupplz/banofbot') open source
+      | .
+    p
+      | Banofbot was used to create
+      | {{ " " }}
+      span(v-if='requestCount') {{ requestCount }}
+      Loader(v-else)
+      | {{ " " }}
+      | votekick requests in
+      | {{ " " }}
+      span(v-if='chatCount') {{ chatCount }}
+      Loader(v-else)
+      | {{ " " }}
+      | chats.
+  div(slot='charts')
+    v-row(v-show='!!stats.banofbot')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='chatData')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='requestData')
+    v-row.d-flex.flex-row.justify-center.align-center.my-4(
+      v-if='!stats.banofbot'
+    )
+      Loader
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Watch } from 'vue-property-decorator'
-import BarChart from './BarChart.vue'
-import { daysAgo } from '../helpers/daysAgo'
+import ProjectCard from '@/components/ProjectCard.vue'
+import BarChart from '@/components/BarChart.vue'
+import Loader from '@/components/Loader.vue'
+import Link from '@/components/Link.vue'
+import { namespace } from 'vuex-class'
+import { toSpaces } from '@/helpers/toSpaces'
+import { emptyDataSet } from '@/helpers/emptyDataSet'
+import { daysAgo } from '@/helpers/daysAgo'
+
+const AppStore = namespace('AppStore')
 
 @Component({
-  components: { BarChart },
+  components: { BarChart, ProjectCard, Loader, Link },
 })
 export default class Banofbot extends Vue {
-  // userData: any = {
-  //   labels: [],
-  //   datasets: [],
-  // }
-  // chatData: any = {
-  //   labels: [],
-  //   datasets: [],
-  // }
-  // requestData: any = {
-  //   labels: [],
-  //   datasets: [],
-  // }
-  // get stats() {
-  //   const banofbotStats = store.stats().banofbot
-  //   if (banofbotStats) {
-  //     banofbotStats.numberOfUsers = store.stats().userCountSeparate.banofbot
-  //   }
-  //   return banofbotStats
-  // }
-  // @Watch('stats')
-  // statsChanged() {
-  //   this.chatData = {
-  //     labels: this.stats.chatDaily.map((a: any) => daysAgo(a._id)).reverse(),
-  //     datasets: [
-  //       {
-  //         label: 'Number of new chats',
-  //         backgroundColor: '#f87979',
-  //         data: this.stats.chatDaily.map((o: any) => o.count).reverse(),
-  //       },
-  //     ],
-  //   }
-  //   this.requestData = {
-  //     labels: this.stats.requestDaily.map((a: any) => daysAgo(a._id)).reverse(),
-  //     datasets: [
-  //       {
-  //         label: 'Number of new requests',
-  //         backgroundColor: '#f87979',
-  //         data: this.stats.requestDaily.map((o: any) => o.count).reverse(),
-  //       },
-  //     ],
-  //   }
-  // }
-  // open(link: string) {
-  //   window.open(link, '_blank')
-  // }
+  @AppStore.State stats?: any
+  @AppStore.State color!: string
+
+  get numberOfUsers() {
+    return this.stats.userCountSeparate && this.stats.userCountSeparate.banofbot
+      ? toSpaces(this.stats.userCountSeparate.banofbot)
+      : undefined
+  }
+
+  get requestCount() {
+    return !this.stats.banofbot
+      ? undefined
+      : toSpaces(this.stats.banofbot.requestCount)
+  }
+
+  get chatCount() {
+    return !this.stats.banofbot
+      ? undefined
+      : toSpaces(this.stats.banofbot.chatCount)
+  }
+
+  get chatData() {
+    return !this.stats.banofbot
+      ? emptyDataSet
+      : {
+          labels: this.stats.banofbot.chatDaily
+            .map((a: any) => daysAgo(a._id))
+            .reverse(),
+          datasets: [
+            {
+              label: 'Number of new chats',
+              backgroundColor: this.color,
+              data: this.stats.banofbot.chatDaily
+                .map((o: any) => o.count)
+                .reverse(),
+            },
+          ],
+        }
+  }
+
+  get requestData() {
+    return !this.stats.banofbot
+      ? emptyDataSet
+      : {
+          labels: this.stats.banofbot.requestDaily
+            .map((a: any) => daysAgo(a._id))
+            .reverse(),
+          datasets: [
+            {
+              label: 'Number of new requests',
+              backgroundColor: this.color,
+              data: this.stats.banofbot.requestDaily
+                .map((o: any) => o.count)
+                .reverse(),
+            },
+          ],
+        }
+  }
 }
 </script>

@@ -38,7 +38,7 @@ export default class ProjectCard extends Vue {
   @Prop({ required: true }) title!: string
   @Prop({ required: false }) numberOfUsers?: number
   @Prop({ required: true }) link!: string
-  @Prop({ required: true }) publications!: Publication[]
+  @Prop({ required: false }) publications?: Publication[]
 
   @AppStore.State openPanels!: number[]
   @AppStore.Mutation togglePanel!: (index: number) => void

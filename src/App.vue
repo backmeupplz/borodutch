@@ -8,11 +8,13 @@ v-app
         ShowStatsButton(:click='toggleOpenClose') {{ allPanelsOpen ? "Collapse all" : "Expand all" }}
     v-row
       Voicy
+    v-row
+      Shieldy
+    v-row
+      Banofbot
     //- v-layout(row wrap)
     //-   v-flex(xs12 md4)
     //-     v-layout(column)
-    //-       Voicy.ma-1
-    //-       Shieldy.ma-1
     //-       Localizer.ma-1
     //-       PostYourStartup.ma-1
     //-   v-flex(xs12 md4)
@@ -26,7 +28,6 @@ v-app
     //-       Resetbot.ma-1
     //-   v-flex(xs12 md4)
     //-     v-layout(column)
-    //-       Banofbot.ma-1
     //-       Arbeitbot.ma-1
     //-       Temply.ma-1
     //-       Randym.ma-1
@@ -42,6 +43,8 @@ import Profile from '@/components/Profile.vue'
 import GradientText from '@/components/GradientText.vue'
 import ShowStatsButton from '@/components/ShowStatsButton.vue'
 import Voicy from '@/components/Voicy.vue'
+import Shieldy from '@/components/Shieldy.vue'
+import Banofbot from '@/components/Banofbot.vue'
 import { namespace } from 'vuex-class'
 
 const AppStore = namespace('AppStore')
@@ -54,6 +57,8 @@ const length = 1
     GradientText,
     ShowStatsButton,
     Voicy,
+    Shieldy,
+    Banofbot,
   },
 })
 export default class App extends Vue {

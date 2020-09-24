@@ -1,6 +1,6 @@
 <template lang="pug">
 ProjectCard(
-  :title='title',
+  title='Voicy',
   link='https://t.me/voicybot',
   :publications='publications',
   :numberOfUsers='numberOfUsers',
@@ -33,15 +33,15 @@ ProjectCard(
   div(slot='charts')
     v-row(v-show='!!stats.voicy')
       v-col(cols='12', md='6')
-        BarChart(:chartData='cloudflareData', :title='title', :key='key')
+        BarChart(:chartData='cloudflareData')
       v-col(cols='12', md='6')
-        BarChart(:chartData='voicePerDayData', :title='title')
+        BarChart(:chartData='voicePerDayData')
       v-col(cols='12', md='6')
-        BarChart(:chartData='messagesPerDayData', :title='title')
+        BarChart(:chartData='messagesPerDayData')
       v-col(cols='12', md='6')
-        BarChart(:chartData='chatsPerDayData', :title='title')
+        BarChart(:chartData='chatsPerDayData')
       v-col(cols='12', md='6')
-        BarChart(:chartData='responseDelay', :title='title')
+        BarChart(:chartData='responseDelay')
     v-row.d-flex.flex-row.justify-center.align-center.my-4(v-if='!stats.voicy')
       Loader
 </template>
@@ -67,9 +67,6 @@ const AppStore = namespace('AppStore')
 export default class Voicy extends Vue {
   @AppStore.State stats?: any
   @AppStore.State color!: string
-  title = 'Voicy'
-
-  key = 0
 
   publications = [
     {
