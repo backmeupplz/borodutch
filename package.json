@@ -23,7 +23,7 @@
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "vue": "^2.6.10",
-    "vue-chartjs": "^3.4.2",
+    "vue-chartjs": "^3.5.1",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.1",
     "vue-router": "^3.0.3",
@@ -34,9 +34,11 @@
     "vuex-persistedstate": "^3.1.0"
   },
   "devDependencies": {
+    "@prettier/plugin-pug": "^1.4.4",
     "@vue/cli-plugin-typescript": "^3.6.0",
     "@vue/cli-service": "^3.6.0",
     "sass": "^1.18.0",
+    "prettier": "prettier/prettier#cd2b8a32b5ef77eb0047e7517b1ea22d605a094a",
     "sass-loader": "^7.1.0",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.5.21"
@@ -50,5 +52,13 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "prettier": {
+    "pluginSearchDirs": [
+      "."
+    ],
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
 }

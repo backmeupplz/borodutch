@@ -1,28 +1,49 @@
 <template lang="pug">
-  ProjectCard(title='Voicy' link='https://t.me/voicybot' :publications='publications' :numberOfUsers='numberOfUsers')
-    div(slot='description')
-      p Voicy is a Telegram bot that converts speech to text from any voice messages and audio files it receives. This is one of my favorite pet projects. It supports over 100 languages and works with either Wit or Google speech recognition neural networks.
-      p
-        | Voicy is currently installed at 
-        span(v-if='chatCount') {{chatCount}}
-        Loader(v-else)
-        |  chats, recognized 
-        span(v-if='voiceCount') {{voiceCount}}
-        Loader(v-else)
-        |  voice messages resulting in 
-        span(v-if='duration') {{duration}}
-        Loader(v-else)
-        |  years of speech.
-      p
-        | If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time. It's 
-        Link(url="https://github.com/backmeupplz/voicy") open source
-        | .
-    div(slot='charts')
-      bar-chart(:chart-data='cloudflareData')
-      bar-chart(:chart-data='voicePerDayData')
-      bar-chart(:chart-data='messagesPerDayData')
-      bar-chart(:chart-data='chatsPerDayData')
-      bar-chart(:chart-data='responseDelay')
+ProjectCard(
+  :title='title',
+  link='https://t.me/voicybot',
+  :publications='publications',
+  :numberOfUsers='numberOfUsers',
+  :index='0'
+)
+  div(slot='description')
+    p Voicy is a Telegram bot that converts speech to text from any voice messages and audio files it receives. This is one of my favorite pet projects. It supports over 100 languages and works with either Wit or Google speech recognition neural networks.
+    p
+      | Voicy is currently installed at
+      | {{ " " }}
+      span(v-if='chatCount') {{ chatCount }}
+      Loader(v-else)
+      | {{ " " }}
+      | chats, recognized
+      | {{ " " }}
+      span(v-if='voiceCount') {{ voiceCount }}
+      Loader(v-else)
+      | {{ " " }}
+      | voice messages resulting in
+      | {{ " " }}
+      span(v-if='duration') {{ duration }}
+      Loader(v-else)
+      | {{ " " }}
+      | years of speech.
+    p
+      | If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time. It's
+      | {{ " " }}
+      Link(url='https://github.com/backmeupplz/voicy') open source
+      | .
+  div(slot='charts')
+    v-row(v-show='!!stats.voicy')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='cloudflareData', :title='title', :key='key')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='voicePerDayData', :title='title')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='messagesPerDayData', :title='title')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='chatsPerDayData', :title='title')
+      v-col(cols='12', md='6')
+        BarChart(:chartData='responseDelay', :title='title')
+    v-row.d-flex.flex-row.justify-center.align-center.my-4(v-if='!stats.voicy')
+      Loader
 </template>
 
 <script lang="ts">
@@ -36,6 +57,7 @@ import { daysAgo, daysAgoLong, formatTime } from '@/helpers/daysAgo'
 import { namespace } from 'vuex-class'
 import { toSpaces } from '@/helpers/toSpaces'
 import { emptyDataSet } from '@/helpers/emptyDataSet'
+import { Watch } from 'vue-property-decorator'
 
 const AppStore = namespace('AppStore')
 
@@ -44,6 +66,10 @@ const AppStore = namespace('AppStore')
 })
 export default class Voicy extends Vue {
   @AppStore.State stats?: any
+  @AppStore.State color!: string
+  title = 'Voicy'
+
+  key = 0
 
   publications = [
     {
@@ -100,7 +126,7 @@ export default class Voicy extends Vue {
           datasets: [
             {
               label: 'Number of voicybot.com visits',
-              backgroundColor: '#f87979',
+              backgroundColor: this.color,
               data: this.stats.voicy.cloudflare,
             },
           ],
@@ -117,7 +143,7 @@ export default class Voicy extends Vue {
           datasets: [
             {
               label: 'Number of voice messages recognized per day',
-              backgroundColor: '#f87979',
+              backgroundColor: this.color,
               data: this.stats.voicy.stats.hourlyStats.map((v: any) => v.count),
             },
           ],
@@ -134,7 +160,7 @@ export default class Voicy extends Vue {
           datasets: [
             {
               label: 'Number of messages received per day',
-              backgroundColor: '#f87979',
+              backgroundColor: this.color,
               data: this.stats.voicy.stats.messageStats.map(
                 (v: any) => v.count
               ),
@@ -154,7 +180,7 @@ export default class Voicy extends Vue {
           datasets: [
             {
               label: 'Total number of chats per day',
-              backgroundColor: '#f87979',
+              backgroundColor: this.color,
               data: this.stats.voicy.stats.chatDailyStats.map((v: any) => {
                 numOfChats = numOfChats + v.count
                 return numOfChats
@@ -169,13 +195,13 @@ export default class Voicy extends Vue {
     return !this.stats.voicy
       ? emptyDataSet
       : {
-          labels: Object.keys(this.stats.voicy.stats.responseTime).map(
-            (a: any) => formatTime(new Date(parseInt(a, 10) * 1000))
-          ),
+          labels: Object.keys(
+            this.stats.voicy.stats.responseTime
+          ).map((a: any) => formatTime(new Date(parseInt(a, 10) * 1000))),
           datasets: [
             {
               label: 'Average response delay (s)',
-              backgroundColor: '#f87979',
+              backgroundColor: this.color,
               data: Object.values(this.stats.voicy.stats.responseTime),
             },
           ],

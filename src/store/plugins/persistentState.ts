@@ -1,5 +1,5 @@
 import createPersistedState from 'vuex-persistedstate'
 
 export default createPersistedState({
-  paths: [],
+  paths: ['AppStore.openPanels'],
 })

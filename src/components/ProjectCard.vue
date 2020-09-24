@@ -1,22 +1,22 @@
 <template lang="pug">
-  .card-container
-    .title-container
-      .column
-        .card-title
-          span {{title}}
-          v-btn.ml-2(text icon color='grey' :href='link' target='_blank')
-            v-icon(small) $arrow
-        span.number-of-users(v-if='numberOfUsers') {{numberOfUsers}} users
-      ShowStatsButton(:click='expand') Show stats
-    .card-text
-      slot(name='description')
-    div(v-if='showMore')
-      slot(name='charts')
-      div(v-if='publications && publications.length')
-        .card-title.mt-8 Publications
-        ul.list-color
-          li(v-for='(publication, i) in publications' :key='i')
-            Link.link-opacity(:url='publication.link') {{publication.name}}
+.card-container
+  .title-container
+    .column
+      .card-title
+        span {{ title }}
+        v-btn.ml-2(text, icon, color='grey', :href='link', target='_blank')
+          v-icon(small) $arrow
+      span.number-of-users(v-if='numberOfUsers') {{ numberOfUsers }} users
+    ShowStatsButton(:click='expandOrCollapse') {{ isOpen ? "Hide stats" : "Show stats" }}
+  .card-text
+    slot(name='description')
+  div(v-show='isOpen')
+    slot(name='charts')
+    div(v-if='publications && publications.length')
+      .card-title.mt-8 Publications
+      ul.list-color
+        li(v-for='(publication, i) in publications', :key='i')
+          Link.link-opacity(:url='publication.link') {{ publication.name }}
 </template>
 
 <script lang="ts">
@@ -24,22 +24,31 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import Link from '@/components/Link.vue'
 import ShowStatsButton from '@/components/ShowStatsButton.vue'
-import { Prop } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import { Publication } from '@/models/Publication'
+import { namespace } from 'vuex-class'
+
+const AppStore = namespace('AppStore')
 
 @Component({
   components: { Link, ShowStatsButton },
 })
 export default class ProjectCard extends Vue {
+  @Prop({ required: true }) index!: number
   @Prop({ required: true }) title!: string
   @Prop({ required: false }) numberOfUsers?: number
   @Prop({ required: true }) link!: string
   @Prop({ required: true }) publications!: Publication[]
 
-  showMore = false
+  @AppStore.State openPanels!: number[]
+  @AppStore.Mutation togglePanel!: (index: number) => void
 
-  expand() {
-    this.showMore = !this.showMore
+  expandOrCollapse() {
+    this.togglePanel(this.index)
+  }
+
+  get isOpen() {
+    return this.openPanels.includes(this.index)
   }
 }
 </script>
