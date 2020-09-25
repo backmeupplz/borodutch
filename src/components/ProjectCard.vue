@@ -20,7 +20,7 @@
       .card-title.mt-8 Publications
       ul.list-color
         li(v-for='(publication, i) in publications', :key='i')
-          Link.link-opacity(:url='publication.link') {{ publication.name }}
+          Link(:url='publication.link') {{ publication.name }}
 </template>
 
 <script lang="ts">
@@ -97,9 +97,6 @@ export default class ProjectCard extends Vue {
 
   color: #ffffff;
 
-  opacity: 0.8;
-}
-.link-opacity {
   opacity: 0.8;
 }
 .list-color {

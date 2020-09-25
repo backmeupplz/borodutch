@@ -11,6 +11,7 @@ export function createCloudflareData(color: string, data?: any) {
             label: 'Number of website visits',
             backgroundColor: color,
             data: data,
+            opacity: 0.3,
           },
         ],
       }

@@ -7,11 +7,16 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+
+const AppStore = namespace('AppStore')
 
 @Component
 export default class GradientText extends Vue {
   @Prop({ required: false }) small?: boolean
   @Prop({ required: false }) color?: string
+
+  @AppStore.State gradient!: string
 
   get extraStyle() {
     return `background-image: linear-gradient(${this.gradient}); font-size: ${
@@ -19,10 +24,6 @@ export default class GradientText extends Vue {
     }px; line-height: ${
       this.small ? 30 : this.$vuetify.breakpoint.smAndDown ? 40 : 70
     }px`
-  }
-
-  get gradient() {
-    return '46.19deg, #F09819 5.66%, #EDDE5D 94.35%'
   }
 }
 </script>
