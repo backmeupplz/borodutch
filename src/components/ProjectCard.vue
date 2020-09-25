@@ -125,7 +125,7 @@ export default class ProjectCard extends Vue {
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 450px) {
   .title-container {
     flex-direction: column;
     justify-content: space-between;

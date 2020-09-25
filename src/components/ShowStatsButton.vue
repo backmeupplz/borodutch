@@ -43,9 +43,9 @@ export default class ShowStatsButton extends Vue {
   background-color: white;
   opacity: 0.8;
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 450px) {
   .show-stats-button {
-    margin-bottom: 12px;
+    margin-bottom: 18px;
   }
 }
 </style>
