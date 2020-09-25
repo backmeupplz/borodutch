@@ -4,68 +4,34 @@ ProjectCard(
   link='https://t.me/voicybot',
   :publications='publications',
   :numberOfUsers='numberOfUsers',
-  :index='0'
+  :index='index',
+  :chartsListData='chartsListData',
+  :loading='!stats.voicy',
+  :descriptionText='descriptionText'
 )
-  div(slot='description')
-    p Voicy is a Telegram bot that converts speech to text from any voice messages and audio files it receives. This is one of my favorite pet projects. It supports over 100 languages and works with either Wit or Google speech recognition neural networks.
-    p
-      | Voicy is currently installed at
-      | {{ " " }}
-      span(v-if='chatCount') {{ chatCount }}
-      Loader(v-else)
-      | {{ " " }}
-      | chats, recognized
-      | {{ " " }}
-      span(v-if='voiceCount') {{ voiceCount }}
-      Loader(v-else)
-      | {{ " " }}
-      | voice messages resulting in
-      | {{ " " }}
-      span(v-if='duration') {{ duration }}
-      Loader(v-else)
-      | {{ " " }}
-      | years of speech.
-    p
-      | If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time. It's
-      | {{ " " }}
-      Link(url='https://github.com/backmeupplz/voicy') open source
-      | .
-  div(slot='charts')
-    v-row.flex-row.justify-center(v-show='!!stats.voicy')
-      v-col(cols='12', md='6')
-        BarChart(:chartData='cloudflareData')
-      v-col(cols='12', md='6')
-        BarChart(:chartData='voicePerDayData')
-      v-col(cols='12', md='6')
-        BarChart(:chartData='messagesPerDayData')
-      v-col(cols='12', md='6')
-        BarChart(:chartData='chatsPerDayData')
-      v-col(cols='12', md='6')
-        BarChart(:chartData='responseDelay')
-    v-row.d-flex.flex-row.justify-center.align-center.my-4(v-if='!stats.voicy')
-      Loader
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import ProjectCard from '@/components/ProjectCard.vue'
-import BarChart from '@/components/BarChart.vue'
-import Loader from '@/components/Loader.vue'
-import Link from '@/components/Link.vue'
 import { daysAgo, daysAgoLong, formatTime } from '@/helpers/daysAgo'
 import { namespace } from 'vuex-class'
-import { toSpaces } from '@/helpers/toSpaces'
 import { emptyDataSet } from '@/helpers/emptyDataSet'
+import { toSpaces } from '@/helpers/toSpaces'
+import { Prop } from 'vue-property-decorator'
+import { createCloudflareData } from '@/helpers/createCloudflareData'
 
 const AppStore = namespace('AppStore')
 
 @Component({
-  components: { BarChart, ProjectCard, Loader, Link },
+  components: { ProjectCard },
 })
 export default class Voicy extends Vue {
   @AppStore.State stats?: any
   @AppStore.State color!: string
+
+  @Prop({ required: true }) index!: number
 
   publications = [
     {
@@ -88,45 +54,65 @@ export default class Voicy extends Vue {
     },
   ]
 
+  get descriptionText() {
+    return [
+      [
+        'Voicy is a Telegram bot that converts speech to text from any voice messages and audio files it receives. This is one of my favorite pet projects. It supports over 100 languages and works with either Wit or Google speech recognition neural networks.',
+      ],
+      [
+        'Voicy is currently installed at ',
+        this.chatCount,
+        ' chats, recognized ',
+        this.voiceCount,
+        ' voice messages resulting in ',
+        { preformattedNumber: this.duration },
+        ' years of speech.',
+      ],
+      [
+        "If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time. It's ",
+        { url: 'https://github.com/backmeupplz/voicy', name: 'open source' },
+        '.',
+      ],
+    ]
+  }
+
+  get chartsListData() {
+    return [
+      createCloudflareData(
+        this.color,
+        this.stats.voicy ? this.stats.voicy.cloudflare : undefined
+      ),
+      this.voicePerDayData,
+      this.messagesPerDayData,
+      this.chatsPerDayData,
+      this.responseDelay,
+    ]
+  }
+
   get numberOfUsers() {
-    return this.stats.userCountSeparate && this.stats.userCountSeparate.voicy
-      ? toSpaces(this.stats.userCountSeparate.voicy)
-      : undefined
+    return !this.stats ||
+      !this.stats.userCountSeparate ||
+      !this.stats.userCountSeparate.voicy
+      ? 0
+      : toSpaces(this.stats.userCountSeparate.voicy)
   }
 
   get chatCount() {
-    return !this.stats.voicy
-      ? undefined
-      : toSpaces(this.stats.voicy.stats.chatCount)
+    return !this.stats || !this.stats.voicy
+      ? 0
+      : this.stats.voicy.stats.chatCount
   }
 
   get voiceCount() {
-    return !this.stats.voicy
-      ? undefined
-      : toSpaces(this.stats.voicy.stats.voiceCount)
+    return !this.stats || !this.stats.voicy
+      ? 0
+      : this.stats.voicy.stats.voiceCount
   }
 
   get duration() {
-    return !this.stats.voicy
-      ? undefined
+    return !this.stats || !this.stats.voicy
+      ? 0
       : (this.stats.voicy.stats.duration / 60 / 60 / 24 / 365).toFixed(2)
-  }
-
-  get cloudflareData() {
-    return !this.stats.voicy
-      ? emptyDataSet
-      : {
-          labels: this.stats.voicy.cloudflare
-            .map((a: any, i: number) => daysAgo(i))
-            .reverse(),
-          datasets: [
-            {
-              label: 'Number of voicybot.com visits',
-              backgroundColor: this.color,
-              data: this.stats.voicy.cloudflare,
-            },
-          ],
-        }
   }
 
   get voicePerDayData() {

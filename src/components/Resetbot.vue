@@ -1,47 +1,43 @@
 <template lang="pug">
-  v-card
-    v-card-title
-      .headline ResetBot
-      v-btn(flat icon color='grey' @click='open("https://resetbot.com")')
-        v-icon(small) link
-    v-card-text
-      p This website is intended to reset your Telegram bot getUpdates method. Useful, when bot updates get stuck for some unknown reason.
-      bar-chart(:chart-data='datacollection')
+ProjectCard(
+  title='ResetBot',
+  link='https://resetbot.com',
+  :index='index',
+  :chartsListData='chartsListData',
+  :loading='!stats.resetbot',
+  :descriptionText='descriptionText'
+)
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Watch } from 'vue-property-decorator'
-import BarChart from './BarChart.vue'
-import { daysAgo } from '../helpers/daysAgo'
+import ProjectCard from '@/components/ProjectCard.vue'
+import { namespace } from 'vuex-class'
+import { Prop } from 'vue-property-decorator'
+import { createCloudflareData } from '@/helpers/createCloudflareData'
+
+const AppStore = namespace('AppStore')
 
 @Component({
-  components: { BarChart },
+  components: { ProjectCard },
 })
 export default class Resetbot extends Vue {
-  // datacollection: any = {
-  //   labels: [],
-  //   datasets: []
-  // };
-  // get stats() {
-  //   return store.stats().resetbot;
-  // }
-  // @Watch("stats")
-  // statsChanged() {
-  //   this.datacollection = {
-  //     labels: this.stats.map((a: any, i: number) => daysAgo(i)).reverse(),
-  //     datasets: [
-  //       {
-  //         label: "Number of visits",
-  //         backgroundColor: "#f87979",
-  //         data: this.stats
-  //       }
-  //     ]
-  //   };
-  // }
-  // open(link: string) {
-  //   window.open(link, "_blank");
-  // }
+  @AppStore.State stats?: any
+  @AppStore.State color!: string
+
+  @Prop({ required: true }) index!: number
+
+  get descriptionText() {
+    return [
+      [
+        'This website is intended to reset your Telegram bot getUpdates method. Useful, when bot updates get stuck for some unknown reason.',
+      ],
+    ]
+  }
+
+  get chartsListData() {
+    return [createCloudflareData(this.color, this.stats.resetbot)]
+  }
 }
 </script>

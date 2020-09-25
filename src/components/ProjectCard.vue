@@ -9,9 +9,13 @@
       span.number-of-users(v-if='numberOfUsers') {{ numberOfUsers }} users
     ShowStatsButton(v-if='!noExtra', :click='expandOrCollapse') {{ isOpen ? "Hide stats" : "Show stats" }}
   .card-text
-    slot(name='description')
+    DescriptionText(:data='descriptionText')
   div(v-show='isOpen')
-    slot(name='charts')
+    ChartsList(
+      v-if='!!chartsListData',
+      :data='chartsListData',
+      :loading='loading'
+    )
     div(v-if='publications && publications.length')
       .card-title.mt-8 Publications
       ul.list-color
@@ -27,11 +31,13 @@ import ShowStatsButton from '@/components/ShowStatsButton.vue'
 import { Prop, Watch } from 'vue-property-decorator'
 import { Publication } from '@/models/Publication'
 import { namespace } from 'vuex-class'
+import ChartsList from '@/components/ChartsList.vue'
+import DescriptionText from '@/components/DescriptionText.vue'
 
 const AppStore = namespace('AppStore')
 
 @Component({
-  components: { Link, ShowStatsButton },
+  components: { Link, ShowStatsButton, ChartsList, DescriptionText },
 })
 export default class ProjectCard extends Vue {
   @Prop({ required: true }) index!: number
@@ -40,6 +46,9 @@ export default class ProjectCard extends Vue {
   @Prop({ required: true }) link!: string
   @Prop({ required: false }) publications?: Publication[]
   @Prop({ required: false }) noExtra?: boolean
+  @Prop({ required: false }) chartsListData?: any[]
+  @Prop({ required: false }) loading?: boolean
+  @Prop({ required: false }) descriptionText?: any[]
 
   @AppStore.State openPanels!: number[]
   @AppStore.Mutation togglePanel!: (index: number) => void

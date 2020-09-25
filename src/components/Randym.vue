@@ -3,49 +3,52 @@ ProjectCard(
   title='Randy Marsh',
   link='https://t.me/randymbot',
   :numberOfUsers='numberOfUsers',
-  :index='3',
-  :noExtra='true'
+  :index='index',
+  :noExtra='true',
+  :loading='!stats.randym',
+  :descriptionText='descriptionText'
 )
-  div(slot='description')
-    p
-      | Telegram raffle bot that allows channel and group admins to execute raffles with prizes among chat members or channel subscribers. Completely free and
-      | {{ " " }}
-      Link(url='https://github.com/backmeupplz/randymbot') open source
-      | .
-    p
-      | Randy was used in
-      | {{ " " }}
-      span(v-if='chatCount') {{ chatCount }}
-      Loader(v-else)
-      | {{ " " }}
-      | chats to execute
-      | {{ " " }}
-      span(v-if='raffleCount') {{ raffleCount }}
-      Loader(v-else)
-      | {{ " " }}
-      | raffles.
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import Link from '@/components/Link.vue'
 import { namespace } from 'vuex-class'
 import { toSpaces } from '@/helpers/toSpaces'
 import ProjectCard from '@/components/ProjectCard.vue'
-import Loader from '@/components/Loader.vue'
+import { Prop } from 'vue-property-decorator'
 
 const AppStore = namespace('AppStore')
 
 @Component({
   components: {
-    Link,
     ProjectCard,
-    Loader,
   },
 })
 export default class Randym extends Vue {
   @AppStore.State stats?: any
+
+  @Prop({ required: true }) index!: number
+
+  get descriptionText() {
+    return [
+      [
+        'Telegram raffle bot that allows channel and group admins to execute raffles with prizes among chat members or channel subscribers. Completely free and ',
+        {
+          url: 'https://github.com/backmeupplz/randymbot',
+          name: 'open source',
+        },
+        '.',
+      ],
+      [
+        'Randy was used in ',
+        this.chatCount,
+        ' chats to execute ',
+        this.raffleCount,
+        ' raffles.',
+      ],
+    ]
+  }
 
   get numberOfUsers() {
     return this.stats.userCountSeparate && this.stats.userCountSeparate.randy
@@ -54,15 +57,11 @@ export default class Randym extends Vue {
   }
 
   get chatCount() {
-    return !this.stats.randym
-      ? undefined
-      : toSpaces(this.stats.randym.chatCount)
+    return !this.stats || !this.stats.randym ? 0 : this.stats.randym.chatCount
   }
 
   get raffleCount() {
-    return !this.stats.randym
-      ? undefined
-      : toSpaces(this.stats.randym.raffleCount)
+    return !this.stats || !this.stats.randym ? 0 : this.stats.randym.raffleCount
   }
 }
 </script>

@@ -7,43 +7,41 @@ v-app
         GradientText(:small='true') Projects
         ShowStatsButton(:click='toggleOpenClose') {{ allPanelsOpen ? "Collapse all" : "Expand all" }}
     v-row
-      Voicy
+      Voicy(:index='0')
     v-row
-      Shieldy
+      Shieldy(:index='1')
     v-row
-      Banofbot
+      Banofbot(:index='2')
     v-row
-      Randym
+      Randym(:index='3')
     v-row
-      Todorant
+      Todorant(:index='4')
     v-row
-      Feedr
+      Feedr(:index='5')
     v-row
-      GoldenBorodutch
+      GoldenBorodutch(:index='6')
     v-row
-      CheckMyTextBot
+      CheckMyTextBot(:index='7')
     v-row
-      TLGCoin
+      TLGCoin(:index='8')
     v-row
-      Borodutch
+      Borodutch(:index='9')
     v-row
-      Temply
+      Temply(:index='10')
     v-row
-      Arbeitbot
+      Arbeitbot(:index='11')
     v-row
-      Localizer
-    //- v-layout(row wrap)
-    //-   v-flex(xs12 md4)
-    //-     v-layout(column)
-    //-       PostYourStartup.ma-1
-    //-   v-flex(xs12 md4)
-    //-     v-layout(column)
-    //-       MT.ma-1
-    //-       Fondu.ma-1
-    //-       Pleaseno.ma-1
-    //-       Resetbot.ma-1
-    //-   v-flex(xs12 md4)
-    //-     v-layout(column)
+      Localizer(:index='12')
+    v-row
+      PostYourStartup(:index='13')
+    v-row
+      MT(:index='14')
+    v-row
+      Fondu(:index='15')
+    v-row
+      Pleaseno(:index='16')
+    v-row
+      Resetbot(:index='17')
     v-row.justify-center.mt-4
       .thank-you Thank you for scrolling!
 </template>
@@ -54,6 +52,8 @@ import Component from 'vue-class-component'
 import Profile from '@/components/Profile.vue'
 import GradientText from '@/components/GradientText.vue'
 import ShowStatsButton from '@/components/ShowStatsButton.vue'
+import { namespace } from 'vuex-class'
+
 import Voicy from '@/components/Voicy.vue'
 import Shieldy from '@/components/Shieldy.vue'
 import Banofbot from '@/components/Banofbot.vue'
@@ -67,11 +67,15 @@ import Borodutch from '@/components/Borodutch.vue'
 import Temply from '@/components/Temply.vue'
 import Arbeitbot from '@/components/Arbeitbot.vue'
 import Localizer from '@/components/Localizer.vue'
-import { namespace } from 'vuex-class'
+import PostYourStartup from '@/components/PostYourStartup.vue'
+import MT from '@/components/MT.vue'
+import Fondu from '@/components/Fondu.vue'
+import Pleaseno from '@/components/Pleaseno.vue'
+import Resetbot from '@/components/Resetbot.vue'
 
 const AppStore = namespace('AppStore')
 
-const length = 1
+const length = 18
 
 @Component({
   components: {
@@ -91,6 +95,11 @@ const length = 1
     Temply,
     Arbeitbot,
     Localizer,
+    PostYourStartup,
+    MT,
+    Fondu,
+    Pleaseno,
+    Resetbot,
   },
 })
 export default class App extends Vue {
