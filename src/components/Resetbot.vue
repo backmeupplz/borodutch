@@ -31,7 +31,9 @@ export default class Resetbot extends Vue {
   get descriptionText() {
     return [
       [
-        'This website is intended to reset your Telegram bot getUpdates method. Useful, when bot updates get stuck for some unknown reason.',
+        'This website is intended to reset your Telegram bot getUpdates method. Useful, when bot updates get stuck for some unknown reason. ',
+        { url: 'https://github.com/backmeupplz/resetbot', name: 'Open source' },
+        '.',
       ],
     ]
   }
