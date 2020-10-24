@@ -32,7 +32,10 @@ export default class Resetbot extends Vue {
     return [
       [
         'This website is intended to reset your Telegram bot getUpdates method. Useful, when bot updates get stuck for some unknown reason. ',
-        { url: 'https://github.com/backmeupplz/resetbot', name: 'Open source' },
+        {
+          url: 'https://github.com/backmeupplz/reset-bot',
+          name: 'Open source',
+        },
         '.',
       ],
     ]
