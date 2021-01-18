@@ -31,7 +31,7 @@ export default class Fixsleep extends Vue {
   get descriptionText() {
     return [
       [
-        "A simple webpage with 17 rules on how to sleep better. I spent muptiple years researching all the available literature and knowledge on why we sleep and how to improve the quality of sleep. I've bulit this short version with links to scientific papers to share with family and friends because not everybody likes reading long articles.",
+        "A simple webpage with 17 rules on how to sleep better. I spent multiple years researching all the available literature and knowledge on why we sleep and how to improve the quality of sleep. I've built this short version with links to scientific papers to share with family and friends because not everybody likes reading long articles.",
       ],
       [
         'Completely free and ',
