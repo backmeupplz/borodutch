@@ -131,6 +131,9 @@ export default class App extends Vue {
 * {
   font-family: Noto Sans;
 }
+.container {
+  max-width: 1000px !important;
+}
 .container,
 .v-application--wrap {
   background-color: black !important;
