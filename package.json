@@ -20,7 +20,7 @@
     "chart.js": "^2.8.0",
     "lodash": "^4.17.19",
     "moment": "^2.24.0",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.5.1",
