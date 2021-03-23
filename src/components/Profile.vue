@@ -64,21 +64,29 @@ div
       GradientText(:small='true') My story
       .story
         p
-          | Hi there! My name is Nikita and I'm a serial product launcher. I'm half developer, half entrepreneur. If I can build something quick and efficient, I build it myself — if I cannot (whether I'm not at the right level of expertise or just don't have time) I delegate tasks to my trusted list of contractors. In case if you want, you can always become a sponsor of my work on
-          | {{ " " }}
-          Link(url='https://github.com/sponsors/backmeupplz') my GitHub Sponsor profile
-          | .
+          | Hi there! My name is Nikita and I'm a serial product launcher. I'm half developer, half entrepreneur. If I can build something quick and efficient, I build it myself — if I cannot (whether I'm not at the right level of expertise or just don't have time) I delegate tasks to my trusted list of contractors.
         p I started as an iOS developer but over the years I've mastered backend, frontend, Android, React Native development; as well as management, hiring, consulting, public speaking and a variety of other soft skills. My favorite stack at this time is Node + TypeScript + Koa + Mongo on backend, Vue + TypeScript + Vuetify on frontend, React Native + Swift + Kotlin on Mobile, Node + TypeScript + Telegraf.js for Telegram bots.
         .fade-text(v-if='!showMore')
         .show-more-button(v-if='!showMore', @click='showMore = true') Show more
         p(v-if='showMore') My mission is to bring value to the people around me. If I see a pain point, I try to fix it as soon as possible. Aside from my main tech stack, programming languages I use include: Python, Ruby, Objective-C, Java, C, C++, Assembly, Bash, Groovy, Dart, JavaScript, Solidity and some R. I host all of my servers on dedicated instances in the cloud running various Linux distros (mainly Debian based). I build hardware solutions for fun based on Raspberry Pi's and connect whole bunch of random stuff to it's GPIO. Even though I favor Vue, I'm fluent with React and Angular. I'm fond of AI and ML as well as I've built multiple blockchain-based solutions. As per databases, I favor MongoDB (and PostgreSQL when it just has to be relational) on server and Realm locally. Always trying to be a step ahead of the current tech.
         p(v-if='showMore') Please, find my contacts, the list of the products I'm most proud of with some of their stats as well as the list of publications on this page. Cheers!
+  v-row
+    v-col
+      GradientText(:small='true') Ways to contribute
+      .story
+        p
+          | In case if you want, you can always become a sponsor of my work on
+          | {{ " " }}
+          Link(url='https://github.com/sponsors/backmeupplz') my GitHub Sponsor profile
+          | {{ " or on " }}
+          Link(url='https://www.buymeacoffee.com/borodutch') my Buy Me a Coffee profile
+          | .
+        p I fund all of my projects personally and the donations help me a lot to keep the products free and open. Thank you.
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Watch } from 'vue-property-decorator'
 import GradientText from '@/components/GradientText.vue'
 import Link from '@/components/Link.vue'
 import Loader from '@/components/Loader.vue'
