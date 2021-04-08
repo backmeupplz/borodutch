@@ -46,6 +46,8 @@ v-app
       Fixsleep(:index='18')
     v-row
       BotFinder(:index='19')
+    v-row
+      Club(:index='20')
     v-row.justify-center.mt-4
       .thank-you Thank you for scrolling!
 </template>
@@ -78,6 +80,7 @@ import Pleaseno from '@/components/Pleaseno.vue'
 import Resetbot from '@/components/Resetbot.vue'
 import Fixsleep from '@/components/Fixsleep.vue'
 import BotFinder from '@/components/BotFinder.vue'
+import Club from '@/components/Club.vue'
 
 const AppStore = namespace('AppStore')
 
@@ -108,6 +111,7 @@ const length = 19
     Resetbot,
     Fixsleep,
     BotFinder,
+    Club,
   },
 })
 export default class App extends Vue {

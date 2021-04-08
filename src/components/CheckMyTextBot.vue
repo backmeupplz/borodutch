@@ -14,9 +14,6 @@ ProjectCard(
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import ProjectCard from '@/components/ProjectCard.vue'
-import BarChart from '@/components/BarChart.vue'
-import Loader from '@/components/Loader.vue'
-import Link from '@/components/Link.vue'
 import { namespace } from 'vuex-class'
 import { toSpaces } from '@/helpers/toSpaces'
 import { Prop } from 'vue-property-decorator'
@@ -24,11 +21,10 @@ import { Prop } from 'vue-property-decorator'
 const AppStore = namespace('AppStore')
 
 @Component({
-  components: { BarChart, ProjectCard, Loader, Link },
+  components: { ProjectCard },
 })
-export default class Shieldy extends Vue {
+export default class CheckMyTextBot extends Vue {
   @AppStore.State stats?: any
-  @AppStore.State color!: string
 
   @Prop({ required: true }) index!: number
 
