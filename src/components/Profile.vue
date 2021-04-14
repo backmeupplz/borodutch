@@ -72,7 +72,12 @@ div
         p(v-if='showMore') Please, find my contacts, the list of the products I'm most proud of with some of their stats as well as the list of publications on this page. Cheers!
   v-row.flex-row.justify-center(v-show='countHistory && countHistory.length')
     v-col(cols='12')
-      LineChart(:chartData='chartData', :options='chartOptions', :height='100')
+      LineChart(
+        :chartData='chartData',
+        :options='chartOptions',
+        :height='100',
+        :internalGradient='gradient'
+      )
   v-row
     v-col
       GradientText(:small='true') Ways to contribute
@@ -128,7 +133,6 @@ export default class Profile extends Vue {
           datasets: [
             {
               label: 'How many people used my apps',
-              backgroundColor: this.color,
               data: this.countHistory.map((h: any) => h[1]),
               opacity: 0.3,
             },
