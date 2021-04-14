@@ -19,5 +19,6 @@ export default store
 async function getState() {
   const appStore = getModule(AppStore, store)
   appStore.fetchStats()
+  appStore.fetchCountHistory()
 }
 getState()

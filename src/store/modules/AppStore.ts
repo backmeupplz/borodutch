@@ -22,6 +22,7 @@ const randomColorPair =
 @Module({ namespaced: true, name: 'AppStore' })
 export default class AppStore extends VuexModule {
   stats = {} as { [index: string]: any }
+  countHistory = []
   openPanels = [] as number[]
 
   gradient = randomColorPair[0]
@@ -31,6 +32,12 @@ export default class AppStore extends VuexModule {
   async fetchStats() {
     const stats = (await axios.get('https://stats.borodutch.com/stats')).data
     return { stats }
+  }
+
+  @MutationAction({ mutate: ['countHistory'] })
+  async fetchCountHistory() {
+    const stats = (await axios.get('https://stats.borodutch.com/count')).data
+    return { countHistory: stats.history }
   }
 
   @Mutation

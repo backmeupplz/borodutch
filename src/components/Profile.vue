@@ -70,6 +70,9 @@ div
         .show-more-button(v-if='!showMore', @click='showMore = true') Show more
         p(v-if='showMore') My mission is to bring value to the people around me. If I see a pain point, I try to fix it as soon as possible. Aside from my main tech stack, programming languages I use include: Python, Ruby, Objective-C, Java, C, C++, Assembly, Bash, Groovy, Dart, JavaScript, Solidity and some R. I host all of my servers on dedicated instances in the cloud running various Linux distros (mainly Debian based). I build hardware solutions for fun based on Raspberry Pi's and connect whole bunch of random stuff to it's GPIO. Even though I favor Vue, I'm fluent with React and Angular. I'm fond of AI and ML as well as I've built multiple blockchain-based solutions. As per databases, I favor MongoDB (and PostgreSQL when it just has to be relational) on server and Realm locally. Always trying to be a step ahead of the current tech.
         p(v-if='showMore') Please, find my contacts, the list of the products I'm most proud of with some of their stats as well as the list of publications on this page. Cheers!
+  v-row.flex-row.justify-center(v-show='countHistory && countHistory.length')
+    v-col(cols='12')
+      LineChart(:chartData='chartData', :options='chartOptions', :height='100')
   v-row
     v-col
       GradientText(:small='true') Ways to contribute
@@ -92,17 +95,47 @@ import Link from '@/components/Link.vue'
 import Loader from '@/components/Loader.vue'
 import { namespace } from 'vuex-class'
 import { toSpaces } from '@/helpers/toSpaces'
+import LineChart from '@/components/LineChart.vue'
+import moment from 'moment'
+import { emptyDataSet } from '@/helpers/emptyDataSet'
 
 const AppStore = namespace('AppStore')
 
 @Component({
-  components: { GradientText, Link, Loader },
+  components: { GradientText, Link, Loader, LineChart },
 })
 export default class Profile extends Vue {
   @AppStore.State stats?: any
+  @AppStore.State countHistory!: any
   @AppStore.State gradient!: string
+  @AppStore.State color!: string
 
   showMore = false
+
+  chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+  }
+
+  get chartData() {
+    return this.countHistory && this.countHistory.length
+      ? {
+          labels: this.countHistory.map((h: any) => {
+            const d = new Date()
+            d.setTime(h[0])
+            return moment(d).format('DD.MM')
+          }),
+          datasets: [
+            {
+              label: 'How many people used my apps',
+              backgroundColor: this.color,
+              data: this.countHistory.map((h: any) => h[1]),
+              opacity: 0.3,
+            },
+          ],
+        }
+      : emptyDataSet
+  }
 
   get numberOfUsers() {
     return this.stats.userCount ? toSpaces(this.stats.userCount.count) : ''
