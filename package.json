@@ -17,7 +17,7 @@
     "@types/chart.js": "^2.7.53",
     "@types/moment": "^2.13.0",
     "axios": "^0.21.1",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "pug": "^2.0.3",
