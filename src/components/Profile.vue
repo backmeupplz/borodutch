@@ -42,13 +42,6 @@ div
         v-btn.social-button-margin(
           text,
           icon,
-          href='https://vk.com/borodutch',
-          target='_blank'
-        )
-          v-icon(:size='20') $vk
-        v-btn.social-button-margin(
-          text,
-          icon,
           href='mailto:n@borodutch.com',
           target='_blank'
         )
