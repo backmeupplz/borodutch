@@ -68,7 +68,7 @@ div
       LineChart(
         :chartData='chartData',
         :options='chartOptions',
-        :height='100',
+        :height='200',
         :internalGradient='gradient'
       )
   v-row
