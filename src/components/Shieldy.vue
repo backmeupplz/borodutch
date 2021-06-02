@@ -36,6 +36,11 @@ export default class Shieldy extends Vue {
       link: 'https://www.producthunt.com/posts/shieldy',
       name: 'Product Hunt: Shieldy',
     },
+    {
+      link:
+        'https://blog.borodutch.com/shieldy-got-acquired-by-1inch-exchange/',
+      name: 'Shieldy got acquired by 1inch Network',
+    },
   ]
 
   get descriptionText() {
@@ -45,7 +50,11 @@ export default class Shieldy extends Vue {
         { url: 'https://github.com/backmeupplz/shieldy', name: 'open source' },
         '.',
       ],
-      ['Shieldy is used by ', this.chatCount, ' chats.'],
+      [
+        'Shieldy is used by ',
+        this.chatCount,
+        ' chats. It got acquired by 1inch Network in June 2021.',
+      ],
     ]
   }
 
