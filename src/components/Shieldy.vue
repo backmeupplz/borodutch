@@ -41,6 +41,45 @@ export default class Shieldy extends Vue {
         'https://blog.borodutch.com/shieldy-got-acquired-by-1inch-exchange/',
       name: 'Shieldy got acquired by 1inch Network',
     },
+    {
+      name: 'Business Wire',
+      link:
+        'https://www.businesswire.com/news/home/20210605005015/en/Borodutch-Labs%E2%80%99-Nikita-Kolmogorov-Sells-Shieldy-with-20M-Users-to-1inch-Network-in-the-Largest-Telegram-Bot-Deal-so-Far',
+    },
+    {
+      name: 'Financial Post',
+      link:
+        'https://financialpost.com/pmn/press-releases-pmn/business-wire-news-releases-pmn/borodutch-labs-nikita-kolmogorov-sells-shieldy-with-20m-users-to-1inch-network-in-the-largest-telegram-bot-deal-so-far',
+    },
+    {
+      name: 'Market Watch',
+      link:
+        'https://www.marketwatch.com/press-release/borodutch-labs-nikita-kolmogorov-sells-shieldy-with-20m-users-to-1inch-network-in-the-largest-telegram-bot-deal-so-far-2021-06-05',
+    },
+    {
+      name: 'Financial Content',
+      link:
+        'https://markets.financialcontent.com/stocks/news/read?GUID=41432815',
+    },
+    {
+      name: 'Street Insider',
+      link:
+        'https://www.streetinsider.com/Business+Wire/Borodutch+Labs%E2%80%99+Nikita+Kolmogorov+Sells+Shieldy+with+20M+Users+to+1inch+Network+in+the+Largest+Telegram+Bot+Deal+so+Far/18524977.html',
+    },
+    {
+      name: 'Townhall Finance',
+      link:
+        'https://markets.financialcontent.com/townhall/news/read?GUID=41432815',
+    },
+    {
+      name: 'WRAL.com',
+      link: 'https://markets.financialcontent.com/wral/news/read?GUID=41432815',
+    },
+    {
+      name: 'yahoo!finance',
+      link:
+        'https://ca.finance.yahoo.com/news/borodutch-labs-nikita-kolmogorov-sells-160700214.html',
+    },
   ]
 
   get descriptionText() {
