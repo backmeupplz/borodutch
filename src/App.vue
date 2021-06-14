@@ -17,39 +17,41 @@ v-app
     v-row
       Todorant(:index='4')
     v-row
-      Feedr(:index='5')
+      DeleteNudesBot(:index='5')
     v-row
-      GoldenBorodutch(:index='6')
+      Feedr(:index='6')
     v-row
-      CheckMyTextBot(:index='7')
+      GoldenBorodutch(:index='7')
     v-row
-      TLGCoin(:index='8')
+      CheckMyTextBot(:index='8')
     v-row
-      Borodutch(:index='9')
+      TLGCoin(:index='9')
     v-row
-      Temply(:index='10')
+      Borodutch(:index='10')
     v-row
-      Arbeitbot(:index='11')
+      Temply(:index='11')
     v-row
-      Localizer(:index='12')
+      Arbeitbot(:index='12')
     v-row
-      PostYourStartup(:index='13')
+      Localizer(:index='13')
     v-row
-      MT(:index='14')
+      PostYourStartup(:index='14')
     v-row
-      Fondu(:index='15')
+      MT(:index='15')
     v-row
-      Pleaseno(:index='16')
+      Fondu(:index='16')
     v-row
-      Resetbot(:index='17')
+      Pleaseno(:index='17')
     v-row
-      Fixsleep(:index='18')
+      Resetbot(:index='18')
     v-row
-      BotFinder(:index='19')
+      Fixsleep(:index='19')
     v-row
-      Club(:index='20')
+      BotFinder(:index='20')
     v-row
-      Magicpill(:index='21')
+      Club(:index='21')
+    v-row
+      Magicpill(:index='22')
     v-row.justify-center.mt-4
       .thank-you Thank you for scrolling!
 </template>
@@ -84,6 +86,7 @@ import Fixsleep from '@/components/Fixsleep.vue'
 import BotFinder from '@/components/BotFinder.vue'
 import Club from '@/components/Club.vue'
 import Magicpill from '@/components/Magicpill.vue'
+import DeleteNudesBot from '@/components/DeleteNudesBot.vue'
 
 const AppStore = namespace('AppStore')
 
@@ -116,6 +119,7 @@ const length = 19
     BotFinder,
     Club,
     Magicpill,
+    DeleteNudesBot,
   },
 })
 export default class App extends Vue {
