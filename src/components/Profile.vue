@@ -54,15 +54,24 @@ div
           .fade
   v-row
     v-col
+      GradientText(:small='true') Do you invest in startups?
+      .story
+        p
+          | If you do and thought of coming to this page frequently to check on my progress, worry no more! I've created a blog specifically for you —
+          | {{ " " }}
+          Link(url='https://invest.borodutch.com') Borodutch Invest Updates
+          | . Subscribe there and receive my monthly update with all the vital things and metrics once a month. User growth, insights from my projects' data, new ideas and updates on the things I'm launching. Even investment opportunities and new partnerships! I promise, just one email a month, no spam.
+  v-row
+    v-col
       GradientText(:small='true') My story
       .story
         p
-          | Hi there! My name is Nikita and I'm a serial product launcher. I'm half developer, half entrepreneur. If I can build something quick and efficient, I build it myself — if I cannot (whether I'm not at the right level of expertise or just don't have time) I delegate tasks to my trusted list of contractors.
-        p I started as an iOS developer but over the years I've mastered backend, frontend, Android, React Native development; as well as management, hiring, consulting, public speaking and a variety of other soft skills. My favorite stack at this time is Node + TypeScript + Koa + Mongo on backend, Vue + TypeScript + Vuetify on frontend, React Native + Swift + Kotlin on Mobile, Node + TypeScript + Telegraf.js for Telegram bots.
+          | Hi there! My name is Nikita, and I'm a serial product launcher. I'm a half developer, half entrepreneur. If I can build something quick and efficient, I make it myself. If I cannot (whether I'm not at the right level of expertise or don't have time), I delegate tasks to my trusted list of contractors.
+        p I started as an iOS developer, but over the years, I've mastered backend, frontend, Android, React Native development, management, hiring, consulting, public speaking and a variety of other soft skills. My favorite stack at this time is Node + TypeScript + Koa + Mongo on backend, Vue + TypeScript + Vuetify on frontend, React Native + Swift + Kotlin on Mobile, Node + TypeScript + Telegraf.js for Telegram bots.
         .fade-text(v-if='!showMore')
         .show-more-button(v-if='!showMore', @click='showMore = true') Show more
-        p(v-if='showMore') My mission is to bring value to the people around me. If I see a pain point, I try to fix it as soon as possible. Aside from my main tech stack, programming languages I use include: Python, Ruby, Objective-C, Java, C, C++, Assembly, Bash, Groovy, Dart, JavaScript, Solidity and some R. I host all of my servers on dedicated instances in the cloud running various Linux distros (mainly Debian based). I build hardware solutions for fun based on Raspberry Pi's and connect whole bunch of random stuff to it's GPIO. Even though I favor Vue, I'm fluent with React and Angular. I'm fond of AI and ML as well as I've built multiple blockchain-based solutions. As per databases, I favor MongoDB (and PostgreSQL when it just has to be relational) on server and Realm locally. Always trying to be a step ahead of the current tech.
-        p(v-if='showMore') Please, find my contacts, the list of the products I'm most proud of with some of their stats as well as the list of publications on this page. Cheers!
+        p(v-if='showMore') My mission is to bring value to the people around me. If I see a pain point, I try to fix it as soon as possible. Aside from my main tech stack, programming languages I use include Python, Ruby, Objective-C, Java, C, C++, Assembly, Bash, Groovy, Dart, JavaScript, Solidity and some R. I host all of my servers on dedicated instances in the cloud running various Linux distros (mainly Debian based). I build hardware solutions for fun based on Raspberry Pi's and connect much random stuff to its GPIO. I'm fluent with Vue, React and Angular. I'm fond of AI and ML as well as I've built multiple blockchain-based solutions. As per databases, I favour MongoDB (and PostgreSQL when it just has to be relational) on server and Realm locally — always trying to be a step ahead of the current tech.
+        p(v-if='showMore') Please, find my contacts, the list of the products I'm most proud of with some of their stats, as well as the list of publications on this page. Cheers!
   v-row.flex-row.justify-center(v-show='countHistory && countHistory.length')
     v-col(cols='12')
       LineChart(
