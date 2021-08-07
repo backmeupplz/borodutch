@@ -52,6 +52,8 @@ v-app
       Club(:index='21')
     v-row
       Magicpill(:index='22')
+    v-row
+      CommonCrypto(:index='23')
     v-row.justify-center.mt-4
       .thank-you Thank you for scrolling!
 </template>
@@ -86,6 +88,7 @@ import Fixsleep from '@/components/Fixsleep.vue'
 import BotFinder from '@/components/BotFinder.vue'
 import Club from '@/components/Club.vue'
 import Magicpill from '@/components/Magicpill.vue'
+import CommonCrypto from '@/components/CommonCrypto.vue'
 import DeleteNudesBot from '@/components/DeleteNudesBot.vue'
 
 const AppStore = namespace('AppStore')
@@ -120,6 +123,7 @@ const length = 19
     Club,
     Magicpill,
     DeleteNudesBot,
+    CommonCrypto,
   },
 })
 export default class App extends Vue {
