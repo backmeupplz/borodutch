@@ -54,6 +54,8 @@ v-app
       Magicpill(:index='22')
     v-row
       CommonCrypto(:index='23')
+    v-row
+      CryptoGranny(:index='24')
     v-row.justify-center.mt-4
       .thank-you Thank you for scrolling!
 </template>
@@ -89,6 +91,7 @@ import BotFinder from '@/components/BotFinder.vue'
 import Club from '@/components/Club.vue'
 import Magicpill from '@/components/Magicpill.vue'
 import CommonCrypto from '@/components/CommonCrypto.vue'
+import CryptoGranny from '@/components/CryptoGranny.vue'
 import DeleteNudesBot from '@/components/DeleteNudesBot.vue'
 
 const AppStore = namespace('AppStore')
@@ -124,6 +127,7 @@ const length = 19
     Magicpill,
     DeleteNudesBot,
     CommonCrypto,
+    CryptoGranny,
   },
 })
 export default class App extends Vue {
