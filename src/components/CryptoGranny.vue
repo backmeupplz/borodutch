@@ -1,7 +1,7 @@
 <template lang="pug">
 ProjectCard(
   title='Crypto Granny',
-  link='https://t.me/CryptoGrannyLive',
+  link='https://t.me/CryptoGrannyFree',
   :index='index',
   :noExtra='true',
   :descriptionText='descriptionText'
