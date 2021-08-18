@@ -15,47 +15,49 @@ v-app
     v-row
       Randym(:index='3')
     v-row
-      Todorant(:index='4')
+      Dosu(:index='4')
     v-row
-      DeleteNudesBot(:index='5')
+      Todorant(:index='5')
     v-row
-      Feedr(:index='6')
+      DeleteNudesBot(:index='6')
     v-row
-      GoldenBorodutch(:index='7')
+      Feedr(:index='7')
     v-row
-      CheckMyTextBot(:index='8')
+      GoldenBorodutch(:index='8')
     v-row
-      TLGCoin(:index='9')
+      CheckMyTextBot(:index='9')
     v-row
-      Borodutch(:index='10')
+      TLGCoin(:index='10')
     v-row
-      Temply(:index='11')
+      Borodutch(:index='11')
     v-row
-      Arbeitbot(:index='12')
+      Temply(:index='12')
     v-row
-      Localizer(:index='13')
+      Arbeitbot(:index='13')
     v-row
-      PostYourStartup(:index='14')
+      Localizer(:index='14')
     v-row
-      MT(:index='15')
+      PostYourStartup(:index='15')
     v-row
-      Fondu(:index='16')
+      MT(:index='16')
     v-row
-      Pleaseno(:index='17')
+      Fondu(:index='17')
     v-row
-      Resetbot(:index='18')
+      Pleaseno(:index='18')
     v-row
-      Fixsleep(:index='19')
+      Resetbot(:index='19')
     v-row
-      BotFinder(:index='20')
+      Fixsleep(:index='20')
     v-row
-      Club(:index='21')
+      BotFinder(:index='21')
     v-row
-      Magicpill(:index='22')
+      Club(:index='22')
     v-row
-      CommonCrypto(:index='23')
+      Magicpill(:index='23')
     v-row
-      CryptoGranny(:index='24')
+      CommonCrypto(:index='24')
+    v-row
+      CryptoGranny(:index='25')
     v-row.justify-center.mt-4
       .thank-you Thank you for scrolling!
 </template>
@@ -93,6 +95,7 @@ import Magicpill from '@/components/Magicpill.vue'
 import CommonCrypto from '@/components/CommonCrypto.vue'
 import CryptoGranny from '@/components/CryptoGranny.vue'
 import DeleteNudesBot from '@/components/DeleteNudesBot.vue'
+import Dosu from '@/components/Dosu.vue'
 
 const AppStore = namespace('AppStore')
 
@@ -128,6 +131,7 @@ const length = 19
     DeleteNudesBot,
     CommonCrypto,
     CryptoGranny,
+    Dosu,
   },
 })
 export default class App extends Vue {
