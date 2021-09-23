@@ -85,7 +85,7 @@ export default class Shieldy extends Vue {
   get descriptionText() {
     return [
       [
-        'Anti-spam Telegram bot that stops 99.99% of annoying spammers by asking users to go throug a very simple captcha-like process and restricting newcomers to only being able to send text (no media). Completely free and ',
+        'Anti-spam Telegram bot that stops 99.99% of annoying spammers by asking users to go through a very simple captcha-like process and restricting newcomers to only being able to send text (no media). Completely free and ',
         { url: 'https://github.com/backmeupplz/shieldy', name: 'open source' },
         '.',
       ],
