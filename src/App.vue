@@ -58,6 +58,8 @@ v-app
       CommonCrypto(:index='24')
     v-row
       CryptoGranny(:index='25')
+    v-row
+      NFTRu(:index='26')
     v-row.justify-center.mt-4
       .thank-you Thank you for scrolling!
 </template>
@@ -96,6 +98,7 @@ import CommonCrypto from '@/components/CommonCrypto.vue'
 import CryptoGranny from '@/components/CryptoGranny.vue'
 import DeleteNudesBot from '@/components/DeleteNudesBot.vue'
 import Dosu from '@/components/Dosu.vue'
+import NFTRu from '@/components/NFTRu.vue'
 
 const AppStore = namespace('AppStore')
 
@@ -132,6 +135,7 @@ const length = 19
     CommonCrypto,
     CryptoGranny,
     Dosu,
+    NFTRu,
   },
 })
 export default class App extends Vue {
