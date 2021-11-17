@@ -8,7 +8,8 @@ const root = classnames(
   'pb-10',
   'max-w-5xl',
   'pt-4',
-  'px-4'
+  'px-4',
+  'bg-black'
 )
 const Root: FC = ({ children }) => {
   return (
