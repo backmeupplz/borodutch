@@ -68,7 +68,7 @@ export const NumberOfUsersAuxiliaryText: FC = ({ children }) => (
   <p className={numberOfUsersAuxiliaryText}>{children}</p>
 )
 
-const bodyText = classnames('text-white', 'opacity-90', 'mb-4')
+const bodyText = classnames('text-white', 'opacity-80', 'mb-4')
 export const BodyText: FC = ({ children }) => (
   <p className={bodyText}>{children}</p>
 )

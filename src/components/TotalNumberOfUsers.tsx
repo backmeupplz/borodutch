@@ -45,9 +45,9 @@ const container = classnames('mt-12')
 export default function TotalNumberOfUsers() {
   return (
     <div className={container}>
-      {/* <Suspense fallback={<Loader />}> */}
-      {/* <Chart /> */}
-      {/* </Suspense> */}
+      <Suspense fallback={<Loader />}>
+        <Chart />
+      </Suspense>
     </div>
   )
 }
