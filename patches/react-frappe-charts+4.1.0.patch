@@ -1,0 +1,21 @@
+diff --git a/node_modules/react-frappe-charts/build/index.d.ts b/node_modules/react-frappe-charts/build/index.d.ts
+index c5d3bd4..e0aecd1 100644
+--- a/node_modules/react-frappe-charts/build/index.d.ts
++++ b/node_modules/react-frappe-charts/build/index.d.ts
+@@ -1,7 +1,7 @@
+ import React from "react";
+ declare type ChartType = "line" | "bar" | "axis-mixed" | "pie" | "percentage" | "heatmap";
+ declare type AxisMode = "span" | "tick";
+-declare type ChartData = {
++export declare type ChartData = {
+     labels?: Array<string>;
+     datasets?: Array<{
+         name?: string;
+@@ -34,6 +34,7 @@ declare type Props = {
+         xAxisMode?: AxisMode;
+         yAxisMode?: AxisMode;
+         xIsSeries?: 0 | 1;
++        shortenYAxisNumbers?: 0 | 1;
+     };
+     barOptions?: {
+         spaceRatio?: number;
