@@ -7,6 +7,7 @@ import Button from 'components/Button'
 import Loader from 'components/Loader'
 import Project from 'components/Project'
 import projects from 'data/projects'
+import showMoreData from 'helpers/showMoreData'
 
 const projectPlaceholderContainer = classnames('pb-4', 'mx-4')
 const projectsContainer = classnames('flex', 'flex-col', 'gap-4')
@@ -37,16 +38,26 @@ function Loaders() {
 
 export default function Projects() {
   const appStoreSnapshot = useSnapshot(appStore)
+  const showMoreDataSnapshot = useSnapshot(showMoreData)
   return (
     <>
       <div className={headerContainer}>
         <SubheaderText>Projects</SubheaderText>
-        {Object.keys(appStoreSnapshot.opened).length > 0 && (
+        {(!showMoreDataSnapshot.showMoreData ||
+          Object.keys(appStoreSnapshot.opened).length > 0) && (
           <Button
             onClick={() => {
-              appStore.opened = {}
+              if (!showMoreData.showMoreData) {
+                showMoreData.showMoreData = true
+              } else {
+                appStore.opened = {}
+              }
             }}
-            title="Hide all stats"
+            title={
+              showMoreDataSnapshot.showMoreData
+                ? 'Hide all stats'
+                : 'Chart more data'
+            }
           />
         )}
       </div>
