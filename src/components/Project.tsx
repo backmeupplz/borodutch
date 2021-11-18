@@ -10,7 +10,6 @@ import { appStore } from 'stores/AppStore'
 import { projectsData as baseProjectsData } from 'helpers/projectsData'
 import { classnames } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
-import ArrowButton from 'components/ArrowButton'
 import Button from 'components/Button'
 import Chart from 'components/Chart'
 import Project from 'models/Project'
@@ -32,7 +31,6 @@ const projectHeaderContainer = classnames(
   'mb-4'
 )
 const titleAndNumbersContainer = classnames('flex', 'flex-col')
-const titleContainer = classnames('flex', 'flex-row', 'gap-2', 'items-center')
 const publicationList = classnames('list-inside', 'list-disc')
 const chartsContainer = classnames(
   'flex',
@@ -58,10 +56,9 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
     <div className={container}>
       <div className={projectHeaderContainer}>
         <div className={titleAndNumbersContainer}>
-          <div className={titleContainer}>
+          <a href={project.link} rel="noopener noreferrer" target="_blank">
             <ProjectTitle>{project.title}</ProjectTitle>
-            <ArrowButton url={project.link} />
-          </div>
+          </a>
           {projectsData.userCountSeparate?.[project.code] && (
             <NumberOfProjectUsersText>
               {formatNumber(projectsData.userCountSeparate[project.code])} users

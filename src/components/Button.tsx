@@ -15,7 +15,8 @@ const button = classnames(
   'px-4',
   'rounded-xl',
   'focus:outline-none',
-  'mx-1'
+  'mx-1',
+  'flex-shrink-0'
 )
 const Button: FC<ButtonProps> = ({ onClick, title }) => {
   return (
