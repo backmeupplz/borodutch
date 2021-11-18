@@ -1,1 +1,1 @@
-export default 'http://localhost:1339'
+export default 'httpв://stats.borodutch.com'
