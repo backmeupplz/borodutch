@@ -62,7 +62,7 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
             <ProjectTitle>{project.title}</ProjectTitle>
             <ArrowButton url={project.link} />
           </div>
-          {projectsData.userCountSeparate[project.code] && (
+          {projectsData.userCountSeparate?.[project.code] && (
             <NumberOfProjectUsersText>
               {formatNumber(projectsData.userCountSeparate[project.code])} users
             </NumberOfProjectUsersText>

@@ -43,13 +43,15 @@ const projects: Project[] = [
             projects. It supports over 100 languages and works with either Wit
             or Google speech recognition neural networks.
           </BodyText>
-          <BodyText>
-            Voicy is currently installed at{' '}
-            {formatNumber(voicy.stats.chatCount)} chats, recognized{' '}
-            {formatNumber(voicy.stats.voiceCount)} voice messages resulting in{' '}
-            {(voicy.stats.duration / 60 / 60 / 24 / 365).toFixed(2)} years of
-            speech.
-          </BodyText>
+          {!!voicy && (
+            <BodyText>
+              Voicy is currently installed at{' '}
+              {formatNumber(voicy.stats.chatCount)} chats, recognized{' '}
+              {formatNumber(voicy.stats.voiceCount)} voice messages resulting in{' '}
+              {(voicy.stats.duration / 60 / 60 / 24 / 365).toFixed(2)} years of
+              speech.
+            </BodyText>
+          )}
           <BodyText>
             If you see that the average response delay is too high — it's
             probably Telegram servers not giving the bot fresh updates, it
@@ -63,28 +65,31 @@ const projects: Project[] = [
       const {
         projectsData: { voicy },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new chats per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(voicy.stats.chatDailyStats),
-        },
-        {
-          title: 'Number of messages received per day',
-          data: messageStatsToLabelsAndDatasets(voicy.stats.messageStats),
-        },
-        {
-          title: 'Number of voice messages recognized per hour vs hours ago',
-          data: dailyStatsToLabelsAndDatasets(voicy.stats.hourlyStats),
-        },
-        {
-          title: 'Response time in seconds',
-          data: responseTimeToLabelsAndDatasets(voicy.stats.responseTime),
-        },
-        {
-          title: 'Voicybot.com visits',
-          data: cloudflareStatsToLabelsAndDatasets(voicy.cloudflare),
-        },
-      ]
+      return voicy
+        ? [
+            {
+              title: 'Number of new chats per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(voicy.stats.chatDailyStats),
+            },
+            {
+              title: 'Number of messages received per day',
+              data: messageStatsToLabelsAndDatasets(voicy.stats.messageStats),
+            },
+            {
+              title:
+                'Number of voice messages recognized per hour vs hours ago',
+              data: dailyStatsToLabelsAndDatasets(voicy.stats.hourlyStats),
+            },
+            {
+              title: 'Response time in seconds',
+              data: responseTimeToLabelsAndDatasets(voicy.stats.responseTime),
+            },
+            {
+              title: 'Voicybot.com visits',
+              data: cloudflareStatsToLabelsAndDatasets(voicy.cloudflare),
+            },
+          ]
+        : []
     },
   },
   {
@@ -146,10 +151,12 @@ const projects: Project[] = [
             Completely free and{' '}
             <Link url="https://github.com/1inch/shieldy">open source</Link>.
           </BodyText>
-          <BodyText>
-            Shieldy is used by {formatNumber(shieldy.chatCount)} chats. It got
-            acquired by 1inch Network in June 2021.
-          </BodyText>
+          {!!shieldy && (
+            <BodyText>
+              Shieldy is used by {formatNumber(shieldy.chatCount)} chats. It got
+              acquired by 1inch Network in June 2021.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -157,12 +164,14 @@ const projects: Project[] = [
       const {
         projectsData: { shieldy },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new chats per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(shieldy.chatDaily),
-        },
-      ]
+      return shieldy
+        ? [
+            {
+              title: 'Number of new chats per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(shieldy.chatDaily),
+            },
+          ]
+        : []
     },
   },
   {
@@ -184,10 +193,12 @@ const projects: Project[] = [
             </Link>
             .
           </BodyText>
-          <BodyText>
-            Banofbot was used to create {formatNumber(banofbot.requestCount)}{' '}
-            votekick requests in {formatNumber(banofbot.chatCount)} chats.
-          </BodyText>
+          {!!banofbot && (
+            <BodyText>
+              Banofbot was used to create {formatNumber(banofbot.requestCount)}{' '}
+              votekick requests in {formatNumber(banofbot.chatCount)} chats.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -195,20 +206,22 @@ const projects: Project[] = [
       const {
         projectsData: { banofbot },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new users per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(banofbot.userDaily),
-        },
-        {
-          title: 'Number of new chats per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(banofbot.chatDaily),
-        },
-        {
-          title: 'Number of new requests per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(banofbot.requestDaily),
-        },
-      ]
+      return banofbot
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(banofbot.userDaily),
+            },
+            {
+              title: 'Number of new chats per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(banofbot.chatDaily),
+            },
+            {
+              title: 'Number of new requests per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(banofbot.requestDaily),
+            },
+          ]
+        : []
     },
   },
   {
@@ -230,10 +243,12 @@ const projects: Project[] = [
             </Link>
             .
           </BodyText>
-          <BodyText>
-            Randy was used in {formatNumber(randym.chatCount)} chats to execute{' '}
-            {formatNumber(randym.raffleCount)} raffles.
-          </BodyText>
+          {!!randym && (
+            <BodyText>
+              Randy was used in {formatNumber(randym.chatCount)} chats to
+              execute {formatNumber(randym.raffleCount)} raffles.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -273,10 +288,12 @@ const projects: Project[] = [
             you. Based on "Getting Things Done", "Willpower" and "Eat That Frog"
             books.
           </BodyText>
-          <BodyText>
-            Users on Todorant created {formatNumber(todorant.db.todoCount)}{' '}
-            todos.
-          </BodyText>
+          {!!todorant && (
+            <BodyText>
+              Users on Todorant created {formatNumber(todorant.db.todoCount)}{' '}
+              todos.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -284,20 +301,22 @@ const projects: Project[] = [
       const {
         projectsData: { todorant },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new users per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(todorant.db.userDaily),
-        },
-        {
-          title: 'Number of new todos per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(todorant.db.todoDaily),
-        },
-        {
-          title: 'Todorant.com visits',
-          data: cloudflareStatsToLabelsAndDatasets(todorant.cloudflare),
-        },
-      ]
+      return todorant
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(todorant.db.userDaily),
+            },
+            {
+              title: 'Number of new todos per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(todorant.db.todoDaily),
+            },
+            {
+              title: 'Todorant.com visits',
+              data: cloudflareStatsToLabelsAndDatasets(todorant.cloudflare),
+            },
+          ]
+        : []
     },
   },
   {
@@ -320,10 +339,12 @@ const projects: Project[] = [
             </Link>
             .
           </BodyText>
-          <BodyText>
-            DeleteNudesBot protects {formatNumber(deletenudesbot.chatCount)}{' '}
-            chats.
-          </BodyText>
+          {!!deletenudesbot && (
+            <BodyText>
+              DeleteNudesBot protects {formatNumber(deletenudesbot.chatCount)}{' '}
+              chats.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -338,10 +359,12 @@ const projects: Project[] = [
       } = useSnapshot(baseProjectsData)
       return (
         <>
-          <BodyText>
-            Feedr is a simple multi-channel support desk. Feedr users configured{' '}
-            {feedr.db.botCount} bots.
-          </BodyText>
+          <BodyText>Feedr is a simple multi-channel support desk.</BodyText>
+          {!!feedr && (
+            <BodyText>
+              Feedr users configured {feedr.db.botCount} bots.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -349,16 +372,18 @@ const projects: Project[] = [
       const {
         projectsData: { feedr },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new users per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(feedr.db.userDaily),
-        },
-        {
-          title: 'Number of new bots per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(feedr.db.botDaily),
-        },
-      ]
+      return feedr
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(feedr.db.userDaily),
+            },
+            {
+              title: 'Number of new bots per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(feedr.db.botDaily),
+            },
+          ]
+        : []
     },
   },
   {
@@ -372,16 +397,21 @@ const projects: Project[] = [
       return (
         <>
           <BodyText>
-            It's my personal micro-blog with{' '}
-            {formatNumber(goldenBorodutch.subCount)} subscribers. Nothing
-            special, just some thoughts about business, IT, development, book
-            reviews, lifestyle facts, etc. Careful: it's in Russian. If you want
-            to read my long reads in English, here's{' '}
+            It's my personal micro-blog. Nothing special, just some thoughts
+            about business, IT, development, book reviews, lifestyle facts, etc.
+            Careful: it's in Russian. If you want to read my long reads in
+            English, here's{' '}
             <Link url="https://blog.borodutch.com">
               a link to my English blog
             </Link>
             .
           </BodyText>
+          {!!goldenBorodutch && (
+            <BodyText>
+              {formatNumber(goldenBorodutch.subCount)} people are subscribed to
+              Golden Borodutch.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -409,12 +439,14 @@ const projects: Project[] = [
       const {
         projectsData: { checkMyTextBot },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new users per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(checkMyTextBot.userDaily),
-        },
-      ]
+      return checkMyTextBot
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(checkMyTextBot.userDaily),
+            },
+          ]
+        : []
     },
   },
   {
@@ -436,9 +468,11 @@ const projects: Project[] = [
             </Link>
             .
           </BodyText>
-          <BodyText>
-            TLGCoin users mined {formatNumber(tlgcoin.coinsCount)} coins.
-          </BodyText>
+          {!!tlgcoin && (
+            <BodyText>
+              TLGCoin users mined {formatNumber(tlgcoin.coinsCount)} coins.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -446,12 +480,14 @@ const projects: Project[] = [
       const {
         projectsData: { tlgcoin },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new users per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(tlgcoin.userDaily),
-        },
-      ]
+      return tlgcoin
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(tlgcoin.userDaily),
+            },
+          ]
+        : []
     },
   },
   {
@@ -498,10 +534,12 @@ const projects: Project[] = [
             <Link url="https://github.com/backmeupplz/temply">open source</Link>
             .
           </BodyText>
-          <BodyText>
-            Temply users created {formatNumber(temply.templatesCount)}{' '}
-            templates.
-          </BodyText>
+          {!!temply && (
+            <BodyText>
+              Temply users created {formatNumber(temply.templatesCount)}{' '}
+              templates.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -509,12 +547,14 @@ const projects: Project[] = [
       const {
         projectsData: { temply },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new users per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(temply.userDaily),
-        },
-      ]
+      return temply
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(temply.userDaily),
+            },
+          ]
+        : []
     },
   },
   {
@@ -556,9 +596,11 @@ const projects: Project[] = [
             profiles if they get accepted. Completely free and{' '}
             <Link url="https://github.com/arbeitbot">open source</Link>.
           </BodyText>
-          <BodyText>
-            ArbeitBot users created {formatNumber(arbeitbot.jobCount)} jobs.
-          </BodyText>
+          {!!arbeitbot && (
+            <BodyText>
+              ArbeitBot users created {formatNumber(arbeitbot.jobCount)} jobs.
+            </BodyText>
+          )}
         </>
       )
     },
@@ -566,20 +608,22 @@ const projects: Project[] = [
       const {
         projectsData: { arbeitbot },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new users per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(arbeitbot.userDaily),
-        },
-        {
-          title: 'Number of new jobs per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(arbeitbot.jobDaily),
-        },
-        {
-          title: 'ArbeitBot.com visits',
-          data: cloudflareStatsToLabelsAndDatasets(arbeitbot.website),
-        },
-      ]
+      return arbeitbot
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(arbeitbot.userDaily),
+            },
+            {
+              title: 'Number of new jobs per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(arbeitbot.jobDaily),
+            },
+            {
+              title: 'ArbeitBot.com visits',
+              data: cloudflareStatsToLabelsAndDatasets(arbeitbot.website),
+            },
+          ]
+        : []
     },
   },
   {
@@ -618,12 +662,14 @@ const projects: Project[] = [
       const {
         projectsData: { localizer },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Localizer.dev visits',
-          data: cloudflareStatsToLabelsAndDatasets(localizer),
-        },
-      ]
+      return localizer
+        ? [
+            {
+              title: 'Localizer.dev visits',
+              data: cloudflareStatsToLabelsAndDatasets(localizer),
+            },
+          ]
+        : []
     },
   },
   {
@@ -658,12 +704,14 @@ const projects: Project[] = [
       const {
         projectsData: { postyourstartup },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Postyourstartup.com visits',
-          data: cloudflareStatsToLabelsAndDatasets(postyourstartup),
-        },
-      ]
+      return postyourstartup
+        ? [
+            {
+              title: 'Postyourstartup.com visits',
+              data: cloudflareStatsToLabelsAndDatasets(postyourstartup),
+            },
+          ]
+        : []
     },
   },
   {
@@ -696,16 +744,18 @@ const projects: Project[] = [
       const {
         projectsData: { mt },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Number of new users per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(mt.userDaily),
-        },
-        {
-          title: 'Number of new orders per day vs days ago',
-          data: dailyStatsToLabelsAndDatasets(mt.orderDaily),
-        },
-      ]
+      return mt
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(mt.userDaily),
+            },
+            {
+              title: 'Number of new orders per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(mt.orderDaily),
+            },
+          ]
+        : []
     },
   },
   {
@@ -753,12 +803,14 @@ const projects: Project[] = [
       const {
         projectsData: { fondu },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Fondu.io visits',
-          data: cloudflareStatsToLabelsAndDatasets(fondu),
-        },
-      ]
+      return fondu
+        ? [
+            {
+              title: 'Fondu.io visits',
+              data: cloudflareStatsToLabelsAndDatasets(fondu),
+            },
+          ]
+        : []
     },
   },
   {
@@ -790,12 +842,14 @@ const projects: Project[] = [
       const {
         projectsData: { pleaseno },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Pleaseno.me visits',
-          data: cloudflareStatsToLabelsAndDatasets(pleaseno),
-        },
-      ]
+      return pleaseno
+        ? [
+            {
+              title: 'Pleaseno.me visits',
+              data: cloudflareStatsToLabelsAndDatasets(pleaseno),
+            },
+          ]
+        : []
     },
   },
   {
@@ -820,12 +874,14 @@ const projects: Project[] = [
       const {
         projectsData: { resetbot },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Resetbot.com visits',
-          data: cloudflareStatsToLabelsAndDatasets(resetbot),
-        },
-      ]
+      return resetbot
+        ? [
+            {
+              title: 'Resetbot.com visits',
+              data: cloudflareStatsToLabelsAndDatasets(resetbot),
+            },
+          ]
+        : []
     },
   },
   {
@@ -857,12 +913,14 @@ const projects: Project[] = [
       const {
         projectsData: { fixsleep },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Fixsleep.link visits',
-          data: cloudflareStatsToLabelsAndDatasets(fixsleep),
-        },
-      ]
+      return fixsleep
+        ? [
+            {
+              title: 'Fixsleep.link visits',
+              data: cloudflareStatsToLabelsAndDatasets(fixsleep),
+            },
+          ]
+        : []
     },
   },
   {
@@ -894,12 +952,14 @@ const projects: Project[] = [
       const {
         projectsData: { botfinder },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Bot-finder.com visits',
-          data: cloudflareStatsToLabelsAndDatasets(botfinder),
-        },
-      ]
+      return botfinder
+        ? [
+            {
+              title: 'Bot-finder.com visits',
+              data: cloudflareStatsToLabelsAndDatasets(botfinder),
+            },
+          ]
+        : []
     },
   },
   {
@@ -959,12 +1019,14 @@ const projects: Project[] = [
       const {
         projectsData: { magicpill },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Magicpill.link visits',
-          data: cloudflareStatsToLabelsAndDatasets(magicpill),
-        },
-      ]
+      return magicpill
+        ? [
+            {
+              title: 'Magicpill.link visits',
+              data: cloudflareStatsToLabelsAndDatasets(magicpill),
+            },
+          ]
+        : []
     },
   },
   {
@@ -993,12 +1055,14 @@ const projects: Project[] = [
       const {
         projectsData: { commoncrypto },
       } = useSnapshot(baseProjectsData)
-      return [
-        {
-          title: 'Commoncrypto.dev visits',
-          data: cloudflareStatsToLabelsAndDatasets(commoncrypto),
-        },
-      ]
+      return commoncrypto
+        ? [
+            {
+              title: 'Commoncrypto.dev visits',
+              data: cloudflareStatsToLabelsAndDatasets(commoncrypto),
+            },
+          ]
+        : []
     },
   },
   {

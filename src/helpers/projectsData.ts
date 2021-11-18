@@ -1,5 +1,6 @@
 import { UserCountData } from 'helpers/userCount'
 import { proxy } from 'valtio'
+import baseUrl from 'helpers/baseUrl'
 import fetch from 'unfetch'
 
 export interface CountAggregation {
@@ -42,21 +43,21 @@ export type ProjectCount = {
 }
 
 export interface ProjectsData {
-  shieldy: {
+  shieldy?: {
     chatDaily: CountAggregation[]
     chatCount: number
     userCount: number
   }
-  deletenudesbot: {
+  deletenudesbot?: {
     chatDaily: CountAggregation[]
     chatCount: number
   }
-  tlgcoin: {
+  tlgcoin?: {
     userDaily: CountAggregation[]
     userCount: number
     coinsCount: number
   }
-  banofbot: {
+  banofbot?: {
     userDaily: CountAggregation[]
     userCount: number
     chatDaily: CountAggregation[]
@@ -64,25 +65,25 @@ export interface ProjectsData {
     requestDaily: CountAggregation[]
     requestCount: number
   }
-  randym: {
+  randym?: {
     raffleDaily: CountAggregation[]
     raffleCount: number
     chatDaily: CountAggregation[]
     chatCount: number
   }
-  temply: {
+  temply?: {
     userDaily: CountAggregation[]
     userCount: number
     templatesCount: number
   }
-  arbeitbot: {
+  arbeitbot?: {
     jobDaily: CountAggregation[]
     jobCount: number
     userDaily: CountAggregation[]
     userCount: number
     website: CloudflareData
   }
-  voicy: {
+  voicy?: {
     stats: {
       responseTime: { [timestamp: number]: number }
       chatCount: number
@@ -97,18 +98,18 @@ export interface ProjectsData {
     }
     cloudflare: CloudflareData
   }
-  fondu: CloudflareData
-  borodutch: CloudflareData
-  pleaseno: CloudflareData
-  botfinder: CloudflareData
-  fixsleep: CloudflareData
-  magicpill: CloudflareData
-  commoncrypto: CloudflareData
-  localizer: CloudflareData
-  postyourstartup: CloudflareData
-  resetbot: CloudflareData
-  goldenBorodutch: { subCount: number }
-  todorant: {
+  fondu?: CloudflareData
+  borodutch?: CloudflareData
+  pleaseno?: CloudflareData
+  botfinder?: CloudflareData
+  fixsleep?: CloudflareData
+  magicpill?: CloudflareData
+  commoncrypto?: CloudflareData
+  localizer?: CloudflareData
+  postyourstartup?: CloudflareData
+  resetbot?: CloudflareData
+  goldenBorodutch?: { subCount: number }
+  todorant?: {
     db: {
       userDaily: CountAggregation[]
       userCount: number
@@ -117,7 +118,7 @@ export interface ProjectsData {
     }
     cloudflare: CloudflareData
   }
-  feedr: {
+  feedr?: {
     db: {
       userDaily: CountAggregation[]
       userCount: number
@@ -126,22 +127,22 @@ export interface ProjectsData {
     }
     cloudflare: CloudflareData
   }
-  checkMyTextBot: {
+  checkMyTextBot?: {
     userDaily: CountAggregation[]
     userCount: number
   }
-  mt: {
+  mt?: {
     userDaily: CountAggregation[]
     userCount: number
     orderDaily: CountAggregation[]
     orderCount: number
   }
-  userCountSeparate: ProjectCount
-  userCount: UserCountData
+  userCountSeparate?: ProjectCount
+  userCount?: UserCountData
 }
 
 export const projectsData = proxy({
-  projectsData: fetch('https://stats.borodutch.com/stats').then(
+  projectsData: fetch(`${baseUrl}/stats`).then(
     (res) => res.json() as Promise<ProjectsData>
   ),
 })
