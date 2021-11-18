@@ -40,7 +40,7 @@ const subheaderText = classnames(
   'font-bold',
   'text-2xl',
   'md:text-3xl',
-  'pt-8',
+  'pt-4',
   'pb-4'
 )
 export const SubheaderText: FC = ({ children }) => (
