@@ -1,1 +1,1 @@
-export default 'httpв://stats.borodutch.com'
+export default 'https://stats.borodutch.com'
