@@ -784,7 +784,7 @@ const projects: Project[] = [
     link: 'https://t.me/AnyVideoDownloadBot',
     description: () => [
       'Telegram bot that allows users to download the video from any link.',
-      'I [acquired](https://t.me/borodutch_support/175) this bot in November 2021.',
+      'I [acquired](https://t.me/borodutch_support/175) this bot in November 2021. It is [open source](https://github.com/Borodutch/VideoDownloadBot).',
     ],
   },
 ]
