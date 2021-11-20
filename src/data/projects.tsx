@@ -1,4 +1,4 @@
-import { BodyText, Link } from 'components/Text'
+import { Link } from 'components/Text'
 import { projectsData as baseProjectsData } from 'helpers/projectsData'
 import { useSnapshot } from 'valtio'
 import Project from 'models/Project'
@@ -35,31 +35,28 @@ const projects: Project[] = [
       const {
         projectsData: { voicy },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
+        'Voicy is a Telegram bot that converts speech to text from any voice messages and audio files it receives. This is one of my favorite pet projects. It supports over 100 languages and works with either Wit or Google speech recognition neural networks.',
+        !!voicy &&
+          `Voicy is currently installed at ${formatNumber(
+            voicy.stats.chatCount
+          )} chats, recognized ${formatNumber(
+            voicy.stats.voiceCount
+          )} voice messages resulting in ${(
+            voicy.stats.duration /
+            60 /
+            60 /
+            24 /
+            365
+          ).toFixed(2)} years of
+              speech.`,
         <>
-          <BodyText>
-            Voicy is a Telegram bot that converts speech to text from any voice
-            messages and audio files it receives. This is one of my favorite pet
-            projects. It supports over 100 languages and works with either Wit
-            or Google speech recognition neural networks.
-          </BodyText>
-          {!!voicy && (
-            <BodyText>
-              Voicy is currently installed at{' '}
-              {formatNumber(voicy.stats.chatCount)} chats, recognized{' '}
-              {formatNumber(voicy.stats.voiceCount)} voice messages resulting in{' '}
-              {(voicy.stats.duration / 60 / 60 / 24 / 365).toFixed(2)} years of
-              speech.
-            </BodyText>
-          )}
-          <BodyText>
-            If you see that the average response delay is too high — it's
-            probably Telegram servers not giving the bot fresh updates, it
-            happens from time to time. It's{' '}
-            <Link url="https://github.com/backmeupplz/voicy">open source</Link>.
-          </BodyText>
-        </>
-      )
+          If you see that the average response delay is too high — it's probably
+          Telegram servers not giving the bot fresh updates, it happens from
+          time to time. It's{' '}
+          <Link url="https://github.com/backmeupplz/voicy">open source</Link>.
+        </>,
+      ]
     },
     charts: () => {
       const {
@@ -142,23 +139,19 @@ const projects: Project[] = [
       const {
         projectsData: { shieldy },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
         <>
-          <BodyText>
-            Anti-spam Telegram bot that stops 99.99% of annoying spammers by
-            asking users to go through a very simple captcha-like process and
-            restricting newcomers to only being able to send text (no media).
-            Completely free and{' '}
-            <Link url="https://github.com/1inch/shieldy">open source</Link>.
-          </BodyText>
-          {!!shieldy && (
-            <BodyText>
-              Shieldy is used by {formatNumber(shieldy.chatCount)} chats. It got
-              acquired by 1inch Network in June 2021.
-            </BodyText>
-          )}
-        </>
-      )
+          Anti-spam Telegram bot that stops 99.99% of annoying spammers by
+          asking users to go through a very simple captcha-like process and
+          restricting newcomers to only being able to send text (no media).
+          Completely free and{' '}
+          <Link url="https://github.com/1inch/shieldy">open source</Link>.
+        </>,
+        !!shieldy &&
+          `Shieldy is used by ${formatNumber(
+            shieldy.chatCount
+          )} chats. It got acquired by 1inch Network in June 2021.`,
+      ]
     },
     charts: () => {
       const {
@@ -182,25 +175,19 @@ const projects: Project[] = [
       const {
         projectsData: { banofbot },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
         <>
-          <BodyText>
-            Telegram votekick bot. Allows to fight spammers or introduce
-            democracy to chats by allowing users to vote for kicking specific
-            members. Completely free and{' '}
-            <Link url="https://github.com/backmeupplz/banofbot">
-              open source
-            </Link>
-            .
-          </BodyText>
-          {!!banofbot && (
-            <BodyText>
-              Banofbot was used to create {formatNumber(banofbot.requestCount)}{' '}
-              votekick requests in {formatNumber(banofbot.chatCount)} chats.
-            </BodyText>
-          )}
-        </>
-      )
+          Telegram votekick bot. Allows to fight spammers or introduce democracy
+          to chats by allowing users to vote for kicking specific members.
+          Completely free and{' '}
+          <Link url="https://github.com/backmeupplz/banofbot">open source</Link>
+          .
+        </>,
+        !!banofbot &&
+          `Banofbot was used to create ${formatNumber(
+            banofbot.requestCount
+          )} votekick requests in ${formatNumber(banofbot.chatCount)} chats.`,
+      ]
     },
     charts: () => {
       const {
@@ -232,45 +219,37 @@ const projects: Project[] = [
       const {
         projectsData: { randym },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
         <>
-          <BodyText>
-            Telegram raffle bot that allows channel and group admins to execute
-            raffles with prizes among chat members or channel subscribers.
-            Completely free and{' '}
-            <Link url="https://github.com/backmeupplz/randymbot">
-              open source
-            </Link>
-            .
-          </BodyText>
-          {!!randym && (
-            <BodyText>
-              Randy was used in {formatNumber(randym.chatCount)} chats to
-              execute {formatNumber(randym.raffleCount)} raffles.
-            </BodyText>
-          )}
-        </>
-      )
+          Telegram raffle bot that allows channel and group admins to execute
+          raffles with prizes among chat members or channel subscribers.
+          Completely free and{' '}
+          <Link url="https://github.com/backmeupplz/randymbot">
+            open source
+          </Link>
+          .
+        </>,
+        !!randym &&
+          `Randy was used in ${formatNumber(
+            randym.chatCount
+          )} chats to execute ${formatNumber(randym.raffleCount)} raffles.`,
+      ]
     },
   },
   {
     title: 'Dosu',
     code: 'dosu',
     link: 'https://dosu.io',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            Pseudoanonymous platform to share your thoughts with the world.
-            Secure, legal, free from hate speech. More info in the{' '}
-            <Link url="https://invest.borodutch.com/55m-users-voicy-is-on-sale/">
-              blog post
-            </Link>
-            .
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        Pseudoanonymous platform to share your thoughts with the world. Secure,
+        legal, free from hate speech. More info in the{' '}
+        <Link url="https://invest.borodutch.com/55m-users-voicy-is-on-sale/">
+          blog post
+        </Link>
+        .
+      </>,
+    ],
   },
   {
     title: 'Todorant',
@@ -280,22 +259,13 @@ const projects: Project[] = [
       const {
         projectsData: { todorant },
       } = useSnapshot(baseProjectsData)
-      return (
-        <>
-          <BodyText>
-            Todorant is the only todo manager you will ever need again. It
-            doesn't just help you to keep track of tasks, it manages them for
-            you. Based on "Getting Things Done", "Willpower" and "Eat That Frog"
-            books.
-          </BodyText>
-          {!!todorant && (
-            <BodyText>
-              Users on Todorant created {formatNumber(todorant.db.todoCount)}{' '}
-              todos.
-            </BodyText>
-          )}
-        </>
-      )
+      return [
+        'Todorant is the only todo manager you will ever need again. It doesn\'t just help you to keep track of tasks, it manages them for you. Based on "Getting Things Done", "Willpower" and "Eat That Frog" books.',
+        !!todorant &&
+          `Users on Todorant created ${formatNumber(
+            todorant.db.todoCount
+          )} todos.`,
+      ]
     },
     charts: () => {
       const {
@@ -327,26 +297,21 @@ const projects: Project[] = [
       const {
         projectsData: { deletenudesbot },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
         <>
-          <BodyText>
-            This bot deletes all nude pictures so that groups don't get banned
-            by Telegram for explicit content. Simply add it to a group, give it
-            admin rights to delete messages and you are done! Completely free
-            and{' '}
-            <Link url="https://github.com/backmeupplz/DeleteNudesBot">
-              open source
-            </Link>
-            .
-          </BodyText>
-          {!!deletenudesbot && (
-            <BodyText>
-              DeleteNudesBot protects {formatNumber(deletenudesbot.chatCount)}{' '}
-              chats.
-            </BodyText>
-          )}
-        </>
-      )
+          This bot deletes all nude pictures so that groups don't get banned by
+          Telegram for explicit content. Simply add it to a group, give it admin
+          rights to delete messages and you are done! Completely free and{' '}
+          <Link url="https://github.com/backmeupplz/DeleteNudesBot">
+            open source
+          </Link>
+          .
+        </>,
+        !!deletenudesbot &&
+          `DeleteNudesBot protects ${formatNumber(
+            deletenudesbot.chatCount
+          )} chats.`,
+      ]
     },
   },
   {
@@ -357,16 +322,10 @@ const projects: Project[] = [
       const {
         projectsData: { feedr },
       } = useSnapshot(baseProjectsData)
-      return (
-        <>
-          <BodyText>Feedr is a simple multi-channel support desk.</BodyText>
-          {!!feedr && (
-            <BodyText>
-              Feedr users configured {feedr.db.botCount} bots.
-            </BodyText>
-          )}
-        </>
-      )
+      return [
+        'Feedr is a simple multi-channel support desk.',
+        !!feedr && `Feedr users configured ${feedr.db.botCount} bots.`,
+      ]
     },
     charts: () => {
       const {
@@ -394,47 +353,38 @@ const projects: Project[] = [
       const {
         projectsData: { goldenBorodutch },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
         <>
-          <BodyText>
-            It's my personal micro-blog. Nothing special, just some thoughts
-            about business, IT, development, book reviews, lifestyle facts, etc.
-            Careful: it's in Russian. If you want to read my long reads in
-            English, here's{' '}
-            <Link url="https://blog.borodutch.com">
-              a link to my English blog
-            </Link>
-            .
-          </BodyText>
-          {!!goldenBorodutch && (
-            <BodyText>
-              {formatNumber(goldenBorodutch.subCount)} people are subscribed to
-              Golden Borodutch.
-            </BodyText>
-          )}
-        </>
-      )
+          It's my personal micro-blog. Nothing special, just some thoughts about
+          business, IT, development, book reviews, lifestyle facts, etc.
+          Careful: it's in Russian. If you want to read my long reads in
+          English, here's{' '}
+          <Link url="https://blog.borodutch.com">
+            a link to my English blog
+          </Link>
+          .
+        </>,
+        !!goldenBorodutch &&
+          `${formatNumber(
+            goldenBorodutch.subCount
+          )} people are subscribed to Golden Borodutch.`,
+      ]
     },
   },
   {
     title: 'Check my text bot',
     code: 'speller',
     link: 'https://t.me/check_my_text_bot',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            Spellcheck Telegram bot. Just add it to your channel, active in
-            private messages and get notified of any typos you post! Completely
-            free and{' '}
-            <Link url="https://github.com/backmeupplz/check_my_text_bot">
-              open source
-            </Link>
-            .
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        Spellcheck Telegram bot. Just add it to your channel, active in private
+        messages and get notified of any typos you post! Completely free and{' '}
+        <Link url="https://github.com/backmeupplz/check_my_text_bot">
+          open source
+        </Link>
+        .
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { checkMyTextBot },
@@ -457,24 +407,16 @@ const projects: Project[] = [
       const {
         projectsData: { tlgcoin },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
         <>
-          <BodyText>
-            Telegram clicker-bot with internal currency and fancy duels. It's
-            like cookie clicker, but in Telegram and with competitive element.
-            Completely free and{' '}
-            <Link url="https://github.com/backmeupplz/tlgcoin">
-              open source
-            </Link>
-            .
-          </BodyText>
-          {!!tlgcoin && (
-            <BodyText>
-              TLGCoin users mined {formatNumber(tlgcoin.coinsCount)} coins.
-            </BodyText>
-          )}
-        </>
-      )
+          Telegram clicker-bot with internal currency and fancy duels. It's like
+          cookie clicker, but in Telegram and with competitive element.
+          Completely free and{' '}
+          <Link url="https://github.com/backmeupplz/tlgcoin">open source</Link>.
+        </>,
+        !!tlgcoin &&
+          `TLGCoin users mined ${formatNumber(tlgcoin.coinsCount)} coins.`,
+      ]
     },
     charts: () => {
       const {
@@ -494,28 +436,17 @@ const projects: Project[] = [
     title: 'Borodutch',
     code: 'borodutch',
     link: 'https://borodutch.com',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            This is this website! Quite spectacular that you can check the
-            requests to it as well in 21st century, right? Don't expect it to
-            have many hits though as it's mainly visited by myself to check on
-            the projects metrics.
-          </BodyText>
-          <BodyText>
-            It's open source. Here's the code for{' '}
-            <Link url="https://github.com/backmeupplz/borodutch">
-              the website
-            </Link>{' '}
-            and for{' '}
-            <Link url="https://github.com/backmeupplz/borodutch-stats">
-              the stats server
-            </Link>
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      "This is this website! Quite spectacular that you can check the requests to it as well in 21st century, right? Don't expect it to have many hits though as it's mainly visited by myself to check on the projects metrics.",
+      <>
+        It's open source. Here's the code for{' '}
+        <Link url="https://github.com/backmeupplz/borodutch">the website</Link>{' '}
+        and for{' '}
+        <Link url="https://github.com/backmeupplz/borodutch-stats">
+          the stats server
+        </Link>
+      </>,
+    ],
   },
   {
     title: 'Temply',
@@ -525,23 +456,18 @@ const projects: Project[] = [
       const {
         projectsData: { temply },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
         <>
-          <BodyText>
-            Inline Telegram bot allowing users to create varios text templates
-            an quickly use them later. Pretty useful for support workers as well
-            as channel administrators. Completely free and{' '}
-            <Link url="https://github.com/backmeupplz/temply">open source</Link>
-            .
-          </BodyText>
-          {!!temply && (
-            <BodyText>
-              Temply users created {formatNumber(temply.templatesCount)}{' '}
-              templates.
-            </BodyText>
-          )}
-        </>
-      )
+          Inline Telegram bot allowing users to create varios text templates an
+          quickly use them later. Pretty useful for support workers as well as
+          channel administrators. Completely free and{' '}
+          <Link url="https://github.com/backmeupplz/temply">open source</Link>.
+        </>,
+        !!temply &&
+          `Temply users created ${formatNumber(
+            temply.templatesCount
+          )} templates.`,
+      ]
     },
     charts: () => {
       const {
@@ -587,22 +513,17 @@ const projects: Project[] = [
       const {
         projectsData: { arbeitbot },
       } = useSnapshot(baseProjectsData)
-      return (
+      return [
         <>
-          <BodyText>
-            Freelance market as a Telegram bot with a twist. Instead of
-            releasing the job to all the candidates on the platform, employers
-            pick freelancers they like and freelancers only see employers'
-            profiles if they get accepted. Completely free and{' '}
-            <Link url="https://github.com/arbeitbot">open source</Link>.
-          </BodyText>
-          {!!arbeitbot && (
-            <BodyText>
-              ArbeitBot users created {formatNumber(arbeitbot.jobCount)} jobs.
-            </BodyText>
-          )}
-        </>
-      )
+          Freelance market as a Telegram bot with a twist. Instead of releasing
+          the job to all the candidates on the platform, employers pick
+          freelancers they like and freelancers only see employers' profiles if
+          they get accepted. Completely free and{' '}
+          <Link url="https://github.com/arbeitbot">open source</Link>.
+        </>,
+        !!arbeitbot &&
+          `ArbeitBot users created ${formatNumber(arbeitbot.jobCount)} jobs.`,
+      ]
     },
     charts: () => {
       const {
@@ -636,28 +557,20 @@ const projects: Project[] = [
         name: 'Product Hunt: Localizer',
       },
     ],
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            A free open-source self-hosted crowd-translating service. Check out
-            examples at{' '}
-            <Link url="https://localize.todorant.com">
-              localize.todorant.com
-            </Link>{' '}
-            and{' '}
-            <Link url="https://localize.borodutch.com">
-              localize.borodutch.com
-            </Link>
-            . It is also{' '}
-            <Link url="https://github.com/backmeupplz/localizer-backend">
-              open source
-            </Link>
-            .
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        A free open-source self-hosted crowd-translating service. Check out
+        examples at{' '}
+        <Link url="https://localize.todorant.com">localize.todorant.com</Link>{' '}
+        and{' '}
+        <Link url="https://localize.borodutch.com">localize.borodutch.com</Link>
+        . It is also{' '}
+        <Link url="https://github.com/backmeupplz/localizer-backend">
+          open source
+        </Link>
+        .
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { localizer },
@@ -682,24 +595,20 @@ const projects: Project[] = [
         name: 'Product Hunt: Post Your Startup',
       },
     ],
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            A list of over 120 places to post your startup. I went through{' '}
-            <Link url="https://www.placestopostyourstartup.com">
-              placestopostyourstartup.com
-            </Link>
-            , posted Todorant everywhere and left notes along the way. You can
-            sort and filter the result any way you want. It is also{' '}
-            <Link url="https://github.com/backmeupplz/postyourstartup">
-              open source
-            </Link>
-            .
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        A list of over 120 places to post your startup. I went through{' '}
+        <Link url="https://www.placestopostyourstartup.com">
+          placestopostyourstartup.com
+        </Link>
+        , posted Todorant everywhere and left notes along the way. You can sort
+        and filter the result any way you want. It is also{' '}
+        <Link url="https://github.com/backmeupplz/postyourstartup">
+          open source
+        </Link>
+        .
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { postyourstartup },
@@ -728,18 +637,13 @@ const projects: Project[] = [
         name: 'VC: Как я запустил симулятор торгов криптой «Мамкин Трейдер» за две недели',
       },
     ],
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            Mamkin Trade is a crypto and stocks virtual trading platform,
-            officially declared to be safe for your mental health. Completely
-            free and{' '}
-            <Link url="https://github.com/mamkin-trade">open source</Link>.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        Mamkin Trade is a crypto and stocks virtual trading platform, officially
+        declared to be safe for your mental health. Completely free and{' '}
+        <Link url="https://github.com/mamkin-trade">open source</Link>.
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { mt },
@@ -788,17 +692,13 @@ const projects: Project[] = [
         name: 'CryptoDaily: Building Your Own Cryptocurrency On The Ethereum Blockchain Just Got Easier',
       },
     ],
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            ERC-20 Ethereum smart-contract builder. Completely free and{' '}
-            <Link url="https://github.com/backmeupplz/fondu">open source</Link>.
-            Hosted on the GitHub Pages.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        ERC-20 Ethereum smart-contract builder. Completely free and{' '}
+        <Link url="https://github.com/backmeupplz/fondu">open source</Link>.
+        Hosted on the GitHub Pages.
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { fondu },
@@ -823,21 +723,15 @@ const projects: Project[] = [
         name: 'Product Hunt: Please, no',
       },
     ],
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            A simple webpage that has two pages: one just shows "Please, no"
-            text, another also shows a "Please, no" GIF. I use it when I can
-            simply answer "Please, no" to particular things. Completely free and{' '}
-            <Link url="https://github.com/backmeupplz/pleaseno">
-              open source
-            </Link>
-            . Hosted on the GitHub Pages as well.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        A simple webpage that has two pages: one just shows "Please, no" text,
+        another also shows a "Please, no" GIF. I use it when I can simply answer
+        "Please, no" to particular things. Completely free and{' '}
+        <Link url="https://github.com/backmeupplz/pleaseno">open source</Link>.
+        Hosted on the GitHub Pages as well.
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { pleaseno },
@@ -856,20 +750,13 @@ const projects: Project[] = [
     title: 'ResetBot',
     code: 'resetbot',
     link: 'https://resetbot.com',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            This website is intended to reset your Telegram bot getUpdates
-            method. Useful, when bot updates get stuck for some unknown reason.{' '}
-            <Link url="https://github.com/backmeupplz/reset-bot">
-              Open source
-            </Link>
-            .
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        This website is intended to reset your Telegram bot getUpdates method.
+        Useful, when bot updates get stuck for some unknown reason.{' '}
+        <Link url="https://github.com/backmeupplz/reset-bot">Open source</Link>.
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { resetbot },
@@ -888,27 +775,14 @@ const projects: Project[] = [
     title: 'Fix sleep',
     code: 'fixsleep',
     link: 'https://fixsleep.link',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            A simple webpage with 17 rules on how to sleep better. I spent
-            multiple years researching all the available literature and
-            knowledge on why we sleep and how to improve the quality of sleep.
-            I've built this short version with links to scientific papers to
-            share with family and friends because not everybody likes reading
-            long articles.
-          </BodyText>
-          <BodyText>
-            Completely free and{' '}
-            <Link url="https://github.com/backmeupplz/fixsleep">
-              open source
-            </Link>
-            . Hosted on the GitHub Pages.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      "A simple webpage with 17 rules on how to sleep better. I spent multiple years researching all the available literature and knowledge on why we sleep and how to improve the quality of sleep. I've built this short version with links to scientific papers to share with family and friends because not everybody likes reading long articles.",
+      <>
+        Completely free and{' '}
+        <Link url="https://github.com/backmeupplz/fixsleep">open source</Link>.
+        Hosted on the GitHub Pages.
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { fixsleep },
@@ -933,21 +807,15 @@ const projects: Project[] = [
         name: 'VC: «Это бот?» — расширение для браузера, показывающее больше информации о комментаторах на vc.ru',
       },
     ],
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            A browser extension that allows you to see registration date,
-            ratings, number of comments and published articles of commentators
-            on vc.ru, TJournal and DTF. Fully{' '}
-            <Link url="https://github.com/backmeupplz/bot-finder">
-              open source
-            </Link>
-            .
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      <>
+        A browser extension that allows you to see registration date, ratings,
+        number of comments and published articles of commentators on vc.ru,
+        TJournal and DTF. Fully{' '}
+        <Link url="https://github.com/backmeupplz/bot-finder">open source</Link>
+        .
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { botfinder },
@@ -966,55 +834,35 @@ const projects: Project[] = [
     title: 'Borodutch Club',
     code: 'borodutchclub',
     link: 'https://club.borodutch.com',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            I tried joining many communities of people who launch their products
-            to find the one where the quality of members is high. All of them
-            start fine but then suffer from an influx of "wannabes".
-          </BodyText>
-
-          <BodyText>
-            So I decided to start my closed community of product people who love
-            to launch MVP's quickly and try out various business hypotheses. As
-            usual, both the{' '}
-            <Link url="https://github.com/backmeupplz/borodutch-club">
-              frontend
-            </Link>{' '}
-            and the{' '}
-            <Link url="https://github.com/backmeupplz/borodutch-club-backend">
-              backend
-            </Link>{' '}
-            are open source.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      'I tried joining many communities of people who launch their products to find the one where the quality of members is high. All of them start fine but then suffer from an influx of "wannabes".',
+      <>
+        So I decided to start my closed community of product people who love to
+        launch MVP's quickly and try out various business hypotheses. As usual,
+        both the{' '}
+        <Link url="https://github.com/backmeupplz/borodutch-club">
+          frontend
+        </Link>{' '}
+        and the{' '}
+        <Link url="https://github.com/backmeupplz/borodutch-club-backend">
+          backend
+        </Link>{' '}
+        are open source.
+      </>,
+    ],
   },
   {
     title: 'Magic pill',
     code: 'magicpill',
     link: 'https://magicpill.link',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            A simple webpage listing benefits of reducing animal product intake
-            based on scientific evidence. Just like with Fix sleep, I built this
-            website to share it with people close to me. To save them time by
-            researching this subject for them.
-          </BodyText>
-          <BodyText>
-            Completely free and{' '}
-            <Link url="https://github.com/backmeupplz/magicpill">
-              open source
-            </Link>
-            . Hosted on the GitHub Pages.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      'A simple webpage listing benefits of reducing animal product intake based on scientific evidence. Just like with Fix sleep, I built this website to share it with people close to me. To save them time by researching this subject for them.',
+      <>
+        Completely free and{' '}
+        <Link url="https://github.com/backmeupplz/magicpill">open source</Link>.
+        Hosted on the GitHub Pages.
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { magicpill },
@@ -1033,24 +881,16 @@ const projects: Project[] = [
     title: 'CommonCrypto',
     code: 'commoncrypto',
     link: 'https://commoncrypto.dev',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            Free to use public API that provides all the tickers for 65+ crypto
-            exchanges. I found the lack of such API disturbing so I created one.
-            Feel free to use for any reason!
-          </BodyText>
-          <BodyText>
-            Completely free and{' '}
-            <Link url="https://github.com/Borodutch/commoncrypto-backend">
-              open source
-            </Link>
-            .
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      'Free to use public API that provides all the tickers for 65+ crypto exchanges. I found the lack of such API disturbing so I created one. Feel free to use for any reason!',
+      <>
+        Completely free and{' '}
+        <Link url="https://github.com/Borodutch/commoncrypto-backend">
+          open source
+        </Link>
+        .
+      </>,
+    ],
     charts: () => {
       const {
         projectsData: { commoncrypto },
@@ -1069,48 +909,37 @@ const projects: Project[] = [
     title: 'Crypto Granny',
     code: 'cryptogranny',
     link: 'https://t.me/CryptoGrannyFree',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            Automated alerts when there is enough difference in price between
-            crypto exchanges (including decentralized exchanges) to make a few
-            percents arbitraging coins between them. Supports the most popular
-            exchanges and works 24/7.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      'Automated alerts when there is enough difference in price between crypto exchanges (including decentralized exchanges) to make a few percents arbitraging coins between them. Supports the most popular exchanges and works 24/7.',
+    ],
   },
   {
     title: 'NFT ru',
     code: 'nftru',
     link: 'https://nft-ru.com',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            Community of Russian-speaking NFT project founders without wannabes
-            and constant noise from cofounder-seekers.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      'Community of Russian-speaking NFT project founders without wannabes and constant noise from cofounder-seekers.',
+    ],
   },
   {
     title: 'Is Bot Down',
     code: 'isbotdown',
     link: 'https://isbotdown.com',
-    description: () => {
-      return (
-        <>
-          <BodyText>
-            A Telegram-bot uptime checker. Notifies users when their bots go
-            down and come back up again.
-          </BodyText>
-        </>
-      )
-    },
+    description: () => [
+      'A Telegram-bot uptime checker. Notifies users when their bots go down and come back up again.',
+    ],
+  },
+  {
+    title: 'Video Download Bot',
+    code: 'videodownloadbot',
+    link: 'https://t.me/AnyVideoDownloadBot',
+    description: () => [
+      'Telegram bot that allows users to download the video from any link.',
+      <>
+        I <Link url="https://t.me/borodutch_support/175">acquired</Link> this
+        bot in November 2021.
+      </>,
+    ],
   },
 ]
 

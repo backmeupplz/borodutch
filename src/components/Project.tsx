@@ -1,11 +1,12 @@
-import { FC } from 'react'
 import {
+  BodyText,
   GradientText,
   Link,
   NumberOfProjectUsersText,
   ProjectSubtitle,
   ProjectTitle,
 } from 'components/Text'
+import { FC } from 'react'
 import { appStore } from 'stores/AppStore'
 import { projectsData as baseProjectsData } from 'helpers/projectsData'
 import { classnames } from 'classnames/tailwind'
@@ -52,6 +53,8 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
   const opened = appStoreSnapshot.opened[project.code]
   const { projectsData } = useSnapshot(baseProjectsData)
 
+  const description = project.description()
+
   return (
     <div className={container}>
       <div className={projectHeaderContainer}>
@@ -78,7 +81,17 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
           />
         )}
       </div>
-      {project.description()}
+      {Array.isArray(description) ? (
+        <>
+          {description
+            .filter((v) => !!v)
+            .map((d, i) => (
+              <BodyText key={i}>{d}</BodyText>
+            ))}
+        </>
+      ) : (
+        description
+      )}
       {opened && project.charts && (
         <div className={chartsContainer}>
           {project.charts().map((chart) => (

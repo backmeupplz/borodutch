@@ -9,7 +9,7 @@ export default interface Project {
     name: string
     link: string
   }[]
-  description: () => JSX.Element
+  description: () => JSX.Element | (string | JSX.Element | undefined | false)[]
   charts?: () => {
     title: string
     data: ChartData
