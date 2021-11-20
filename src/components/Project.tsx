@@ -1,18 +1,18 @@
+import { FC } from 'react'
 import {
-  BodyText,
   GradientText,
   Link,
   NumberOfProjectUsersText,
   ProjectSubtitle,
   ProjectTitle,
 } from 'components/Text'
-import { FC } from 'react'
 import { appStore } from 'stores/AppStore'
 import { projectsData as baseProjectsData } from 'helpers/projectsData'
 import { classnames } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
 import Chart from 'components/Chart'
+import Description from 'components/Description'
 import Project from 'models/Project'
 import formatNumber from 'helpers/formatNumber'
 
@@ -53,8 +53,6 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
   const opened = appStoreSnapshot.opened[project.code]
   const { projectsData } = useSnapshot(baseProjectsData)
 
-  const description = project.description()
-
   return (
     <div className={container}>
       <div className={projectHeaderContainer}>
@@ -81,17 +79,7 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
           />
         )}
       </div>
-      {Array.isArray(description) ? (
-        <>
-          {description
-            .filter((v) => !!v)
-            .map((d, i) => (
-              <BodyText key={i}>{d}</BodyText>
-            ))}
-        </>
-      ) : (
-        description
-      )}
+      <Description description={project.description()} />
       {opened && project.charts && (
         <div className={chartsContainer}>
           {project.charts().map((chart) => (
