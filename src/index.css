@@ -16,3 +16,10 @@ text {
 .frappe-chart .x.axis .line-vertical {
   display: none;
 }
+
+a,
+p,
+button {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
