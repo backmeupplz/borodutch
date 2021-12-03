@@ -780,7 +780,7 @@ const projects: Project[] = [
   },
   {
     title: 'Video Download Bot',
-    code: 'videodownloadbot',
+    code: 'videoDownloadBot',
     link: 'https://t.me/AnyVideoDownloadBot',
     description: () => [
       'Telegram bot that allows users to download the video from any link.',
