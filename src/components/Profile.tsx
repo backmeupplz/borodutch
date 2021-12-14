@@ -42,7 +42,8 @@ const socialButtonsContainer = classnames(
   'flex',
   'flex-row',
   'mt-4',
-  'space-x-4'
+  'space-x-4',
+  'mb-2'
 )
 
 function NumberOfUsers() {
