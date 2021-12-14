@@ -83,6 +83,7 @@ export default function Profile() {
           />
           <IconButton icon="email" url="mailto:n@borodutch.com" />
           <IconButton icon="facebook" url="https://fb.me/borodutch" />
+          <IconButton icon="twitter" url="https://twitter.com/backmeupplz" />
         </div>
       </div>
       <div className={imageContainer}>
