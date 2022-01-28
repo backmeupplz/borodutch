@@ -479,7 +479,7 @@ const projects: Project[] = [
       },
     ],
     description: () => [
-      'A free open-source self-hosted crowd-translating service. Check out examples at [localize.todorant.com](https://localize.todorant.com) and [localize.borodutch.com](https://localize.borodutch.com). It is also (open source)(https://github.com/backmeupplz/localizer-backend).',
+      'A free open-source self-hosted crowd-translating service. Check out examples at [localize.todorant.com](https://localize.todorant.com) and [localize.borodutch.com](https://localize.borodutch.com). It is also [open source](https://github.com/backmeupplz/localizer-backend).',
     ],
     charts: () => {
       const {
