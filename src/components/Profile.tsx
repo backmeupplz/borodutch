@@ -59,7 +59,7 @@ export default function Profile() {
   return (
     <div className={profileContainer}>
       <div className={profileTextContainer}>
-        <AuxiliaryText>borodutch</AuxiliaryText>
+        <AuxiliaryText>borodutch.eth</AuxiliaryText>
         <HeaderText>Nikita Kolmogorov</HeaderText>
         <Suspense fallback={<Loader />}>
           <NumberOfUsers />
