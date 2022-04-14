@@ -4,17 +4,6 @@ import Story from 'components/Story'
 export default function Intro() {
   return (
     <>
-      <SubheaderText>Do you invest in startups?</SubheaderText>
-      <BodyText>
-        If you do and thought of coming to this page frequently to check on my
-        progress, worry no more! I've created a blog specifically for you —{' '}
-        <Link url="https://invest.borodutch.com">Borodutch Invest Updates</Link>
-        . Subscribe there and receive my monthly update with all the vital
-        things and metrics once a month. User growth, insights from my projects'
-        data, new ideas and updates on the things I'm launching. Even investment
-        opportunities and new partnerships! I promise, just one email a month,
-        no spam.
-      </BodyText>
       <Story />
       <SubheaderText>Ways to contribute</SubheaderText>
       <BodyText>

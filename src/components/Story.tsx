@@ -1,4 +1,4 @@
-import { BodyText, SubheaderText, TextButton } from 'components/Text'
+import { BodyText, Link, SubheaderText, TextButton } from 'components/Text'
 import { classnames } from 'classnames/tailwind'
 import { useState } from 'react'
 
@@ -37,13 +37,14 @@ export default function Story() {
         list of contractors.
       </BodyText>
       <BodyText>
-        I started as an iOS developer, but over the years, I've mastered
-        backend, frontend, Android, React Native development, management,
-        hiring, consulting, public speaking and a variety of other soft skills.
-        My favorite stack at this time is Node + TypeScript + Koa + Mongo +
-        amala on backend, React + TypeScript + Tailwind on frontend, React
-        Native + Swift + Kotlin on Mobile, Node + TypeScript + grammY for
-        Telegram bots.
+        I started as an iOS developer. Over the years, I've mastered backend,
+        frontend, Android, React Native development, management, hiring,
+        consulting, public speaking, and various other soft skills. You can find
+        my up-to-date tech stack in{' '}
+        <Link url="https://templates.borodutch.com">
+          the list of my code templates
+        </Link>
+        .
       </BodyText>
       {showMore ? (
         <>
@@ -55,18 +56,16 @@ export default function Story() {
             Solidity and some R. I host all of my servers on dedicated instances
             in the cloud running various Linux distros (mainly Debian based). I
             build hardware solutions for fun based on Raspberry Pi's and connect
-            much random stuff to its GPIO. I'm fluent with Vue, React and
-            Angular. I'm fond of AI and ML as well as I've built multiple
-            blockchain-based solutions. As per databases, I favour MongoDB (and
-            PostgreSQL when it just has to be relational) on server and
-            WatermelonDB locally — always trying to be a step ahead of the
-            current tech.
+            much random stuff to its GPIO. I'm fluent in Vue, React and Angular.
+            I'm fond of AI, ML, web3 and social. As per databases, I favour
+            MongoDB (and PostgreSQL when it just has to be relational) on the
+            server and WatermelonDB locally — always trying to be a step ahead
+            of the current tech.
           </BodyText>
-
           <BodyText>
             Please, find my contacts, the list of the products I'm most proud of
-            with some of their stats, as well as the list of publications on
-            this page. Cheers!
+            with some of their stats, and the list of publications on this page.
+            Cheers!
           </BodyText>
         </>
       ) : (
