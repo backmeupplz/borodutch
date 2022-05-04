@@ -102,10 +102,6 @@ const projects: Project[] = [
         link: 'https://financialpost.com/pmn/press-releases-pmn/business-wire-news-releases-pmn/borodutch-labs-nikita-kolmogorov-sells-shieldy-with-20m-users-to-1inch-network-in-the-largest-telegram-bot-deal-so-far',
       },
       {
-        name: 'Market Watch',
-        link: 'https://www.marketwatch.com/press-release/borodutch-labs-nikita-kolmogorov-sells-shieldy-with-20m-users-to-1inch-network-in-the-largest-telegram-bot-deal-so-far-2021-06-05',
-      },
-      {
         name: 'Financial Content',
         link: 'https://markets.financialcontent.com/stocks/news/read?GUID=41432815',
       },
