@@ -23,10 +23,6 @@ const projects: Project[] = [
         name: 'Habr: Рецепт разработки бота под Telegram',
       },
       {
-        link: 'https://spark.ru/startup/voicy/blog/19008/kak-zapustit-proekt-v-odinochku/',
-        name: 'Spark: Личный опыт: как запустить проект в одиночку',
-      },
-      {
         link: 'https://vc.ru/flood/21082-telegram-bot-growth',
         name: 'VC: Кейс из России: Как мы без бюджета раскрутили два Telegram-бота до 17 500 чатов',
       },
