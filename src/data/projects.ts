@@ -567,10 +567,6 @@ const projects: Project[] = [
         name: 'The New Web: This app makes writing Ethereum smart contracts super easy, perhaps too easy',
       },
       {
-        link: 'https://coinnewsnation.com/2018/08/this-app-makes-it-super-easy-to-write-smart-contracts-for-ethereum/',
-        name: 'CoinNews Nation: This app makes it super easy to write smart contracts for Ethereum',
-      },
-      {
         link: 'https://www.chepicap.com/en/news/2745/new-fondu-app-lets-users-create-ethereum-smart-contracts-more-easily.html',
         name: 'Chepicap: New Fondu app lets users create Ethereum smart contracts more easily',
       },
