@@ -31,10 +31,7 @@ export default function Story() {
       <SubheaderText>My story</SubheaderText>
       <BodyText>
         Hi there! My name is Nikita, and I'm a serial product launcher. I'm a
-        half developer, half entrepreneur. If I can build something quick and
-        efficient, I make it myself. If I cannot (whether I'm not at the right
-        level of expertise or don't have time), I delegate tasks to my trusted
-        list of contractors.
+        half developer, half entrepreneur.
       </BodyText>
       <BodyText>
         I started as an iOS developer. Over the years, I've mastered backend,
