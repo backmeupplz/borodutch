@@ -717,28 +717,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'CommonCrypto',
-    code: 'commoncrypto',
-    link: 'https://commoncrypto.dev',
-    description: () => [
-      'Free to use public API that provides all the tickers for 65+ crypto exchanges. I found the lack of such API disturbing so I created one. Feel free to use for any reason!',
-      'Completely free and [open source](https://github.com/Borodutch/commoncrypto-backend).',
-    ],
-    charts: () => {
-      const {
-        projectsData: { commoncrypto },
-      } = useSnapshot(baseProjectsData)
-      return commoncrypto
-        ? [
-            {
-              title: 'Commoncrypto.dev visits',
-              data: cloudflareStatsToLabelsAndDatasets(commoncrypto),
-            },
-          ]
-        : []
-    },
-  },
-  {
     title: 'Crypto Granny',
     code: 'cryptogranny',
     link: 'https://t.me/CryptoGrannyFree',
