@@ -30,14 +30,14 @@ export default function Story() {
     <div className={storyContainer(!showMore)}>
       <SubheaderText>My story</SubheaderText>
       <BodyText>
-        Hi there! My name is Nikita, and I'm a serial product launcher. I'm a
-        half developer, half entrepreneur.
+        Hi there! My name is Nikita, and I'm a serial product launcher. I'm half
+        developer, half entrepreneur.
       </BodyText>
       <BodyText>
         I started as an iOS developer. Over the years, I've mastered backend,
         frontend, Android, React Native development, management, hiring,
-        consulting, public speaking, and various other soft skills. You can find
-        my up-to-date tech stack in{' '}
+        consulting, public speaking, and other soft skills. You can find my
+        up-to-date tech stack in{' '}
         <Link url="https://templates.borodutch.com">
           the list of my code templates
         </Link>
@@ -50,14 +50,14 @@ export default function Story() {
             pain point, I try to fix it as soon as possible. Aside from my main
             tech stack, programming languages I use include Python, Ruby,
             Objective-C, Java, C, C++, Assembly, Bash, Groovy, Dart, JavaScript,
-            Solidity and some R. I host all of my servers on dedicated instances
-            in the cloud running various Linux distros (mainly Debian based). I
-            build hardware solutions for fun based on Raspberry Pi's and connect
-            much random stuff to its GPIO. I'm fluent in Vue, React and Angular.
-            I'm fond of AI, ML, web3 and social. As per databases, I favour
-            MongoDB (and PostgreSQL when it just has to be relational) on the
-            server and WatermelonDB locally — always trying to be a step ahead
-            of the current tech.
+            Solidity, Circom, and some R. I host all of my servers on dedicated
+            instances in the cloud running various Linux distros (mainly Debian
+            based). I build hardware solutions for fun based on Raspberry Pi's
+            and connect much random stuff to its GPIO. I'm fluent in Vue, React,
+            and Angular. I'm fond of AI, ML, web3, and social. As per databases,
+            I favor MongoDB (and PostgreSQL when it just has to be relational)
+            on the server and WatermelonDB locally — always trying to be a step
+            ahead of the current tech.
           </BodyText>
           <BodyText>
             Please, find my contacts, the list of the products I'm most proud of

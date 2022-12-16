@@ -41,6 +41,8 @@ export type ProjectCount = {
   nftru?: number
   isbotdown?: number
   videoDownloadBot?: number
+  remindme?: number
+  essay?: number
 }
 
 export interface ProjectsData {

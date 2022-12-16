@@ -1,4 +1,3 @@
-import { Link } from 'components/Text'
 import { projectsData as baseProjectsData } from 'helpers/projectsData'
 import { useSnapshot } from 'valtio'
 import Project from 'models/Project'
@@ -46,7 +45,7 @@ const projects: Project[] = [
             365
           ).toFixed(2)} years of
               speech.`,
-        "If you see that the average response delay is too high — it's probably Telegram servers not giving the bot fresh updates, it happens from time to time. It's [open source](https://github.com/backmeupplz/voicy).",
+        "If the average response delay is too high — it's probably because Telegram servers are not giving the bot fresh updates. It happens from time to time. It's [open source](https://github.com/backmeupplz/voicy).",
       ]
     },
     charts: () => {
@@ -127,7 +126,7 @@ const projects: Project[] = [
         projectsData: { shieldy },
       } = useSnapshot(baseProjectsData)
       return [
-        'Anti-spam Telegram bot that stops 99.99% of annoying spammers by asking users to go through a very simple captcha-like process and restricting newcomers to only being able to send text (no media). Completely free and [open source](https://github.com/1inch/shieldy).',
+        'Anti-spam Telegram bot that stops 99.99% of annoying spammers by asking users to go through a straightforward captcha-like process and restricting newcomers to only being able to send text (no media). Completely free and [open source](https://github.com/1inch/shieldy).',
         !!shieldy &&
           `Shieldy is used by ${formatNumber(
             shieldy.chatCount
@@ -157,7 +156,7 @@ const projects: Project[] = [
         projectsData: { banofbot },
       } = useSnapshot(baseProjectsData)
       return [
-        'Telegram votekick bot. Allows to fight spammers or introduce democracy to chats by allowing users to vote for kicking specific members. Completely free and [open source](https://github.com/backmeupplz/banofbot).',
+        'Telegram votekick bot. Allows to fight spammers or introduce democracy to chats by enabling users to vote for kicking specific members — completely free and [open source](https://github.com/backmeupplz/banofbot).',
         !!banofbot &&
           `Banofbot was used to create ${formatNumber(
             banofbot.requestCount
@@ -204,14 +203,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'Dosu',
-    code: 'dosu',
-    link: 'https://dosu.io',
-    description: () => [
-      'Pseudoanonymous platform to share your thoughts with the world. Secure, legal, free from hate speech. More info in the [blog post](https://invest.borodutch.com/55m-users-voicy-is-on-sale/).',
-    ],
-  },
-  {
     title: 'Todorant',
     code: 'todorant',
     link: 'https://todorant.com',
@@ -220,7 +211,7 @@ const projects: Project[] = [
         projectsData: { todorant },
       } = useSnapshot(baseProjectsData)
       return [
-        'Todorant is the only todo manager you will ever need again. It doesn\'t just help you to keep track of tasks, it manages them for you. Based on "Getting Things Done", "Willpower" and "Eat That Frog" books.',
+        'Todorant is the only todo manager you will ever need again. It doesn\'t just help you to keep track of tasks. It manages them for you. Based on "Getting Things Done," "Willpower," and "Eat That Frog" books.',
         !!todorant &&
           `Users on Todorant created ${formatNumber(
             todorant.db.todoCount
@@ -267,37 +258,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'Feedr',
-    code: 'feedr',
-    link: 'https://feedr.chat',
-    description: () => {
-      const {
-        projectsData: { feedr },
-      } = useSnapshot(baseProjectsData)
-      return [
-        'Feedr is a simple multi-channel support desk.',
-        !!feedr && `Feedr users configured ${feedr.db.botCount} bots.`,
-      ]
-    },
-    charts: () => {
-      const {
-        projectsData: { feedr },
-      } = useSnapshot(baseProjectsData)
-      return feedr
-        ? [
-            {
-              title: 'Number of new users per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(feedr.db.userDaily),
-            },
-            {
-              title: 'Number of new bots per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(feedr.db.botDaily),
-            },
-          ]
-        : []
-    },
-  },
-  {
     title: 'Golden Borodutch',
     code: 'goldenBorodutch',
     link: 'https://t.me/golden_borodutch',
@@ -306,7 +266,7 @@ const projects: Project[] = [
         projectsData: { goldenBorodutch },
       } = useSnapshot(baseProjectsData)
       return [
-        "It's my personal micro-blog. Nothing special, just some thoughts about business, IT, development, book reviews, lifestyle facts, etc. Careful: it's in Russian. If you want to read my long reads in English, here's [a link to my English blog](https://blog.borodutch.com).",
+        "It's my personal micro-blog. Nothing special, just thoughts about business, IT, development, book reviews, lifestyle facts, etc. Careful: it's in Russian. If you want to read my long reads in English, here's [a link to my English blog](https://blog.borodutch.com).",
         !!goldenBorodutch &&
           `${formatNumber(
             goldenBorodutch.subCount
@@ -319,7 +279,7 @@ const projects: Project[] = [
     code: 'speller',
     link: 'https://t.me/check_my_text_bot',
     description: () => [
-      'Spellcheck Telegram bot. Just add it to your channel, active in private messages and get notified of any typos you post! Completely free and [open source](https://github.com/backmeupplz/check_my_text_bot).',
+      'Spellcheck Telegram bot. Just add it to your channel, active in private messages, and get notified of any typos you post! Completely free and [open source](https://github.com/backmeupplz/check_my_text_bot).',
     ],
     charts: () => {
       const {
@@ -344,7 +304,7 @@ const projects: Project[] = [
         projectsData: { tlgcoin },
       } = useSnapshot(baseProjectsData)
       return [
-        "Telegram clicker-bot with internal currency and fancy duels. It's like cookie clicker, but in Telegram and with competitive element. Completely free and [open source](https://github.com/backmeupplz/tlgcoin).",
+        "Telegram clicker-bot with internal currency and fancy duels. It's like the cookie clicker but in Telegram and with a competitive element. Completely free and [open source](https://github.com/backmeupplz/tlgcoin).",
         !!tlgcoin &&
           `TLGCoin users mined ${formatNumber(tlgcoin.coinsCount)} coins.`,
       ]
@@ -368,8 +328,8 @@ const projects: Project[] = [
     code: 'borodutch',
     link: 'https://borodutch.com',
     description: () => [
-      "This is this website! Quite spectacular that you can check the requests to it as well in 21st century, right? Don't expect it to have many hits though as it's mainly visited by myself to check on the projects metrics.",
-      "It's open source. Here's the code for [the website](https://github.com/backmeupplz/borodutch) and for [the stats server](https://github.com/backmeupplz/borodutch-stats)",
+      "This is this website! It is spectacular that you can also check its requests in the 21st century. Expect it to have a few hits, though, as it's mainly visited by myself to review the project metrics.",
+      "It's open source. Here's the code for [the website](https://github.com/backmeupplz/borodutch) and [the stats server](https://github.com/backmeupplz/borodutch-stats)",
     ],
   },
   {
@@ -381,7 +341,7 @@ const projects: Project[] = [
         projectsData: { temply },
       } = useSnapshot(baseProjectsData)
       return [
-        'Inline Telegram bot allowing users to create varios text templates an quickly use them later. Pretty useful for support workers as well as channel administrators. Completely free and [open source](https://github.com/backmeupplz/temply).',
+        'Inline Telegram bot that allows users to create various text templates and quickly use them later. Pretty useful for support workers as well as channel administrators. Completely free and [open source](https://github.com/backmeupplz/temply).',
         !!temply &&
           `Temply users created ${formatNumber(
             temply.templatesCount
@@ -433,7 +393,7 @@ const projects: Project[] = [
         projectsData: { arbeitbot },
       } = useSnapshot(baseProjectsData)
       return [
-        "Freelance market as a Telegram bot with a twist. Instead of releasing the job to all the candidates on the platform, employers pick freelancers they like and freelancers only see employers' profiles if they get accepted. Completely free and [open source](https://github.com/arbeitbot).",
+        "Freelance market as a Telegram bot with a twist. Instead of releasing the job to all the candidates on the platform, employers pick freelancers they like, and freelancers only see employers' profiles if they get accepted. Completely free and [open source](https://github.com/arbeitbot).",
         !!arbeitbot &&
           `ArbeitBot users created ${formatNumber(arbeitbot.jobCount)} jobs.`,
       ]
@@ -498,7 +458,7 @@ const projects: Project[] = [
       },
     ],
     description: () => [
-      'A list of over 120 places to post your startup. I went through [placestopostyourstartup.com](https://www.placestopostyourstartup.com), posted Todorant everywhere and left notes along the way. You can sort and filter the result any way you want. It is also [open source](https://github.com/backmeupplz/postyourstartup).',
+      'A list of over 120 places to post your startup. I went through [placestopostyourstartup.com](https://www.placestopostyourstartup.com), posted Todorant everywhere, and left notes along the way. You can sort and filter the result any way you want. It is also [open source](https://github.com/backmeupplz/postyourstartup).',
     ],
     charts: () => {
       const {
@@ -529,7 +489,7 @@ const projects: Project[] = [
       },
     ],
     description: () => [
-      'Mamkin Trade is a crypto and stocks virtual trading platform, officially declared to be safe for your mental health. Completely free and [open source](https://github.com/mamkin-trade).',
+      'Mamkin Trade is a crypto and stocks virtual trading platform officially declared safe for your mental health. Completely free and [open source](https://github.com/mamkin-trade).',
     ],
     charts: () => {
       const {
@@ -599,7 +559,7 @@ const projects: Project[] = [
       },
     ],
     description: () => [
-      'A simple webpage that has two pages: one just shows "Please, no" text, another also shows a "Please, no" GIF. I use it when I can simply answer "Please, no" to particular things. Completely free and [open source](https://github.com/backmeupplz/pleaseno). Hosted on the GitHub Pages as well.',
+      'A simple webpage with two pages: one shows "Please, no" text, and another also shows a "Please, no" GIF. I use it when I can answer "Please, no" to particular things. Completely free and [open source](https://github.com/backmeupplz/pleaseno). Hosted on the GitHub Pages as well.',
     ],
     charts: () => {
       const {
@@ -620,7 +580,7 @@ const projects: Project[] = [
     code: 'resetbot',
     link: 'https://resetbot.com',
     description: () => [
-      'This website is intended to reset your Telegram bot getUpdates method. Useful, when bot updates get stuck for some unknown reason. [Open source](https://github.com/backmeupplz/reset-bot).',
+      'This website is intended to reset your Telegram bot getUpdates method. Useful when bot updates get stuck for some unknown reason. [Open source](https://github.com/backmeupplz/reset-bot).',
     ],
     charts: () => {
       const {
@@ -641,7 +601,7 @@ const projects: Project[] = [
     code: 'fixsleep',
     link: 'https://fixsleep.link',
     description: () => [
-      "A simple webpage with 17 rules on how to sleep better. I spent multiple years researching all the available literature and knowledge on why we sleep and how to improve the quality of sleep. I've built this short version with links to scientific papers to share with family and friends because not everybody likes reading long articles.",
+      "A simple webpage with 17 rules on how to sleep better. I spent multiple years researching all the available literature and knowledge on why we sleep and how to improve sleep quality. I've built this short version with links to scientific papers to share with family and friends because not everybody likes reading long articles.",
       'Completely free and [open source](https://github.com/backmeupplz/fixsleep). Hosted on the GitHub Pages.',
     ],
     charts: () => {
@@ -669,7 +629,7 @@ const projects: Project[] = [
       },
     ],
     description: () => [
-      'A browser extension that allows you to see registration date, ratings, number of comments and published articles of commentators on vc.ru, TJournal and DTF. Fully [open source](https://github.com/backmeupplz/bot-finder).',
+      'A browser extension that allows you to see registration date, ratings, number of comments, and published articles of commentators on vc.ru, TJournal, and DTF. Fully [open source](https://github.com/backmeupplz/bot-finder).',
     ],
     charts: () => {
       const {
@@ -690,8 +650,8 @@ const projects: Project[] = [
     code: 'borodutchclub',
     link: 'https://club.borodutch.com',
     description: () => [
-      'I tried joining many communities of people who launch their products to find the one where the quality of members is high. All of them start fine but then suffer from an influx of "wannabes".',
-      "So I decided to start my closed community of product people who love to launch MVP's quickly and try out various business hypotheses. As usual, both the [frontend](https://github.com/backmeupplz/borodutch-club) and the [backend](https://github.com/backmeupplz/borodutch-club-backend) are open source.",
+      'I tried many communities of people who launched their products to find one where the quality of members is high. All of them start OK but then suffer from an influx of "wannabes."',
+      'So I started my closed community of product people who love to launch MVPs quickly and try out various business hypotheses. As usual, both the [frontend](https://github.com/backmeupplz/borodutch-club) and the [backend](https://github.com/backmeupplz/borodutch-club-backend) are open source.',
     ],
   },
   {
@@ -699,7 +659,7 @@ const projects: Project[] = [
     code: 'magicpill',
     link: 'https://magicpill.link',
     description: () => [
-      'A simple webpage listing benefits of reducing animal product intake based on scientific evidence. Just like with Fix sleep, I built this website to share it with people close to me. To save them time by researching this subject for them.',
+      'A simple webpage listing benefits of reducing animal product intake based on scientific evidence. like with Fix Sleep, I built this website to share it with people close to me. To save them time by researching this subject for them.',
       'Completely free and [open source](https://github.com/backmeupplz/magicpill). Hosted on the GitHub Pages.',
     ],
     charts: () => {
@@ -721,15 +681,7 @@ const projects: Project[] = [
     code: 'cryptogranny',
     link: 'https://t.me/CryptoGrannyFree',
     description: () => [
-      'Automated alerts when there is enough difference in price between crypto exchanges (including decentralized exchanges) to make a few percents arbitraging coins between them. Supports the most popular exchanges and works 24/7.',
-    ],
-  },
-  {
-    title: 'NFT ru',
-    code: 'nftru',
-    link: 'https://nft-ru.com',
-    description: () => [
-      'Community of Russian-speaking NFT project founders without wannabes and constant noise from cofounder-seekers.',
+      'Automated alerts when there is enough difference in price between crypto exchanges (including decentralized exchanges) to make a few percent arbitraging coins between them. Supports the most popular exchanges and works 24/7.',
     ],
   },
   {
@@ -747,6 +699,22 @@ const projects: Project[] = [
     description: () => [
       'Telegram bot that allows users to download the video from any link.',
       'I [acquired](https://t.me/borodutch_support/175) this bot in November 2021. It is [open source](https://github.com/Borodutch/VideoDownloadBot).',
+    ],
+  },
+  {
+    title: 'RemindMe',
+    code: 'remindme',
+    link: 'https://fcast.me/remindme',
+    description: () => [
+      'Farcaster bot that reminds users about the casts after a time interval. It is [open source](https://github.com/backmeupplz/remindme).',
+    ],
+  },
+  {
+    title: 'Essay',
+    code: 'essay',
+    link: 'https://fcast.me/essay',
+    description: () => [
+      'Farcaster bot that unwraps threads into screenshot essays. It is [open source](https://github.com/backmeupplz/essay).',
     ],
   },
 ]

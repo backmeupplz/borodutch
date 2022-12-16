@@ -15,7 +15,7 @@ export default function Intro() {
       <Story />
       <SubheaderText>Ways to contribute</SubheaderText>
       <BodyText>
-        In case if you want, you can always become a sponsor of my work on{' '}
+        In case you want, you can always become a sponsor of my work on{' '}
         <Link url="https://github.com/sponsors/backmeupplz">
           my GitHub Sponsor profile
         </Link>{' '}
@@ -23,7 +23,7 @@ export default function Intro() {
         <Link url="https://www.buymeacoffee.com/borodutch">
           my Buy Me a Coffee profile
         </Link>
-        . I fund all of my projects personally and the donations help me a lot
+        . I fund all of my projects personally, and the donations help me a lot
         to keep the products free and open. Thank you.
       </BodyText>
     </>
