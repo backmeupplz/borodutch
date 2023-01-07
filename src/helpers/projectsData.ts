@@ -43,6 +43,9 @@ export type ProjectCount = {
   videoDownloadBot?: number
   remindme?: number
   essay?: number
+  unlovely?: number
+  crosscaster?: number
+  mintit?: number
 }
 
 export interface ProjectsData {
