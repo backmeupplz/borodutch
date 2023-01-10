@@ -741,6 +741,14 @@ const projects: Project[] = [
       'A fun bot on Farcaster that mints casts as NFTs on Polygon. It is [open source](https://github.com/backmeupplz/mintit-backend).',
     ],
   },
+  {
+    title: 'ChatGPT Farcaster',
+    code: 'chatgpt',
+    link: 'https://fcast.me/chatgpt',
+    description: () => [
+      'ChatGPT connected straight to Farcaster. It is [open source](https://github.com/backmeupplz/farcaster-chatgpt).',
+    ],
+  },
 ]
 
 export default projects
