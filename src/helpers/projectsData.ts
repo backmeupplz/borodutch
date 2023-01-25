@@ -47,6 +47,7 @@ export type ProjectCount = {
   crosscaster?: number
   mintit?: number
   chatgpt?: number
+  health?: number
 }
 
 export interface ProjectsData {

@@ -749,6 +749,14 @@ const projects: Project[] = [
       'ChatGPT connected straight to Farcaster. It is [open source](https://github.com/backmeupplz/farcaster-chatgpt).',
     ],
   },
+  {
+    title: 'Health',
+    code: 'health',
+    link: 'https://fcast.me/health',
+    description: () => [
+      'Health bot on Farcaster that reminds people of good habits like straightening their backs. It is [open source](https://github.com/backmeupplz/health).',
+    ],
+  },
 ]
 
 export default projects
