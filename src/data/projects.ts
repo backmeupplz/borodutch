@@ -757,6 +757,14 @@ const projects: Project[] = [
       'Health bot on Farcaster that reminds people of good habits like straightening their backs. It is [open source](https://github.com/backmeupplz/health).',
     ],
   },
+  {
+    title: 'Farcantasy',
+    code: 'farcantasy',
+    link: 'https://farcantasy.xyz',
+    description: () => [
+      'NFT trading card game with Farcaster users as cards. [It](https://github.com/BigWhaleLabs/farcantasy-metadata) [is](https://github.com/BigWhaleLabs/farcantasy-frontend) fully [open source](https://github.com/BigWhaleLabs/farcantasy-contract).',
+    ],
+  },
 ]
 
 export default projects

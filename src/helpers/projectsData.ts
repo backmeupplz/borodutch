@@ -48,6 +48,7 @@ export type ProjectCount = {
   mintit?: number
   chatgpt?: number
   health?: number
+  farcantasy?: number
 }
 
 export interface ProjectsData {
