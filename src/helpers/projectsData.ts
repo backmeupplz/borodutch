@@ -15,7 +15,6 @@ export type ProjectCount = {
   shieldy?: number
   goldenBorodutch?: number
   todorant?: number
-  feedr?: number
   mt?: number
   temply?: number
   arbeitBot?: number
@@ -124,15 +123,6 @@ export interface ProjectsData {
       userCount: number
       todoDaily: CountAggregation[]
       todoCount: number
-    }
-    cloudflare: CloudflareData
-  }
-  feedr?: {
-    db: {
-      userDaily: CountAggregation[]
-      userCount: number
-      botDaily: CountAggregation[]
-      botCount: number
     }
     cloudflare: CloudflareData
   }
