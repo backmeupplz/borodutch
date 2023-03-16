@@ -765,6 +765,14 @@ const projects: Project[] = [
       'NFT trading card game with Farcaster users as cards. [It](https://github.com/BigWhaleLabs/farcantasy-metadata) [is](https://github.com/BigWhaleLabs/farcantasy-frontend) fully [open source](https://github.com/BigWhaleLabs/farcantasy-contract).',
     ],
   },
+  {
+    title: 'Light NF.TD',
+    code: 'lightnftd',
+    link: 'https://nftd-light.xyz/#/borodutch',
+    description: () => [
+      "I didn't like that [nf.td/borodutch](https://nf.td/borodutch) was 3Mb in size on the initial load. So I made a [light version](https://nftd-light.xyz/#/borodutch) that is sub-40Kb. It is [open source](https://github.com/backmeupplz/nftd-light).",
+    ],
+  },
 ]
 
 export default projects
