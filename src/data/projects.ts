@@ -707,14 +707,6 @@ const projects: Project[] = [
     ],
   },
   {
-    title: 'Crosscaster',
-    code: 'crosscaster',
-    link: 'https://crosscaster.xyz',
-    description: () => [
-      'A crosscasting tool between Twitter and Farcaster. [Frontend](https://github.com/backmeupplz/crosscaster-frontend) and [backend](https://github.com/backmeupplz/crosscaster-backend) are open source.',
-    ],
-  },
-  {
     title: 'MintIt',
     code: 'mintit',
     link: 'https://fcast.me/mintit',

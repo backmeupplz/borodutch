@@ -43,7 +43,6 @@ export type ProjectCount = {
   remindme?: number
   essay?: number
   unlovely?: number
-  crosscaster?: number
   mintit?: number
   chatgpt?: number
   health?: number
