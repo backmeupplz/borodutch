@@ -421,31 +421,12 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'Localizer',
-    code: 'localizer',
-    link: 'https://localizer.dev',
-    publications: [
-      {
-        link: 'https://www.producthunt.com/posts/localizer',
-        name: 'Product Hunt: Localizer',
-      },
-    ],
+    title: 'CAS Ban Checker',
+    code: 'casBanChecker',
+    link: 'https://t.me/cas_ban_bot',
     description: () => [
-      'A free open-source self-hosted crowd-translating service. Check out examples at [localize.todorant.com](https://localize.todorant.com) and [localize.borodutch.com](https://localize.borodutch.com). It is also [open source](https://github.com/backmeupplz/localizer-backend).',
+      'Bot that checks whether a user is banned by [CAS](https://cas.chat). It is also [open source](https://github.com/backmeupplz/cas_ban_bot).',
     ],
-    charts: () => {
-      const {
-        projectsData: { localizer },
-      } = useSnapshot(baseProjectsData)
-      return localizer
-        ? [
-            {
-              title: 'Localizer.dev visits',
-              data: cloudflareStatsToLabelsAndDatasets(localizer),
-            },
-          ]
-        : []
-    },
   },
   {
     title: 'Post Your Startup',
