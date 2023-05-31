@@ -13,8 +13,7 @@
 - `yarn build` — builds the app for production to the `docs` folder
 - `yarn lint` — checks if the code is linted and formatted
 - `yarn generate-css-types` — generates the CSS types for `tailwind-css`
-- `yarn update` — builds the code and pushes it to git remote
 
 ## CD
 
-The `docs` folder of the `main` branch gets deployed to [borodutch.com](https://borodutch.com).
+`main` branch gets deployed to [borodutch.com](https://borodutch.com).
