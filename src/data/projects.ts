@@ -258,23 +258,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'Golden Borodutch',
-    code: 'goldenBorodutch',
-    link: 'https://t.me/golden_borodutch',
-    description: () => {
-      const {
-        projectsData: { goldenBorodutch },
-      } = useSnapshot(baseProjectsData)
-      return [
-        "It's my personal micro-blog. Nothing special, just thoughts about business, IT, development, book reviews, lifestyle facts, etc. Careful: it's in Russian. If you want to read my long reads in English, here's [a link to my English blog](https://blog.borodutch.com).",
-        !!goldenBorodutch &&
-          `${formatNumber(
-            goldenBorodutch.subCount
-          )} people are subscribed to Golden Borodutch.`,
-      ]
-    },
-  },
-  {
     title: 'Check my text bot',
     code: 'speller',
     link: 'https://t.me/check_my_text_bot',
