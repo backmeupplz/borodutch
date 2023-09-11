@@ -8,7 +8,13 @@ export default function Intro() {
       <BodyText>
         Can't wait to tell you this — I finally co-authored and published a
         book! You can buy it on{' '}
-        <Link url="https://book.bdut.ch">the book's website</Link>.
+        <Link url="https://book.bdut.ch">the book's website</Link> or{' '}
+        <Link url="https://a.co/d/8ALfLVd">on Amazon</Link>. Curious about how I
+        got from zero to a published author? Check out{' '}
+        <Link url="https://blog.borodutch.com/heres-how-i-published-my-book">
+          my blog post
+        </Link>{' '}
+        where I describe the process!
       </BodyText>
       <Story />
       <SubheaderText>Ways to contribute</SubheaderText>
