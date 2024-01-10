@@ -615,7 +615,7 @@ const projects: Project[] = [
     link: 'https://club.borodutch.com',
     description: () => [
       'I tried many communities of people who launched their products to find one where the quality of members is high. All of them start OK but then suffer from an influx of "wannabes."',
-      'So I started my closed community of product people who love to launch MVPs quickly and try out various business hypotheses. As usual, both the [frontend](https://github.com/backmeupplz/borodutch-club) and the [backend](https://github.com/backmeupplz/borodutch-club-backend) are open source.',
+      'So I started my closed community of product people who love to launch MVPs quickly and try out various business hypotheses. As usual, both the [frontend](https://github.com/backmeupplz/borodutch-club-frontend) and the [backend](https://github.com/backmeupplz/borodutch-club-backend) are open source.',
     ],
   },
   {
