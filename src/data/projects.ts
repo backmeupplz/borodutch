@@ -668,7 +668,7 @@ const projects: Project[] = [
   {
     title: 'RemindMe',
     code: 'remindme',
-    link: 'https://fcast.me/remindme',
+    link: 'https://warpcast.com/remindme',
     description: () => [
       'Farcaster bot that reminds users about the casts after a time interval. It is [open source](https://github.com/backmeupplz/remindme).',
     ],
@@ -676,23 +676,15 @@ const projects: Project[] = [
   {
     title: 'Essay',
     code: 'essay',
-    link: 'https://fcast.me/essay',
+    link: 'https://warpcast.com/essay',
     description: () => [
       'Farcaster bot that unwraps threads into screenshot essays. It is [open source](https://github.com/backmeupplz/essay).',
     ],
   },
   {
-    title: 'Unlovely',
-    code: 'unlovely',
-    link: 'https://unlovely.app',
-    description: () => [
-      'Evil clone of the Unlonely app. It is [open source](https://github.com/backmeupplz/unlovely).',
-    ],
-  },
-  {
     title: 'MintIt',
     code: 'mintit',
-    link: 'https://fcast.me/mintit',
+    link: 'https://warpcast.com/mintit',
     description: () => [
       'A fun bot on Farcaster that mints casts as NFTs on Polygon. It is [open source](https://github.com/backmeupplz/mintit-backend).',
     ],
@@ -700,7 +692,7 @@ const projects: Project[] = [
   {
     title: 'ChatGPT Farcaster',
     code: 'chatgpt',
-    link: 'https://fcast.me/chatgpt',
+    link: 'https://warpcast.com/gpt',
     description: () => [
       'ChatGPT connected straight to Farcaster. It is [open source](https://github.com/backmeupplz/farcaster-chatgpt).',
     ],
@@ -708,7 +700,7 @@ const projects: Project[] = [
   {
     title: 'Health',
     code: 'health',
-    link: 'https://fcast.me/health',
+    link: 'https://warpcast.com/healthbot',
     description: () => [
       'Health bot on Farcaster that reminds people of good habits like straightening their backs. It is [open source](https://github.com/backmeupplz/health).',
     ],
@@ -719,14 +711,6 @@ const projects: Project[] = [
     link: 'https://farcantasy.xyz',
     description: () => [
       'NFT trading card game with Farcaster users as cards. [It](https://github.com/BigWhaleLabs/farcantasy-metadata) [is](https://github.com/BigWhaleLabs/farcantasy-frontend) fully [open source](https://github.com/BigWhaleLabs/farcantasy-contract).',
-    ],
-  },
-  {
-    title: 'Light NF.TD',
-    code: 'lightnftd',
-    link: 'https://nftd-light.xyz/#/borodutch',
-    description: () => [
-      "I didn't like that [nf.td/borodutch](https://nf.td/borodutch) was 3Mb in size on the initial load. So I made a [light version](https://nftd-light.xyz/#/borodutch) that is sub-40Kb. It is [open source](https://github.com/backmeupplz/nftd-light).",
     ],
   },
 ]
