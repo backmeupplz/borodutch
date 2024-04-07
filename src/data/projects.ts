@@ -439,41 +439,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'Mamkin Trade',
-    code: 'mt',
-    link: 'https://mamkin.trade',
-    publications: [
-      {
-        link: 'https://www.producthunt.com/posts/mamkin-trade',
-        name: 'Product Hunt: Mamkin Trade',
-      },
-      {
-        link: 'https://vc.ru/dev/68012-kak-ya-zapustil-simulyator-torgov-kriptoy-mamkin-treyder-za-dve-nedeli',
-        name: 'VC: Как я запустил симулятор торгов криптой «Мамкин Трейдер» за две недели',
-      },
-    ],
-    description: () => [
-      'Mamkin Trade is a crypto and stocks virtual trading platform officially declared safe for your mental health. Completely free and [open source](https://github.com/mamkin-trade).',
-    ],
-    charts: () => {
-      const {
-        projectsData: { mt },
-      } = useSnapshot(baseProjectsData)
-      return mt
-        ? [
-            {
-              title: 'Number of new users per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(mt.userDaily),
-            },
-            {
-              title: 'Number of new orders per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(mt.orderDaily),
-            },
-          ]
-        : []
-    },
-  },
-  {
     title: 'Fondu',
     code: 'fondu',
     link: 'https://fondu.io',
