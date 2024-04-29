@@ -27,7 +27,6 @@ export type ProjectCount = {
   checkMyTextBot?: number
   borodutch?: number
   casBanChecker?: number
-  postyourstartup?: number
   fondu?: number
   pleaseno?: number
   resetbot?: number
@@ -113,7 +112,6 @@ export interface ProjectsData {
   fixsleep?: CloudflareData
   magicpill?: CloudflareData
   commoncrypto?: CloudflareData
-  postyourstartup?: CloudflareData
   resetbot?: CloudflareData
   goldenBorodutch?: { subCount: number }
   todorant?: {

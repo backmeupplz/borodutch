@@ -412,33 +412,6 @@ const projects: Project[] = [
     ],
   },
   {
-    title: 'Post Your Startup',
-    code: 'postyourstartup',
-    link: 'https://postyourstartup.com',
-    publications: [
-      {
-        link: 'https://www.producthunt.com/posts/post-your-startup',
-        name: 'Product Hunt: Post Your Startup',
-      },
-    ],
-    description: () => [
-      'A list of over 120 places to post your startup. I went through [placestopostyourstartup.com](https://www.placestopostyourstartup.com), posted Todorant everywhere, and left notes along the way. You can sort and filter the result any way you want. It is also [open source](https://github.com/backmeupplz/postyourstartup).',
-    ],
-    charts: () => {
-      const {
-        projectsData: { postyourstartup },
-      } = useSnapshot(baseProjectsData)
-      return postyourstartup
-        ? [
-            {
-              title: 'Postyourstartup.com visits',
-              data: cloudflareStatsToLabelsAndDatasets(postyourstartup),
-            },
-          ]
-        : []
-    },
-  },
-  {
     title: 'Fondu',
     code: 'fondu',
     link: 'https://fondu.io',
