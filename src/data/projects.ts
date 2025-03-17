@@ -9,6 +9,14 @@ import responseTimeToLabelsAndDatasets from 'helpers/responseTimeToLabelsAndData
 
 const projects: Project[] = [
   {
+    title: '$eggs',
+    code: 'eggs',
+    link: 'https://warpcast.com/warpcastadmin.eth/0x5ff68a23',
+    description: () => [
+      '$eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs',
+    ],
+  },
+  {
     title: 'Voicy',
     code: 'voicy',
     link: 'https://t.me/voicybot',
