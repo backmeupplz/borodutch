@@ -529,33 +529,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'Bot finder',
-    code: 'botfinder',
-    link: 'https://bot-finder.com',
-    publications: [
-      {
-        link: 'https://vc.ru/tribuna/226020-eto-bot-rasshirenie-dlya-brauzera-pokazyvayushchee-bolshe-informacii-o-kommentatorah-na-vc-ru',
-        name: 'VC: «Это бот?» — расширение для браузера, показывающее больше информации о комментаторах на vc.ru',
-      },
-    ],
-    description: () => [
-      'A browser extension that allows you to see registration date, ratings, number of comments, and published articles of commentators on vc.ru, TJournal, and DTF. Fully [open source](https://github.com/backmeupplz/bot-finder).',
-    ],
-    charts: () => {
-      const {
-        projectsData: { botfinder },
-      } = useSnapshot(baseProjectsData)
-      return botfinder
-        ? [
-            {
-              title: 'Bot-finder.com visits',
-              data: cloudflareStatsToLabelsAndDatasets(botfinder),
-            },
-          ]
-        : []
-    },
-  },
-  {
     title: 'Borodutch Club',
     code: 'borodutchclub',
     link: 'https://club.borodutch.com',
