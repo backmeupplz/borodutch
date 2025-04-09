@@ -249,23 +249,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'DeleteNudesBot',
-    code: 'deletenudesbot',
-    link: 'https://t.me/DeleteNudesBot',
-    description: () => {
-      const {
-        projectsData: { deletenudesbot },
-      } = useSnapshot(baseProjectsData)
-      return [
-        "This bot deletes all nude pictures so that groups don't get banned by Telegram for explicit content. Simply add it to a group, give it admin rights to delete messages and you are done! Completely free and [open source](https://github.com/backmeupplz/DeleteNudesBot).",
-        !!deletenudesbot &&
-          `DeleteNudesBot protects ${formatNumber(
-            deletenudesbot.chatCount
-          )} chats.`,
-      ]
-    },
-  },
-  {
     title: 'Check my text bot',
     code: 'speller',
     link: 'https://t.me/check_my_text_bot',
@@ -348,64 +331,6 @@ const projects: Project[] = [
             {
               title: 'Number of new users per day vs days ago',
               data: dailyStatsToLabelsAndDatasets(temply.userDaily),
-            },
-          ]
-        : []
-    },
-  },
-  {
-    title: 'ArbeitBot',
-    code: 'arbeitBot',
-    link: 'https://t.me/arbeit_bot',
-    publications: [
-      {
-        link: 'https://www.producthunt.com/posts/arbeitbot',
-        name: 'Product Hunt: ArbeitBot',
-      },
-      {
-        link: 'https://habr.com/ru/post/310434/',
-        name: 'Habr: Как мы написали фриланс-биржу для Telegram',
-      },
-      {
-        link: 'https://spark.ru/startup/arbeitbot/blog/18257/kak-arbeitbot-poluchil-pervie-1250-ustanovok',
-        name: 'Spark: Как ArbeitBot получил первые 1250 установок',
-      },
-      {
-        link: 'https://vc.ru/flood/21082-telegram-bot-growth',
-        name: 'VC: Кейс из России: Как мы без бюджета раскрутили два Telegram-бота до 17 500 чатов',
-      },
-      {
-        link: 'https://vc.ru/tribuna/19537-arbeitbot',
-        name: 'VC: Arbeitbot — бесплатная фриланс-биржа в Telegram',
-      },
-    ],
-    description: () => {
-      const {
-        projectsData: { arbeitbot },
-      } = useSnapshot(baseProjectsData)
-      return [
-        "Freelance market as a Telegram bot with a twist. Instead of releasing the job to all the candidates on the platform, employers pick freelancers they like, and freelancers only see employers' profiles if they get accepted. Completely free and [open source](https://github.com/arbeitbot).",
-        !!arbeitbot &&
-          `ArbeitBot users created ${formatNumber(arbeitbot.jobCount)} jobs.`,
-      ]
-    },
-    charts: () => {
-      const {
-        projectsData: { arbeitbot },
-      } = useSnapshot(baseProjectsData)
-      return arbeitbot
-        ? [
-            {
-              title: 'Number of new users per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(arbeitbot.userDaily),
-            },
-            {
-              title: 'Number of new jobs per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(arbeitbot.jobDaily),
-            },
-            {
-              title: 'ArbeitBot.com visits',
-              data: cloudflareStatsToLabelsAndDatasets(arbeitbot.website),
             },
           ]
         : []
@@ -529,15 +454,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'Borodutch Club',
-    code: 'borodutchclub',
-    link: 'https://club.borodutch.com',
-    description: () => [
-      'I tried many communities of people who launched their products to find one where the quality of members is high. All of them start OK but then suffer from an influx of "wannabes."',
-      'So I started my closed community of product people who love to launch MVPs quickly and try out various business hypotheses. As usual, both the [frontend](https://github.com/backmeupplz/borodutch-club) and the [backend](https://github.com/backmeupplz/borodutch-club-backend) are open source.',
-    ],
-  },
-  {
     title: 'Magic pill',
     code: 'magicpill',
     link: 'https://magicpill.link',
@@ -558,14 +474,6 @@ const projects: Project[] = [
           ]
         : []
     },
-  },
-  {
-    title: 'Crypto Granny',
-    code: 'cryptogranny',
-    link: 'https://t.me/CryptoGrannyFree',
-    description: () => [
-      'Automated alerts when there is enough difference in price between crypto exchanges (including decentralized exchanges) to make a few percent arbitraging coins between them. Supports the most popular exchanges and works 24/7.',
-    ],
   },
   {
     title: 'Is Bot Down',
@@ -593,43 +501,11 @@ const projects: Project[] = [
     ],
   },
   {
-    title: 'Essay',
-    code: 'essay',
-    link: 'https://warpcast.com/essay',
-    description: () => [
-      'Farcaster bot that unwraps threads into screenshot essays. It is [open source](https://github.com/backmeupplz/essay).',
-    ],
-  },
-  {
-    title: 'MintIt',
-    code: 'mintit',
-    link: 'https://warpcast.com/mintit',
-    description: () => [
-      'A fun bot on Farcaster that mints casts as NFTs on Polygon. It is [open source](https://github.com/backmeupplz/mintit-backend).',
-    ],
-  },
-  {
-    title: 'ChatGPT Farcaster',
-    code: 'chatgpt',
-    link: 'https://warpcast.com/gpt',
-    description: () => [
-      'ChatGPT connected straight to Farcaster. It is [open source](https://github.com/backmeupplz/farcaster-chatgpt).',
-    ],
-  },
-  {
-    title: 'Health',
+    title: 'Healthbot',
     code: 'health',
     link: 'https://warpcast.com/healthbot',
     description: () => [
       'Health bot on Farcaster that reminds people of good habits like straightening their backs. It is [open source](https://github.com/backmeupplz/health).',
-    ],
-  },
-  {
-    title: 'Farcantasy',
-    code: 'farcantasy',
-    link: 'https://farcantasy.xyz',
-    description: () => [
-      'NFT trading card game with Farcaster users as cards. [It](https://github.com/BigWhaleLabs/farcantasy-metadata) [is](https://github.com/BigWhaleLabs/farcantasy-frontend) fully [open source](https://github.com/BigWhaleLabs/farcantasy-contract).',
     ],
   },
 ]
