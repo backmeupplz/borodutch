@@ -53,7 +53,7 @@ const projects: Project[] = [
             365
           ).toFixed(2)} years of
               speech.`,
-        "If the average response delay is too high — it's probably because Telegram servers are not giving the bot fresh updates. It happens from time to time. It's [open source](https://github.com/backmeupplz/voicy).",
+        "It's [open source](https://github.com/backmeupplz/voicy).",
       ]
     },
     charts: () => {
@@ -74,10 +74,6 @@ const projects: Project[] = [
               title:
                 'Number of voice messages recognized per hour vs hours ago',
               data: dailyStatsToLabelsAndDatasets(voicy.stats.hourlyStats),
-            },
-            {
-              title: 'Response time in seconds',
-              data: responseTimeToLabelsAndDatasets(voicy.stats.responseTime),
             },
             {
               title: 'Voicybot.com visits',
