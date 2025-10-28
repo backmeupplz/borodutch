@@ -11,7 +11,7 @@ export interface CountAggregation {
 export type CloudflareData = number[]
 
 export type ProjectCount = {
-  eggs?: number
+  pigeon?: number
   deletenudesbot?: number
   shieldy?: number
   goldenBorodutch?: number

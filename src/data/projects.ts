@@ -9,11 +9,11 @@ import responseTimeToLabelsAndDatasets from 'helpers/responseTimeToLabelsAndData
 
 const projects: Project[] = [
   {
-    title: '$eggs',
-    code: 'eggs',
-    link: 'https://warpcast.com/warpcastadmin.eth/0x5ff68a23',
+    title: 'Pigeon',
+    code: 'pigeon',
+    link: 'https://pigeon.trade',
     description: () => [
-      '$eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs $eggs',
+      'Pigeon is an AI assistant that lives right there where people are: Telegram, WhatsApp, Discord, Messenger, Farcaster, Base App, XMTP, X, Reddit, Slack, or at 888 655 8732! No apps required, just message Pigeon anywhere and trade stocks, crypto, ETFs, memecoins, smart contracts, transfer anything! Supports all EVM chains, World, Solana, TON, HyperEVM; can trade Polymarket, Ostium, Hyperliquid, and more. Best part? Absolutely free and no limits.',
     ],
   },
   {
