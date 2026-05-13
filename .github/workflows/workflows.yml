@@ -10,8 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.17.0'
       - name: Install modules
-        run: yarn --no-progress
+        run: yarn install --immutable
       - name: Compile code
         run: yarn tsc --skipLibCheck
       - name: Lint code
