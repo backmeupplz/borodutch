@@ -139,7 +139,40 @@ export interface ProjectsData {
 }
 
 export const projectsData = proxy({
-  projectsData: fetch(`${baseUrl}/stats`).then(
+  projectsData: fetch(`${baseUrl}/summary`).then(
     (res) => res.json() as Promise<ProjectsData>
   ),
 })
+
+export const projectDetails = proxy({
+  failed: {} as { [code: string]: boolean },
+  loaded: {} as { [code: string]: boolean },
+})
+
+const loadedProjects: { [code: string]: boolean } = {}
+const loadingProjects: { [code: string]: boolean } = {}
+
+export function loadProjectData(code: string) {
+  if (loadedProjects[code] || loadingProjects[code]) {
+    return
+  }
+  loadingProjects[code] = true
+  projectsData.projectsData = Promise.all([
+    projectsData.projectsData,
+    fetch(`${baseUrl}/stats/${code}`)
+      .then((res) => (res.ok ? (res.json() as Promise<ProjectsData>) : {}))
+      .catch(() => ({} as ProjectsData)),
+  ]).then(([summary, details]) => {
+    loadingProjects[code] = false
+    if (Object.keys(details).length) {
+      loadedProjects[code] = true
+      projectDetails.loaded[code] = true
+    } else {
+      projectDetails.failed[code] = true
+    }
+    return {
+      ...summary,
+      ...details,
+    }
+  })
+}

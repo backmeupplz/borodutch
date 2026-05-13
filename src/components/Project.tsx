@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import {
   GradientText,
   Link,
@@ -7,12 +7,17 @@ import {
   ProjectTitle,
 } from 'components/Text'
 import { appStore } from 'stores/AppStore'
-import { projectsData as baseProjectsData } from 'helpers/projectsData'
+import {
+  projectsData as baseProjectsData,
+  loadProjectData,
+  projectDetails,
+} from 'helpers/projectsData'
 import { classnames } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
 import Chart from 'components/Chart'
 import Description from 'components/Description'
+import Loader from 'components/Loader'
 import Project from 'models/Project'
 import formatNumber from 'helpers/formatNumber'
 
@@ -49,9 +54,18 @@ const chartContainer = classnames(
 )
 
 const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
-  const appStoreSnapshot = useSnapshot(appStore)
-  const opened = appStoreSnapshot.opened[project.code]
+  useSnapshot(appStore)
+  useSnapshot(projectDetails)
+  const opened = appStore.opened[project.code]
   const { projectsData } = useSnapshot(baseProjectsData)
+  const detailFailed = projectDetails.failed[project.code]
+  const detailsLoaded = projectDetails.loaded[project.code]
+
+  useEffect(() => {
+    if (opened && project.charts) {
+      loadProjectData(project.code)
+    }
+  }, [opened, project.charts, project.code])
 
   return (
     <div className={container}>
@@ -66,21 +80,20 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
             </NumberOfProjectUsersText>
           )}
         </div>
-        {(project.publications?.length || project.charts?.().length) && (
+        {(project.publications?.length || project.charts) && (
           <Button
             onClick={() => {
               appStore.opened[project.code] = !appStore.opened[project.code]
             }}
-            title={
-              appStoreSnapshot.opened[project.code]
-                ? 'Hide stats'
-                : 'Show stats'
-            }
+            title={opened ? 'Hide stats' : 'Show stats'}
           />
         )}
       </div>
       <Description description={project.description()} />
-      {opened && project.charts && (
+      {opened && project.charts && !detailsLoaded && !detailFailed && (
+        <Loader />
+      )}
+      {opened && project.charts && detailsLoaded && (
         <div className={chartsContainer}>
           {project.charts().map((chart) => (
             <div className={chartContainer} key={chart.title}>
