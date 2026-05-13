@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import {
   GradientText,
   Link,
@@ -7,7 +7,10 @@ import {
   ProjectTitle,
 } from 'components/Text'
 import { appStore } from 'stores/AppStore'
-import { projectsData as baseProjectsData } from 'helpers/projectsData'
+import {
+  projectsData as baseProjectsData,
+  loadProjectsData,
+} from 'helpers/projectsData'
 import { classnames } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
@@ -53,6 +56,12 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
   const opened = appStoreSnapshot.opened[project.code]
   const { projectsData } = useSnapshot(baseProjectsData)
 
+  useEffect(() => {
+    if (opened && project.charts) {
+      void loadProjectsData()
+    }
+  }, [opened, project.charts])
+
   return (
     <div className={container}>
       <div className={projectHeaderContainer}>
@@ -66,7 +75,7 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
             </NumberOfProjectUsersText>
           )}
         </div>
-        {(project.publications?.length || project.charts?.().length) && (
+        {(project.publications?.length || project.charts) && (
           <Button
             onClick={() => {
               appStore.opened[project.code] = !appStore.opened[project.code]

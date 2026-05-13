@@ -60,7 +60,8 @@ export const NumberOfUsersText: FC = ({ children }) => (
 const numberOfUsersAuxiliaryText = classnames(
   'text-white',
   'font-medium',
-  'text-3xl',
+  'text-2xl',
+  'sm:text-3xl',
   'opacity-50',
   'pb-4'
 )

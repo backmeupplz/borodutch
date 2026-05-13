@@ -12,6 +12,10 @@ export type CloudflareData = number[]
 
 export type ProjectCount = {
   pigeon?: number
+  myground?: number
+  symphony?: number
+  friday?: number
+  omens?: number
   deletenudesbot?: number
   shieldy?: number
   goldenBorodutch?: number
@@ -138,8 +142,33 @@ export interface ProjectsData {
   userCount?: UserCountData
 }
 
-export const projectsData = proxy({
-  projectsData: fetch(`${baseUrl}/stats`).then(
-    (res) => res.json() as Promise<ProjectsData>
-  ),
+export const projectsData = proxy<{
+  projectsData: ProjectsData
+  isLoading: boolean
+  isLoaded: boolean
+  error?: string
+}>({
+  projectsData: {},
+  isLoading: false,
+  isLoaded: false,
 })
+
+export async function loadProjectsData() {
+  if (projectsData.isLoading || projectsData.isLoaded) {
+    return
+  }
+
+  projectsData.isLoading = true
+  projectsData.error = undefined
+
+  try {
+    const response = await fetch(`${baseUrl}/stats`)
+    projectsData.projectsData = (await response.json()) as ProjectsData
+    projectsData.isLoaded = true
+  } catch (error) {
+    projectsData.error =
+      error instanceof Error ? error.message : 'Failed to load project stats'
+  } finally {
+    projectsData.isLoading = false
+  }
+}

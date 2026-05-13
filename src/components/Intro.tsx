@@ -4,17 +4,28 @@ import Story from 'components/Story'
 export default function Intro() {
   return (
     <>
-      <SubheaderText>I wrote a book!</SubheaderText>
+      <SubheaderText>What I do now</SubheaderText>
       <BodyText>
-        Can't wait to tell you this — I finally co-authored and published a
-        book! You can buy it on{' '}
+        I am focused on agentic development: turning vague product work into
+        scoped tasks, repo-isolated implementation, automated validation, and
+        real QA evidence. The goal is simple: ship useful projects without
+        babysitting every step.
+      </BodyText>
+      <BodyText>
+        My current work spans Telegram bots, crypto and trading tools,
+        self-hosted infrastructure, and the local automation that keeps those
+        projects healthy.
+      </BodyText>
+      <SubheaderText>Book</SubheaderText>
+      <BodyText>
+        I also co-authored a productivity book. You can buy it on{' '}
         <Link url="https://book.bdut.ch">the book's website</Link> or{' '}
-        <Link url="https://a.co/d/8ALfLVd">on Amazon</Link>. Curious about how I
-        got from zero to a published author? Check out{' '}
+        <Link url="https://a.co/d/8ALfLVd">Amazon</Link>. I wrote about the
+        publishing process on{' '}
         <Link url="https://blog.borodutch.com/heres-how-i-published-my-book">
-          my blog post
+          my blog
         </Link>{' '}
-        where I describe the process!
+        too.
       </BodyText>
       <Story />
       <SubheaderText>Ways to contribute</SubheaderText>
