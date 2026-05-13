@@ -5,7 +5,6 @@ import cloudflareStatsToLabelsAndDatasets from 'helpers/cloudflareStatsToLabelsA
 import dailyStatsToLabelsAndDatasets from 'helpers/dailyStatsToLabelsAndDatasets'
 import formatNumber from 'helpers/formatNumber'
 import messageStatsToLabelsAndDatasets from 'helpers/messageStatsToLabelsAndDatasets'
-import responseTimeToLabelsAndDatasets from 'helpers/responseTimeToLabelsAndDatasets'
 
 const projects: Project[] = [
   {
