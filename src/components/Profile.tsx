@@ -59,8 +59,13 @@ export default function Profile() {
   return (
     <div className={profileContainer}>
       <div className={profileTextContainer}>
-        <AuxiliaryText>borodutch.eth</AuxiliaryText>
+        <AuxiliaryText>agentic development / bots / self-hosting</AuxiliaryText>
         <HeaderText>Nikita Kolmogorov</HeaderText>
+        <BodyText>
+          I build products and the agentic development loops that keep them
+          moving: Kaneo tasks, Symphony workers, Codex PRs, OpenClaw QA, and
+          boring deployment proof.
+        </BodyText>
         <Suspense fallback={<Loader />}>
           <NumberOfUsers />
         </Suspense>
@@ -68,12 +73,12 @@ export default function Profile() {
           people used my apps today
         </NumberOfUsersAuxiliaryText>
         <BodyText>
-          Updated daily. Curious how I calculated this number? Check out the
-          code{' '}
+          Updated daily from lightweight stats. Curious how I calculate this
+          number? Check out the code{' '}
           <Link url="https://github.com/backmeupplz/borodutch-stats/blob/master/src/helpers/userCount.ts">
             here
           </Link>
-          . Careful: it's not the prettiest code I've written.
+          .
         </BodyText>
         <div className={socialButtonsContainer}>
           <IconButton icon="telegram" url="https://t.me/borodutch" />

@@ -1,4 +1,5 @@
 import { Footer } from 'components/Text'
+import BlogPosts from 'components/BlogPosts'
 import Intro from 'components/Intro'
 import Profile from 'components/Profile'
 import Projects from 'components/Projects'
@@ -11,6 +12,7 @@ const App = () => {
       <Profile />
       <TotalNumberOfUsers />
       <Intro />
+      <BlogPosts />
       <Projects />
       <Footer>Thanks for scrolling!</Footer>
     </Root>

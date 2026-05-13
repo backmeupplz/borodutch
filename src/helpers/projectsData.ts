@@ -12,6 +12,10 @@ export type CloudflareData = number[]
 
 export type ProjectCount = {
   pigeon?: number
+  myground?: number
+  symphony?: number
+  friday?: number
+  omens?: number
   deletenudesbot?: number
   shieldy?: number
   goldenBorodutch?: number
