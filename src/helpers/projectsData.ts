@@ -142,33 +142,41 @@ export interface ProjectsData {
   userCount?: UserCountData
 }
 
-export const projectsData = proxy<{
-  projectsData: ProjectsData
-  isLoading: boolean
-  isLoaded: boolean
-  error?: string
-}>({
-  projectsData: {},
-  isLoading: false,
-  isLoaded: false,
+export const projectsData = proxy({
+  projectsData: fetch(`${baseUrl}/summary`).then(
+    (res) => res.json() as Promise<ProjectsData>
+  ),
 })
 
-export async function loadProjectsData() {
-  if (projectsData.isLoading || projectsData.isLoaded) {
+export const projectDetails = proxy({
+  failed: {} as { [code: string]: boolean },
+  loaded: {} as { [code: string]: boolean },
+})
+
+const loadedProjects: { [code: string]: boolean } = {}
+const loadingProjects: { [code: string]: boolean } = {}
+
+export function loadProjectData(code: string) {
+  if (loadedProjects[code] || loadingProjects[code]) {
     return
   }
-
-  projectsData.isLoading = true
-  projectsData.error = undefined
-
-  try {
-    const response = await fetch(`${baseUrl}/stats`)
-    projectsData.projectsData = (await response.json()) as ProjectsData
-    projectsData.isLoaded = true
-  } catch (error) {
-    projectsData.error =
-      error instanceof Error ? error.message : 'Failed to load project stats'
-  } finally {
-    projectsData.isLoading = false
-  }
+  loadingProjects[code] = true
+  projectsData.projectsData = Promise.all([
+    projectsData.projectsData,
+    fetch(`${baseUrl}/stats/${code}`)
+      .then((res) => (res.ok ? (res.json() as Promise<ProjectsData>) : {}))
+      .catch(() => ({} as ProjectsData)),
+  ]).then(([summary, details]) => {
+    loadingProjects[code] = false
+    if (Object.keys(details).length) {
+      loadedProjects[code] = true
+      projectDetails.loaded[code] = true
+    } else {
+      projectDetails.failed[code] = true
+    }
+    return {
+      ...summary,
+      ...details,
+    }
+  })
 }
