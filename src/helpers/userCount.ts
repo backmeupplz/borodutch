@@ -1,14 +1,23 @@
 import { proxy } from 'valtio'
 import baseUrl from 'helpers/baseUrl'
-import fetch from 'unfetch'
+import fetchJson from 'helpers/fetchJson'
 
 export interface UserCountData {
   count: string
   history: string[][]
 }
 
+const fallbackUserCount: UserCountData = {
+  count: '0',
+  history: [],
+}
+
 export const userCount = proxy({
-  userCount: fetch(`${baseUrl}/count`).then(
-    (res) => res.json() as Promise<UserCountData>
-  ),
+  userCount: fallbackUserCount,
 })
+
+void fetchJson<UserCountData>(`${baseUrl}/count`, fallbackUserCount).then(
+  (data) => {
+    userCount.userCount = data
+  }
+)

@@ -1,6 +1,6 @@
 import { proxy } from 'valtio'
 import baseUrl from 'helpers/baseUrl'
-import fetch from 'unfetch'
+import fetchJson from 'helpers/fetchJson'
 
 export interface ArrData {
   configured: boolean
@@ -12,6 +12,16 @@ export interface ArrData {
   }[]
 }
 
+const fallbackArr: ArrData = {
+  configured: false,
+  currency: 'usd',
+  history: [],
+}
+
 export const arr = proxy({
-  arr: fetch(`${baseUrl}/arr`).then((res) => res.json() as Promise<ArrData>),
+  arr: fallbackArr,
+})
+
+void fetchJson<ArrData>(`${baseUrl}/arr`, fallbackArr).then((data) => {
+  arr.arr = data
 })

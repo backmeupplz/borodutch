@@ -8,12 +8,12 @@ export default function messageStatsToLabelsAndDatasets(
   }[]
 ) {
   const showMoreDataSnapshot = useSnapshot(showMoreData)
-  messageStats.pop()
+  const chartStats = messageStats.slice(0, -1)
   const labels = [] as string[]
   const values = [] as number[]
   for (const { date, count } of showMoreDataSnapshot.showMoreData
-    ? messageStats
-    : messageStats.slice(messageStats.length - 30)) {
+    ? chartStats
+    : chartStats.slice(chartStats.length - 30)) {
     if (!date) continue
     labels.push(new Date(date).toLocaleDateString())
     values.push(count)
