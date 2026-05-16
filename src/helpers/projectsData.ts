@@ -1,7 +1,7 @@
 import { UserCountData } from 'helpers/userCount'
 import { proxy } from 'valtio'
 import baseUrl from 'helpers/baseUrl'
-import fetch from 'unfetch'
+import fetchJson from 'helpers/fetchJson'
 
 export interface CountAggregation {
   _id: number | null
@@ -143,9 +143,11 @@ export interface ProjectsData {
 }
 
 export const projectsData = proxy({
-  projectsData: fetch(`${baseUrl}/summary`).then(
-    (res) => res.json() as Promise<ProjectsData>
-  ),
+  projectsData: {} as ProjectsData,
+})
+
+void fetchJson<ProjectsData>(`${baseUrl}/summary`, {}).then((data) => {
+  projectsData.projectsData = data
 })
 
 export const projectDetails = proxy({
@@ -161,22 +163,19 @@ export function loadProjectData(code: string) {
     return
   }
   loadingProjects[code] = true
-  projectsData.projectsData = Promise.all([
-    projectsData.projectsData,
-    fetch(`${baseUrl}/stats/${code}`)
-      .then((res) => (res.ok ? (res.json() as Promise<ProjectsData>) : {}))
-      .catch(() => ({} as ProjectsData)),
-  ]).then(([summary, details]) => {
-    loadingProjects[code] = false
-    if (Object.keys(details).length) {
-      loadedProjects[code] = true
-      projectDetails.loaded[code] = true
-    } else {
-      projectDetails.failed[code] = true
+  void fetchJson<ProjectsData>(`${baseUrl}/stats/${code}`, {}).then(
+    (details) => {
+      loadingProjects[code] = false
+      if (Object.keys(details).length) {
+        loadedProjects[code] = true
+        projectDetails.loaded[code] = true
+      } else {
+        projectDetails.failed[code] = true
+      }
+      projectsData.projectsData = {
+        ...projectsData.projectsData,
+        ...details,
+      }
     }
-    return {
-      ...summary,
-      ...details,
-    }
-  })
+  )
 }

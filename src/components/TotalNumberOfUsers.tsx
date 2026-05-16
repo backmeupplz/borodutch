@@ -10,6 +10,9 @@ import formatNumber from 'helpers/formatNumber'
 
 function UsersChart() {
   const userCountSnapshot = useSnapshot(userCount)
+  if (!userCountSnapshot.userCount.history.length) {
+    return null
+  }
   return (
     <ReactFrappeChart
       title="How many people used my apps"

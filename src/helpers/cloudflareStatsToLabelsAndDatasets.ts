@@ -4,12 +4,12 @@ import daysAgo from 'helpers/daysAgo'
 export default function cloudflareStatsToLabelsAndDatasets(
   stats: CloudflareData
 ) {
-  stats.pop()
+  const chartStats = stats.slice(0, -1)
   const labels = [] as string[]
   const values = [] as number[]
-  for (let i = 0; i < stats.length; i++) {
-    labels.push(daysAgo(stats.length - i).toLocaleDateString())
-    values.push(stats[i])
+  for (let i = 0; i < chartStats.length; i++) {
+    labels.push(daysAgo(chartStats.length - i).toLocaleDateString())
+    values.push(chartStats[i])
   }
   return { labels, datasets: [{ values }] }
 }
