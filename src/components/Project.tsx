@@ -58,6 +58,7 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
   useSnapshot(projectDetails)
   const opened = appStore.opened[project.code]
   const { projectsData } = useSnapshot(baseProjectsData)
+  const projectUserCount = projectsData.userCountSeparate?.[project.code]
   const detailFailed = projectDetails.failed[project.code]
   const detailsLoaded = projectDetails.loaded[project.code]
 
@@ -74,9 +75,9 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
           <a href={project.link} rel="noopener noreferrer" target="_blank">
             <ProjectTitle>{project.title}</ProjectTitle>
           </a>
-          {projectsData.userCountSeparate?.[project.code] && (
+          {typeof projectUserCount === 'number' && (
             <NumberOfProjectUsersText>
-              {formatNumber(projectsData.userCountSeparate[project.code])} users
+              {formatNumber(projectUserCount)} users
             </NumberOfProjectUsersText>
           )}
         </div>
