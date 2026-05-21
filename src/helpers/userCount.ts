@@ -17,8 +17,16 @@ export const userCount = proxy({
   userCount: fallbackUserCount,
 })
 
+function hasUserCountData(data: UserCountData) {
+  return data.history.length > 0
+}
+
 void fetchJson<UserCountData>(`${baseUrl}/count`, fallbackUserCount).then(
   (data) => {
+    if (!hasUserCountData(data)) {
+      return
+    }
+
     userCount.userCount = data
     userCount.loaded = true
   }
