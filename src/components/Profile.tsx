@@ -48,6 +48,11 @@ const socialButtonsContainer = classnames(
 
 function NumberOfUsers() {
   const userCountSnapshot = useSnapshot(userCount)
+
+  if (!userCountSnapshot.loaded) {
+    return <Loader />
+  }
+
   return (
     <NumberOfUsersText>
       {formatNumber(userCountSnapshot.userCount.count)}

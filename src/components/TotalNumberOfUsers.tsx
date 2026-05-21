@@ -9,6 +9,10 @@ import formatNumber from 'helpers/formatNumber'
 
 function UsersChart() {
   const userCountSnapshot = useSnapshot(userCount)
+  if (!userCountSnapshot.loaded) {
+    return <Loader line />
+  }
+
   if (!userCountSnapshot.userCount.history.length) {
     return null
   }

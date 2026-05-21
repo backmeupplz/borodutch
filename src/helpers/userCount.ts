@@ -13,11 +13,13 @@ const fallbackUserCount: UserCountData = {
 }
 
 export const userCount = proxy({
+  loaded: false,
   userCount: fallbackUserCount,
 })
 
 void fetchJson<UserCountData>(`${baseUrl}/count`, fallbackUserCount).then(
   (data) => {
     userCount.userCount = data
+    userCount.loaded = true
   }
 )
