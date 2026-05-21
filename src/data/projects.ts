@@ -8,15 +8,6 @@ import messageStatsToLabelsAndDatasets from 'helpers/messageStatsToLabelsAndData
 
 const projects: Project[] = [
   {
-    title: 'Pigeon',
-    code: 'pigeon',
-    link: 'https://pigeon.trade',
-    description: () => [
-      'AI trading assistant for the places people already talk: Telegram, WhatsApp, Discord, Messenger, Farcaster, Base App, XMTP, X, Reddit, Slack, and phone.',
-      'It can trade stocks, crypto, ETFs, memecoins, smart contracts, Polymarket, Ostium, Hyperliquid, and more without installing a new app.',
-    ],
-  },
-  {
     title: 'Voicy',
     code: 'voicy',
     link: 'https://t.me/voicybot',
@@ -248,6 +239,98 @@ const projects: Project[] = [
       'This website: simple profile, current projects, recent writing, and lightweight stats first.',
       "It's open source: [website](https://github.com/backmeupplz/borodutch), [stats server](https://github.com/backmeupplz/borodutch-stats).",
     ],
+  },
+  {
+    title: 'Temply',
+    code: 'temply',
+    link: 'https://t.me/temply_bot',
+    description: () => {
+      const {
+        projectsData: { temply },
+      } = useSnapshot(baseProjectsData)
+      return [
+        'Inline Telegram bot for saving reusable text templates and quickly inserting them later. Useful for support work, channel admins, and repeated replies.',
+        !!temply &&
+          `Temply has ${formatNumber(
+            temply.userCount
+          )} users who created ${formatNumber(
+            temply.templatesCount
+          )} templates.`,
+        "It's [open source](https://github.com/backmeupplz/temply).",
+      ]
+    },
+    charts: () => {
+      const {
+        projectsData: { temply },
+      } = useSnapshot(baseProjectsData)
+      return temply
+        ? [
+            {
+              title: 'Number of new users per day vs days ago',
+              data: dailyStatsToLabelsAndDatasets(temply.userDaily),
+            },
+          ]
+        : []
+    },
+  },
+  {
+    title: 'CAS Ban Checker',
+    code: 'casBanChecker',
+    link: 'https://t.me/cas_ban_bot',
+    description: () => [
+      'Telegram bot that checks whether a user is banned by [CAS](https://cas.chat).',
+      "It's [open source](https://github.com/backmeupplz/cas_ban_bot).",
+    ],
+  },
+  {
+    title: 'Please, no',
+    code: 'pleaseno',
+    link: 'https://pleaseno.me',
+    publications: [
+      {
+        link: 'https://www.producthunt.com/posts/please-no',
+        name: 'Product Hunt: Please, no',
+      },
+    ],
+    description: () => [
+      'A tiny webpage for answering with "Please, no" when that is the whole message.',
+      "It's [open source](https://github.com/backmeupplz/pleaseno).",
+    ],
+    charts: () => {
+      const {
+        projectsData: { pleaseno },
+      } = useSnapshot(baseProjectsData)
+      return pleaseno
+        ? [
+            {
+              title: 'Pleaseno.me visits',
+              data: cloudflareStatsToLabelsAndDatasets(pleaseno),
+            },
+          ]
+        : []
+    },
+  },
+  {
+    title: 'Fix sleep',
+    code: 'fixsleep',
+    link: 'https://fixsleep.link',
+    description: () => [
+      'A simple page with 17 research-backed rules for sleeping better, built as a short reference for family and friends.',
+      "It's [open source](https://github.com/backmeupplz/fixsleep).",
+    ],
+    charts: () => {
+      const {
+        projectsData: { fixsleep },
+      } = useSnapshot(baseProjectsData)
+      return fixsleep
+        ? [
+            {
+              title: 'Fixsleep.link visits',
+              data: cloudflareStatsToLabelsAndDatasets(fixsleep),
+            },
+          ]
+        : []
+    },
   },
 ]
 
