@@ -54,6 +54,11 @@ export type ProjectCount = {
   lightnftd?: number
 }
 
+export interface ProjectCountSummary {
+  count: number
+  label: string
+}
+
 export interface ProjectsData {
   shieldy?: {
     chatDaily: CountAggregation[]
@@ -140,6 +145,7 @@ export interface ProjectsData {
   }
   userCountSeparate?: ProjectCount
   userCount?: UserCountData
+  projectCounts?: Partial<Record<keyof ProjectCount, ProjectCountSummary>>
 }
 
 export const projectsData = proxy({

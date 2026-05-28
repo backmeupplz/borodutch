@@ -5,6 +5,7 @@
   "scripts": {
     "start": "vite",
     "build": "cross-env NODE_ENV=production tsc && vite build",
+    "test:stats-fallbacks": "node scripts/verifyStatsFallbacks.js",
     "update-blog-posts": "node scripts/updateBlogPosts.js",
     "pretty": "prettier --check src",
     "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
