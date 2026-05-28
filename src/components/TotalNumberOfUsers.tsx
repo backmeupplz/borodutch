@@ -9,11 +9,12 @@ import formatNumber from 'helpers/formatNumber'
 
 function UsersChart() {
   const userCountSnapshot = useSnapshot(userCount)
+  const history = userCountSnapshot.userCount.history
   if (!userCountSnapshot.loaded) {
     return <Loader line />
   }
 
-  if (!userCountSnapshot.userCount.history.length) {
+  if (!Array.isArray(history) || !history.length) {
     return null
   }
   return (
@@ -33,12 +34,8 @@ function UsersChart() {
       }}
       height={200}
       data={{
-        labels: userCountSnapshot.userCount.history.map((v) =>
-          new Date(+v[0]).toLocaleDateString()
-        ),
-        datasets: [
-          { values: userCountSnapshot.userCount.history.map((v) => +v[1]) },
-        ],
+        labels: history.map((v) => new Date(+v[0]).toLocaleDateString()),
+        datasets: [{ values: history.map((v) => +v[1]) }],
       }}
       tooltipOptions={{
         formatTooltipY: (d) => formatNumber(d),

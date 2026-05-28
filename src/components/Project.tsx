@@ -20,6 +20,7 @@ import Description from 'components/Description'
 import Loader from 'components/Loader'
 import Project from 'models/Project'
 import formatNumber from 'helpers/formatNumber'
+import projectSummaryStat from 'helpers/projectSummaryStat'
 
 const container = classnames(
   'flex',
@@ -58,7 +59,7 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
   useSnapshot(projectDetails)
   const opened = appStore.opened[project.code]
   const { projectsData } = useSnapshot(baseProjectsData)
-  const projectUserCount = projectsData.userCountSeparate?.[project.code]
+  const projectStat = projectSummaryStat(projectsData, project.code)
   const detailFailed = projectDetails.failed[project.code]
   const detailsLoaded = projectDetails.loaded[project.code]
 
@@ -75,9 +76,9 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
           <a href={project.link} rel="noopener noreferrer" target="_blank">
             <ProjectTitle>{project.title}</ProjectTitle>
           </a>
-          {typeof projectUserCount === 'number' && (
+          {projectStat && (
             <NumberOfProjectUsersText>
-              {formatNumber(projectUserCount)} users
+              {formatNumber(projectStat.count)} {projectStat.label}
             </NumberOfProjectUsersText>
           )}
         </div>

@@ -1,11 +1,11 @@
 import { proxy } from 'valtio'
 import baseUrl from 'helpers/baseUrl'
 import fetchJson from 'helpers/fetchJson'
+import normalizeUserCountData, {
+  NormalizableUserCountData,
+} from 'helpers/normalizeUserCountData'
 
-export interface UserCountData {
-  count: string
-  history: string[][]
-}
+export type UserCountData = NormalizableUserCountData
 
 const fallbackUserCount: UserCountData = {
   count: '0',
@@ -17,17 +17,14 @@ export const userCount = proxy({
   userCount: fallbackUserCount,
 })
 
-function hasUserCountData(data: UserCountData) {
-  return data.history.length > 0
-}
-
 void fetchJson<UserCountData>(`${baseUrl}/count`, fallbackUserCount).then(
   (data) => {
-    if (!hasUserCountData(data)) {
+    const normalizedData = normalizeUserCountData(data)
+    if (!normalizedData) {
       return
     }
 
-    userCount.userCount = data
+    userCount.userCount = normalizedData
     userCount.loaded = true
   }
 )

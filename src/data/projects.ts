@@ -4,6 +4,7 @@ import Project from 'models/Project'
 import cloudflareStatsToLabelsAndDatasets from 'helpers/cloudflareStatsToLabelsAndDatasets'
 import dailyStatsToLabelsAndDatasets from 'helpers/dailyStatsToLabelsAndDatasets'
 import formatNumber from 'helpers/formatNumber'
+import hasPositiveNumbers from 'helpers/hasPositiveNumbers'
 import messageStatsToLabelsAndDatasets from 'helpers/messageStatsToLabelsAndDatasets'
 
 const projects: Project[] = [
@@ -27,11 +28,11 @@ const projects: Project[] = [
       } = useSnapshot(baseProjectsData)
       return [
         'Telegram voice-to-text bot with local worker infrastructure, stronger queues, and real Telegram Web QA in the development loop.',
-        !!voicy &&
+        hasPositiveNumbers(voicy?.stats?.chatCount, voicy?.stats?.voiceCount) &&
           `Voicy is installed in ${formatNumber(
-            voicy.stats.chatCount
+            voicy?.stats?.chatCount
           )} chats and has recognized ${formatNumber(
-            voicy.stats.voiceCount
+            voicy?.stats?.voiceCount
           )} voice messages.`,
         "It's [open source](https://github.com/backmeupplz/voicy).",
       ]
@@ -108,10 +109,10 @@ const projects: Project[] = [
       } = useSnapshot(baseProjectsData)
       return [
         'Telegram votekick bot for fighting spam and letting chats kick members by vote.',
-        !!banofbot &&
+        hasPositiveNumbers(banofbot?.requestCount, banofbot?.chatCount) &&
           `Banofbot has handled ${formatNumber(
-            banofbot.requestCount
-          )} votekick requests in ${formatNumber(banofbot.chatCount)} chats.`,
+            banofbot?.requestCount
+          )} votekick requests in ${formatNumber(banofbot?.chatCount)} chats.`,
         "It's [open source](https://github.com/backmeupplz/banofbot).",
       ]
     },
@@ -147,10 +148,10 @@ const projects: Project[] = [
       } = useSnapshot(baseProjectsData)
       return [
         'Telegram raffle bot for channel and group admins.',
-        !!randym &&
+        hasPositiveNumbers(randym?.raffleCount, randym?.chatCount) &&
           `Randy has run ${formatNumber(
-            randym.raffleCount
-          )} raffles in ${formatNumber(randym.chatCount)} chats.`,
+            randym?.raffleCount
+          )} raffles in ${formatNumber(randym?.chatCount)} chats.`,
         "It's [open source](https://github.com/backmeupplz/randymbot).",
       ]
     },
@@ -165,9 +166,9 @@ const projects: Project[] = [
       } = useSnapshot(baseProjectsData)
       return [
         'Todo manager built around the productivity system from my book. I no longer pitch it as the future of todo apps, but it is still part of my work and writing.',
-        !!todorant &&
+        hasPositiveNumbers(todorant?.db?.todoCount) &&
           `Users on Todorant created ${formatNumber(
-            todorant.db.todoCount
+            todorant?.db?.todoCount
           )} todos.`,
       ]
     },
@@ -213,8 +214,8 @@ const projects: Project[] = [
       } = useSnapshot(baseProjectsData)
       return [
         'Telegram anti-spam bot I built and sold to 1inch Network. Keeping it here as a real project receipt, not as current day-to-day work.',
-        !!shieldy &&
-          `Shieldy is used by ${formatNumber(shieldy.chatCount)} chats.`,
+        hasPositiveNumbers(shieldy?.chatCount) &&
+          `Shieldy is used by ${formatNumber(shieldy?.chatCount)} chats.`,
       ]
     },
     charts: () => {
@@ -250,11 +251,11 @@ const projects: Project[] = [
       } = useSnapshot(baseProjectsData)
       return [
         'Inline Telegram bot for saving reusable text templates and quickly inserting them later. Useful for support work, channel admins, and repeated replies.',
-        !!temply &&
+        hasPositiveNumbers(temply?.userCount, temply?.templatesCount) &&
           `Temply has ${formatNumber(
-            temply.userCount
+            temply?.userCount
           )} users who created ${formatNumber(
-            temply.templatesCount
+            temply?.templatesCount
           )} templates.`,
         "It's [open source](https://github.com/backmeupplz/temply).",
       ]
