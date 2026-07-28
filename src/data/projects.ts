@@ -9,6 +9,14 @@ import messageStatsToLabelsAndDatasets from 'helpers/messageStatsToLabelsAndData
 
 const projects: Project[] = [
   {
+    title: 'Veydrift',
+    code: 'veydrift',
+    link: 'https://veydrift.com',
+    description: () => [
+      'Onchain multiplayer space strategy game on Base, built around competing for planets and navigating a shared universe.',
+    ],
+  },
+  {
     title: 'Voicy',
     code: 'voicy',
     link: 'https://t.me/voicybot',
