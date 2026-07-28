@@ -1,8 +1,11 @@
 import { ChartData } from 'react-frappe-charts'
+import type { ProjectCount } from 'helpers/projectsData'
+
+type ProjectCode = keyof ProjectCount | 'veydrift'
 
 export default interface Project {
   title: string
-  code: string
+  code: ProjectCode
   link: string
   publications?: {
     name: string
