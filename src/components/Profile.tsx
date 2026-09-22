@@ -68,7 +68,7 @@ export default function Profile() {
         <HeaderText>Nikita Kolmogorov</HeaderText>
         <BodyText>
           I build products and the agentic development loops that keep them
-          moving: Kaneo tasks, Symphony workers, Codex PRs, OpenClaw QA, and
+          moving: Kaneo tasks, OpenClaw workers, Codex PRs, product QA, and
           boring deployment proof.
         </BodyText>
         <Suspense fallback={<Loader />}>

@@ -1,17 +1,17 @@
-import { BodyText, Link, ProjectSubtitle, SubheaderText } from 'components/Text'
+import { Link, ProjectSubtitle, SubheaderText } from 'components/Text'
 import { classnames } from 'classnames/tailwind'
 import blogPosts from 'data/blogPosts'
 
-const postsContainer = classnames('flex', 'flex-col', 'gap-4')
+const postsContainer = classnames('flex', 'flex-col', 'gap-2')
 const postContainer = classnames(
   'flex',
   'flex-col',
   'border',
   'border-opacity-25',
-  'p-4',
+  'p-3',
   'rounded-xl'
 )
-const dateText = classnames('text-white', 'opacity-50', 'text-sm', 'mb-2')
+const dateText = classnames('text-white', 'opacity-50', 'text-sm', 'mb-1')
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString(undefined, {
@@ -26,13 +26,12 @@ export default function BlogPosts() {
     <>
       <SubheaderText>Latest writing</SubheaderText>
       <div className={postsContainer}>
-        {blogPosts.map((post) => (
+        {blogPosts.slice(0, 3).map((post) => (
           <article className={postContainer} key={post.link}>
             <p className={dateText}>{formatDate(post.date)}</p>
             <ProjectSubtitle>
               <Link url={post.link}>{post.title}</Link>
             </ProjectSubtitle>
-            {post.description && <BodyText>{post.description}</BodyText>}
           </article>
         ))}
       </div>
