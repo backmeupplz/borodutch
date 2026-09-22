@@ -94,32 +94,6 @@ const projects: Project[] = [
     ],
   },
   {
-    title: 'Symphony',
-    code: 'symphony',
-    link: 'https://github.com/backmeupplz/symphony',
-    description: () => [
-      'Agentic development runner that watches Kaneo, routes each task to the right repo, starts Codex in an isolated workspace, and keeps validation and PR handoff explicit.',
-      'This is the boring delivery loop behind the current projects.',
-    ],
-  },
-  {
-    title: 'Friday',
-    code: 'friday',
-    link: 'https://t.me/frdy_bot',
-    description: () => [
-      'Telegram bot that searches the web and streams AI answers live. It uses grammY, Fireworks AI, and a self-hosted SearXNG setup.',
-      "It's [open source](https://github.com/backmeupplz/telegram-ai-searcher).",
-    ],
-  },
-  {
-    title: 'Omens',
-    code: 'omens',
-    link: 'https://github.com/backmeupplz/omens',
-    description: () => [
-      'AI-filtered X feed for getting signal from noisy timelines without doomscrolling the raw feed.',
-    ],
-  },
-  {
     title: 'Banofbot',
     code: 'banofbot',
     link: 'https://t.me/banofbot',
@@ -295,15 +269,6 @@ const projects: Project[] = [
     },
   },
   {
-    title: 'CAS Ban Checker',
-    code: 'casBanChecker',
-    link: 'https://t.me/cas_ban_bot',
-    description: () => [
-      'Telegram bot that checks whether a user is banned by [CAS](https://cas.chat).',
-      "It's [open source](https://github.com/backmeupplz/cas_ban_bot).",
-    ],
-  },
-  {
     title: 'Please, no',
     code: 'pleaseno',
     link: 'https://pleaseno.me',
@@ -326,28 +291,6 @@ const projects: Project[] = [
             {
               title: 'Pleaseno.me visits',
               data: cloudflareStatsToLabelsAndDatasets(pleaseno),
-            },
-          ]
-        : []
-    },
-  },
-  {
-    title: 'Fix sleep',
-    code: 'fixsleep',
-    link: 'https://fixsleep.link',
-    description: () => [
-      'A simple page with 17 research-backed rules for sleeping better, built as a short reference for family and friends.',
-      "It's [open source](https://github.com/backmeupplz/fixsleep).",
-    ],
-    charts: () => {
-      const {
-        projectsData: { fixsleep },
-      } = useSnapshot(baseProjectsData)
-      return fixsleep
-        ? [
-            {
-              title: 'Fixsleep.link visits',
-              data: cloudflareStatsToLabelsAndDatasets(fixsleep),
             },
           ]
         : []
