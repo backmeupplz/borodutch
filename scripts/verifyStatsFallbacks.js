@@ -13,6 +13,7 @@ fs.mkdirSync(helperOutDir, { recursive: true })
 for (const helper of [
   'formatNumber.ts',
   'hasPositiveNumbers.ts',
+  'jevAntispamDescription.ts',
   'normalizeUserCountData.ts',
   'projectSummaryStat.ts',
 ]) {
@@ -34,6 +35,10 @@ process.env.NODE_PATH = tmp
 require('module').Module._initPaths()
 
 const formatNumber = require(path.join(helperOutDir, 'formatNumber.js')).default
+const jevAntispamDescription = require(path.join(
+  helperOutDir,
+  'jevAntispamDescription.js'
+)).default
 const normalizeUserCountData = require(path.join(
   helperOutDir,
   'normalizeUserCountData.js'
@@ -46,6 +51,22 @@ const projectSummaryStat = require(path.join(
 assert.strictEqual(formatNumber(0), '0')
 assert.strictEqual(formatNumber('0'), '0')
 assert.strictEqual(formatNumber(undefined), '')
+
+assert.deepStrictEqual(
+  jevAntispamDescription({
+    knownChatCount: 654,
+    privateChatCount: 504,
+    reachableCommunityCount: 123,
+    combinedCommunityAudience: 229771,
+    successfulDeletionCount: 5337,
+  }),
+  [
+    'Telegram anti-spam bot powered by the Jev model.',
+    'Jev Antispam knows 654 chats, including 504 private chats, and currently reaches 123 communities with 229 771 combined members and subscribers. It has deleted 5 337 spam messages.',
+    'Try it [on Telegram](https://t.me/jev_antispam_bot). It is [open source](https://github.com/backmeupplz/jev_antispam_bot).',
+  ]
+)
+assert.strictEqual(jevAntispamDescription()[1], false)
 
 assert.deepStrictEqual(
   normalizeUserCountData({
@@ -79,6 +100,18 @@ const summaryWithEmptySeparateCounts = {
   banofbot: { chatCount: 326449 },
   temply: { userCount: 12046 },
 }
+
+assert.deepStrictEqual(
+  projectSummaryStat(
+    {
+      projectCounts: {
+        jevAntispam: { count: 230275, label: 'people reached' },
+      },
+    },
+    'jevAntispam'
+  ),
+  { count: 230275, label: 'people reached' }
+)
 
 assert.deepStrictEqual(
   projectSummaryStat(summaryWithEmptySeparateCounts, 'shieldy'),

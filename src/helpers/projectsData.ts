@@ -11,6 +11,7 @@ export interface CountAggregation {
 export type CloudflareData = number[]
 
 export type ProjectCount = {
+  jevAntispam?: number
   pigeon?: number
   myground?: number
   symphony?: number
@@ -59,7 +60,16 @@ export interface ProjectCountSummary {
   label: string
 }
 
+export interface JevAntispamStats {
+  knownChatCount: number
+  privateChatCount: number
+  reachableCommunityCount: number
+  combinedCommunityAudience: number
+  successfulDeletionCount: number
+}
+
 export interface ProjectsData {
+  jevAntispam?: JevAntispamStats
   shieldy?: {
     chatDaily: CountAggregation[]
     chatCount: number

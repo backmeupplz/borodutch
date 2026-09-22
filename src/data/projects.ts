@@ -5,6 +5,7 @@ import cloudflareStatsToLabelsAndDatasets from 'helpers/cloudflareStatsToLabelsA
 import dailyStatsToLabelsAndDatasets from 'helpers/dailyStatsToLabelsAndDatasets'
 import formatNumber from 'helpers/formatNumber'
 import hasPositiveNumbers from 'helpers/hasPositiveNumbers'
+import jevAntispamDescription from 'helpers/jevAntispamDescription'
 import messageStatsToLabelsAndDatasets from 'helpers/messageStatsToLabelsAndDatasets'
 
 const projects: Project[] = [
@@ -15,6 +16,17 @@ const projects: Project[] = [
     description: () => [
       'Onchain multiplayer space strategy game on Base, built around competing for planets and navigating a shared universe.',
     ],
+  },
+  {
+    title: 'Jev Antispam',
+    code: 'jevAntispam',
+    link: 'https://t.me/jev_antispam_bot',
+    description: () => {
+      const {
+        projectsData: { jevAntispam },
+      } = useSnapshot(baseProjectsData)
+      return jevAntispamDescription(jevAntispam)
+    },
   },
   {
     title: 'Voicy',
