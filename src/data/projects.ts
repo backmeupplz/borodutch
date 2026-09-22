@@ -47,7 +47,7 @@ const projects: Project[] = [
               ),
             },
             {
-              title: 'Total spam messages successfully deleted vs days ago',
+              title: 'Total spam deleted vs days ago',
               data: jevHistoryToLabelsAndDatasets(
                 history,
                 'successfulDeletionCount'
