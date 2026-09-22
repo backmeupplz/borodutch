@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import ReactFrappeChart, { ChartData } from 'react-frappe-charts'
+import chartLineOptions from 'helpers/chartLineOptions'
 import currentGradient from 'helpers/currentGradient'
 import formatNumber from 'helpers/formatNumber'
 
@@ -15,10 +16,7 @@ const Chart: FC<{ title: string; data: ChartData }> = ({ title, data }) => (
         xIsSeries: 1,
         shortenYAxisNumbers: 1,
       }}
-      lineOptions={{
-        regionFill: 1,
-        hideDots: 1,
-      }}
+      lineOptions={chartLineOptions(data)}
       height={200}
       data={data}
       tooltipOptions={{

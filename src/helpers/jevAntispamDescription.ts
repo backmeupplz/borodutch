@@ -6,25 +6,15 @@ export default function jevAntispamDescription(
 ) {
   const completeStats =
     stats &&
-    [
-      stats.knownChatCount,
-      stats.privateChatCount,
-      stats.reachableCommunityCount,
-      stats.combinedCommunityAudience,
-      stats.successfulDeletionCount,
-    ].every(function (value) {
+    [stats.knownChatCount, stats.successfulDeletionCount].every(function (
+      value
+    ) {
       return typeof value === 'number' && Number.isFinite(value)
     })
   const liveNumbers: string | false = completeStats
     ? `Jev Antispam knows ${formatNumber(
         stats.knownChatCount
-      )} chats, including ${formatNumber(
-        stats.privateChatCount
-      )} private chats, and currently reaches ${formatNumber(
-        stats.reachableCommunityCount
-      )} communities with ${formatNumber(
-        stats.combinedCommunityAudience
-      )} combined members and subscribers. It has deleted ${formatNumber(
+      )} chats and has successfully deleted ${formatNumber(
         stats.successfulDeletionCount
       )} spam messages.`
     : false

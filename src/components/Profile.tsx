@@ -1,5 +1,4 @@
 import {
-  AuxiliaryText,
   BodyText,
   HeaderText,
   Link,
@@ -64,13 +63,7 @@ export default function Profile() {
   return (
     <div className={profileContainer}>
       <div className={profileTextContainer}>
-        <AuxiliaryText>agentic development / bots / self-hosting</AuxiliaryText>
         <HeaderText>Nikita Kolmogorov</HeaderText>
-        <BodyText>
-          I build products and the agentic development loops that keep them
-          moving: Kaneo tasks, OpenClaw workers, Codex PRs, product QA, and
-          boring deployment proof.
-        </BodyText>
         <Suspense fallback={<Loader />}>
           <NumberOfUsers />
         </Suspense>
@@ -78,8 +71,7 @@ export default function Profile() {
           people used my apps today
         </NumberOfUsersAuxiliaryText>
         <BodyText>
-          Updated daily from lightweight stats. Curious how I calculate this
-          number? Check out the code{' '}
+          Updated daily. Curious how I calculate this number? Check out the code{' '}
           <Link url="https://github.com/backmeupplz/borodutch-stats/blob/master/src/helpers/userCount.ts">
             here
           </Link>
