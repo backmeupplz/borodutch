@@ -12,6 +12,11 @@ const postContainer = classnames(
   'rounded-xl'
 )
 const dateText = classnames('text-white', 'opacity-50', 'text-sm', 'mb-1')
+const excerptText = classnames('text-white', 'opacity-80', 'text-sm')
+
+const latestPosts = [...blogPosts]
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, 3)
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString(undefined, {
@@ -26,12 +31,13 @@ export default function BlogPosts() {
     <>
       <SubheaderText>Latest writing</SubheaderText>
       <div className={postsContainer}>
-        {blogPosts.slice(0, 3).map((post) => (
+        {latestPosts.map((post) => (
           <article className={postContainer} key={post.link}>
             <p className={dateText}>{formatDate(post.date)}</p>
             <ProjectSubtitle>
               <Link url={post.link}>{post.title}</Link>
             </ProjectSubtitle>
+            <p className={excerptText}>{post.description}</p>
           </article>
         ))}
       </div>
