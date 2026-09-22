@@ -4,7 +4,18 @@ import type { JevAntispamStats } from 'helpers/projectsData'
 export default function jevAntispamDescription(
   stats?: Readonly<JevAntispamStats>
 ) {
-  const liveNumbers: string | false = stats
+  const completeStats =
+    stats &&
+    [
+      stats.knownChatCount,
+      stats.privateChatCount,
+      stats.reachableCommunityCount,
+      stats.combinedCommunityAudience,
+      stats.successfulDeletionCount,
+    ].every(function (value) {
+      return typeof value === 'number' && Number.isFinite(value)
+    })
+  const liveNumbers: string | false = completeStats
     ? `Jev Antispam knows ${formatNumber(
         stats.knownChatCount
       )} chats, including ${formatNumber(

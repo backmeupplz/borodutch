@@ -67,6 +67,7 @@ assert.deepStrictEqual(
   ]
 )
 assert.strictEqual(jevAntispamDescription()[1], false)
+assert.strictEqual(jevAntispamDescription({})[1], false)
 
 assert.deepStrictEqual(
   normalizeUserCountData({
