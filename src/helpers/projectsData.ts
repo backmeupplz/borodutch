@@ -66,6 +66,15 @@ export interface JevAntispamStats {
   reachableCommunityCount: number
   combinedCommunityAudience: number
   successfulDeletionCount: number
+  processedMessageCount?: number
+  history?: JevAntispamHistoryPoint[]
+}
+
+export interface JevAntispamHistoryPoint {
+  date: string
+  knownChatCount: number
+  processedMessageCount: number
+  successfulDeletionCount: number
 }
 
 export interface ProjectsData {

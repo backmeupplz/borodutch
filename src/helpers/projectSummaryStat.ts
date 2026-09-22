@@ -19,7 +19,9 @@ export default function projectSummaryStat(
 ): ProjectSummaryStat | undefined {
   const summaryStat = projectsData.projectCounts?.[code as keyof ProjectCount]
   if (summaryStat && isPositiveNumber(summaryStat.count)) {
-    return summaryStat
+    return code === 'jevAntispam'
+      ? { count: summaryStat.count, label: 'users' }
+      : summaryStat
   }
 
   const separateCounts = projectsData.userCountSeparate as

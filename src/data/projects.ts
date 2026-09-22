@@ -6,6 +6,7 @@ import dailyStatsToLabelsAndDatasets from 'helpers/dailyStatsToLabelsAndDatasets
 import formatNumber from 'helpers/formatNumber'
 import hasPositiveNumbers from 'helpers/hasPositiveNumbers'
 import jevAntispamDescription from 'helpers/jevAntispamDescription'
+import jevHistoryToLabelsAndDatasets from 'helpers/jevHistoryToLabelsAndDatasets'
 import messageStatsToLabelsAndDatasets from 'helpers/messageStatsToLabelsAndDatasets'
 
 const projects: Project[] = [
@@ -26,6 +27,34 @@ const projects: Project[] = [
         projectsData: { jevAntispam },
       } = useSnapshot(baseProjectsData)
       return jevAntispamDescription(jevAntispam)
+    },
+    charts: () => {
+      const {
+        projectsData: { jevAntispam },
+      } = useSnapshot(baseProjectsData)
+      const history = jevAntispam?.history
+      return history?.length
+        ? [
+            {
+              title: 'Number of chats vs days ago',
+              data: jevHistoryToLabelsAndDatasets(history, 'knownChatCount'),
+            },
+            {
+              title: 'Total messages processed vs days ago',
+              data: jevHistoryToLabelsAndDatasets(
+                history,
+                'processedMessageCount'
+              ),
+            },
+            {
+              title: 'Total spam messages successfully deleted vs days ago',
+              data: jevHistoryToLabelsAndDatasets(
+                history,
+                'successfulDeletionCount'
+              ),
+            },
+          ]
+        : []
     },
   },
   {
@@ -231,7 +260,7 @@ const projects: Project[] = [
     code: 'borodutch',
     link: 'https://borodutch.com',
     description: () => [
-      'This website: simple profile, current projects, recent writing, and lightweight stats first.',
+      'This website. The future is now, old man',
       "It's open source: [website](https://github.com/backmeupplz/borodutch), [stats server](https://github.com/backmeupplz/borodutch-stats).",
     ],
   },
