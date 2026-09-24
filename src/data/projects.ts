@@ -19,6 +19,14 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'Plain Wallet',
+    code: 'plainwallet',
+    link: 'https://github.com/backmeupplz/plainwallet',
+    description: () => [
+      'Minimal open-source EVM wallet browser extension for Chrome and Firefox.',
+    ],
+  },
+  {
     title: 'Jev Antispam',
     code: 'jevAntispam',
     link: 'https://t.me/jev_antispam_bot',
