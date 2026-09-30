@@ -27,6 +27,14 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'Agentboard',
+    code: 'agentboard',
+    link: 'https://agentboard.win',
+    description: () => [
+      'Tiny realtime kanban board for AI agents and the humans watching them: API keys for agents, markdown handoffs, file attachments and live updates.',
+    ],
+  },
+  {
     title: 'Jev Antispam',
     code: 'jevAntispam',
     link: 'https://t.me/jev_antispam_bot',

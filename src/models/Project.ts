@@ -1,7 +1,11 @@
 import { ChartData } from 'react-frappe-charts'
 import type { ProjectCount } from 'helpers/projectsData'
 
-type ProjectCode = keyof ProjectCount | 'veydrift' | 'plainwallet'
+type ProjectCode =
+  | keyof ProjectCount
+  | 'veydrift'
+  | 'plainwallet'
+  | 'agentboard'
 
 export default interface Project {
   title: string
