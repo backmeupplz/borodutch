@@ -35,6 +35,14 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'ABS+',
+    code: 'absplus',
+    link: 'https://absplus.app',
+    description: () => [
+      'Free, open-source Android app for Audiobookshelf. Stream or download audiobooks and podcasts, with synced listening progress.',
+    ],
+  },
+  {
     title: 'Jev Antispam',
     code: 'jevAntispam',
     link: 'https://t.me/jev_antispam_bot',
@@ -308,34 +316,6 @@ const projects: Project[] = [
             {
               title: 'Number of new users per day vs days ago',
               data: dailyStatsToLabelsAndDatasets(temply.userDaily),
-            },
-          ]
-        : []
-    },
-  },
-  {
-    title: 'Please, no',
-    code: 'pleaseno',
-    link: 'https://pleaseno.me',
-    publications: [
-      {
-        link: 'https://www.producthunt.com/posts/please-no',
-        name: 'Product Hunt: Please, no',
-      },
-    ],
-    description: () => [
-      'A tiny webpage for answering with "Please, no" when that is the whole message.',
-      "It's [open source](https://github.com/backmeupplz/pleaseno).",
-    ],
-    charts: () => {
-      const {
-        projectsData: { pleaseno },
-      } = useSnapshot(baseProjectsData)
-      return pleaseno
-        ? [
-            {
-              title: 'Pleaseno.me visits',
-              data: cloudflareStatsToLabelsAndDatasets(pleaseno),
             },
           ]
         : []

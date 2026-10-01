@@ -6,6 +6,7 @@ type ProjectCode =
   | 'veydrift'
   | 'plainwallet'
   | 'agentboard'
+  | 'absplus'
 
 export default interface Project {
   title: string
