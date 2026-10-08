@@ -66,7 +66,7 @@ assert.deepStrictEqual(
 for (const project of projects.filter((project) => project.image)) {
   assert.ok(
     fs.existsSync(
-      path.join(__dirname, `../public/images/projects/${project.code}.webp`)
+      path.join(__dirname, `../src/assets/projects/${project.code}.webp`)
     ),
     `${project.code} image is missing`
   )
