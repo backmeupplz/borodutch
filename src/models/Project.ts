@@ -2,7 +2,6 @@ import type { ProjectCount, ProjectsData } from 'helpers/projectsData'
 
 type ProjectCode =
   | keyof ProjectCount
-  | 'veydrift'
   | 'plainwallet'
   | 'agentboard'
   | 'absplus'

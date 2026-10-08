@@ -19,7 +19,6 @@ export default function TotalNumberOfUsers() {
         history.length > 0 && (
           <Chart
             tall
-            title="How many people used my apps"
             data={{
               labels: history.map((v) => dateLabel(+v[0])),
               values: history.map((v) => +v[1]),
