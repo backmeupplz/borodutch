@@ -1,5 +1,6 @@
 import { Link, ProjectSubtitle, SubheaderText } from 'components/Text'
 import { classnames } from 'classnames/tailwind'
+import { dateLabel } from 'helpers/chartSeries'
 import blogPosts from 'data/blogPosts'
 
 const postsContainer = classnames('flex', 'flex-col', 'gap-2')
@@ -11,15 +12,8 @@ const postContainer = classnames(
   'p-3',
   'rounded-xl'
 )
+const descriptionText = classnames('text-white', 'opacity-70', 'text-sm')
 const dateText = classnames('text-white', 'opacity-50', 'text-sm', 'mb-1')
-
-function formatDate(date: string) {
-  return new Date(date).toLocaleDateString(undefined, {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })
-}
 
 export default function BlogPosts() {
   return (
@@ -28,10 +22,11 @@ export default function BlogPosts() {
       <div className={postsContainer}>
         {blogPosts.slice(0, 3).map((post) => (
           <article className={postContainer} key={post.link}>
-            <p className={dateText}>{formatDate(post.date)}</p>
+            <p className={dateText}>{dateLabel(post.date)}</p>
             <ProjectSubtitle>
               <Link url={post.link}>{post.title}</Link>
             </ProjectSubtitle>
+            <p className={descriptionText}>{post.description}</p>
           </article>
         ))}
       </div>

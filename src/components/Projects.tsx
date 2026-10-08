@@ -1,15 +1,12 @@
 import { SubheaderText } from 'components/Text'
-import { Suspense } from 'react'
 import { appStore } from 'stores/AppStore'
 import { classnames } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
-import Loader from 'components/Loader'
 import Project from 'components/Project'
 import projects from 'data/projects'
 import showMoreData from 'helpers/showMoreData'
 
-const projectPlaceholderContainer = classnames('pb-4', 'mx-4')
 const projectsContainer = classnames('flex', 'flex-col', 'gap-4')
 const headerContainer = classnames(
   'flex',
@@ -18,33 +15,14 @@ const headerContainer = classnames(
   'items-center'
 )
 
-function Loaders() {
-  return (
-    <>
-      {Array(projects.length)
-        .fill(null)
-        .map((_, i) => (
-          <div key={i} className={projectPlaceholderContainer}>
-            <Loader />
-            <Loader line />
-            <Loader line />
-            <Loader line />
-            <Loader line />
-          </div>
-        ))}
-    </>
-  )
-}
-
 export default function Projects() {
-  const appStoreSnapshot = useSnapshot(appStore)
-  const showMoreDataSnapshot = useSnapshot(showMoreData)
+  const { opened } = useSnapshot(appStore)
+  const { showMoreData: showMore } = useSnapshot(showMoreData)
   return (
-    <>
+    <section>
       <div className={headerContainer}>
         <SubheaderText>Projects</SubheaderText>
-        {(!showMoreDataSnapshot.showMoreData ||
-          Object.keys(appStoreSnapshot.opened).length > 0) && (
+        {(!showMore || Object.values(opened).some(Boolean)) && (
           <Button
             onClick={() => {
               if (!showMoreData.showMoreData) {
@@ -53,21 +31,15 @@ export default function Projects() {
                 appStore.opened = {}
               }
             }}
-            title={
-              showMoreDataSnapshot.showMoreData
-                ? 'Hide all stats'
-                : 'Chart more data'
-            }
+            title={showMore ? 'Hide all stats' : 'Chart full history'}
           />
         )}
       </div>
-      <Suspense fallback={<Loaders />}>
-        <div className={projectsContainer}>
-          {projects.map((project) => (
-            <Project key={project.code} project={project} />
-          ))}
-        </div>
-      </Suspense>
-    </>
+      <div className={projectsContainer}>
+        {projects.map((project) => (
+          <Project key={project.code} project={project} />
+        ))}
+      </div>
+    </section>
   )
 }

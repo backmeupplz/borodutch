@@ -1,19 +1,20 @@
-import { projectsData as baseProjectsData } from 'helpers/projectsData'
-import { useSnapshot } from 'valtio'
+import {
+  cloudflareSeries,
+  countSeries,
+  jevSeries,
+  messageSeries,
+} from 'helpers/chartSeries'
 import Project from 'models/Project'
-import cloudflareStatsToLabelsAndDatasets from 'helpers/cloudflareStatsToLabelsAndDatasets'
-import dailyStatsToLabelsAndDatasets from 'helpers/dailyStatsToLabelsAndDatasets'
 import formatNumber from 'helpers/formatNumber'
 import hasPositiveNumbers from 'helpers/hasPositiveNumbers'
 import jevAntispamDescription from 'helpers/jevAntispamDescription'
-import jevHistoryToLabelsAndDatasets from 'helpers/jevHistoryToLabelsAndDatasets'
-import messageStatsToLabelsAndDatasets from 'helpers/messageStatsToLabelsAndDatasets'
 
 const projects: Project[] = [
   {
     title: 'Veydrift',
     code: 'veydrift',
     link: 'https://veydrift.com',
+    image: 'wide',
     description: () => [
       'Onchain multiplayer space strategy game on Base, built around competing for planets and navigating a shared universe.',
     ],
@@ -21,15 +22,18 @@ const projects: Project[] = [
   {
     title: 'Plain Wallet',
     code: 'plainwallet',
-    link: 'https://github.com/backmeupplz/plainwallet',
+    link: 'https://plainwallet.app',
+    image: 'wide',
     description: () => [
-      'Minimal open-source EVM wallet browser extension for Chrome and Firefox.',
+      'Very minimal EVM wallet for Chrome, Firefox, Safari, Android, iPhone and Mac: about 1,400 lines of TypeScript you can read in an evening.',
+      "It's [open source](https://github.com/backmeupplz/plainwallet).",
     ],
   },
   {
     title: 'Agentboard',
     code: 'agentboard',
     link: 'https://agentboard.win',
+    image: 'wide',
     description: () => [
       'Tiny realtime kanban board for AI agents and the humans watching them: API keys for agents, markdown handoffs, file attachments and live updates.',
     ],
@@ -38,44 +42,42 @@ const projects: Project[] = [
     title: 'ABS+',
     code: 'absplus',
     link: 'https://absplus.app',
+    image: 'wide',
     description: () => [
       'Free, open-source Android app for Audiobookshelf. Stream or download audiobooks and podcasts, with synced listening progress.',
+    ],
+  },
+  {
+    title: 'Mesh+',
+    code: 'meshplus',
+    link: 'https://meshplus.app',
+    image: 'wide',
+    description: () => [
+      'Free Android app for Meshtastic radios, so you can message your friends when there is no signal: private rooms, encrypted DMs, an SMS relay and firmware updates from your phone.',
+      "It's [open source](https://github.com/backmeupplz/meshtastic-plus).",
     ],
   },
   {
     title: 'Jev Antispam',
     code: 'jevAntispam',
     link: 'https://t.me/jev_antispam_bot',
-    description: () => {
-      const {
-        projectsData: { jevAntispam },
-      } = useSnapshot(baseProjectsData)
-      return jevAntispamDescription(jevAntispam)
-    },
-    charts: () => {
-      const {
-        projectsData: { jevAntispam },
-      } = useSnapshot(baseProjectsData)
+    image: 'icon',
+    description: ({ jevAntispam }) => jevAntispamDescription(jevAntispam),
+    charts: ({ jevAntispam }) => {
       const history = jevAntispam?.history
       return history?.length
         ? [
             {
-              title: 'Number of chats vs days ago',
-              data: jevHistoryToLabelsAndDatasets(history, 'knownChatCount'),
+              title: 'Chats',
+              data: jevSeries(history, 'knownChatCount'),
             },
             {
-              title: 'Total messages processed vs days ago',
-              data: jevHistoryToLabelsAndDatasets(
-                history,
-                'processedMessageCount'
-              ),
+              title: 'Total messages processed',
+              data: jevSeries(history, 'processedMessageCount'),
             },
             {
-              title: 'Total spam messages successfully deleted vs days ago',
-              data: jevHistoryToLabelsAndDatasets(
-                history,
-                'successfulDeletionCount'
-              ),
+              title: 'Total spam messages deleted',
+              data: jevSeries(history, 'successfulDeletionCount'),
             },
           ]
         : []
@@ -85,6 +87,7 @@ const projects: Project[] = [
     title: 'Voicy',
     code: 'voicy',
     link: 'https://t.me/voicybot',
+    image: 'icon',
     publications: [
       {
         link: 'https://blog.borodutch.com/i-rebuilt-voicy-with-agents-instead-of-rewriting-it-myself/',
@@ -95,156 +98,129 @@ const projects: Project[] = [
         name: 'Product Hunt: Voicy',
       },
     ],
-    description: () => {
-      const {
-        projectsData: { voicy },
-      } = useSnapshot(baseProjectsData)
-      return [
-        'Telegram voice-to-text bot with local worker infrastructure, stronger queues, and real Telegram Web QA in the development loop.',
-        hasPositiveNumbers(voicy?.stats?.chatCount, voicy?.stats?.voiceCount) &&
-          `Voicy is installed in ${formatNumber(
-            voicy?.stats?.chatCount
-          )} chats and has recognized ${formatNumber(
-            voicy?.stats?.voiceCount
-          )} voice messages.`,
-        "It's [open source](https://github.com/backmeupplz/voicy).",
-      ]
-    },
-    charts: () => {
-      const {
-        projectsData: { voicy },
-      } = useSnapshot(baseProjectsData)
-      return voicy
+    description: ({ voicy }) => [
+      'Telegram voice-to-text bot with local worker infrastructure, stronger queues, and real Telegram Web QA in the development loop.',
+      hasPositiveNumbers(voicy?.stats?.chatCount, voicy?.stats?.voiceCount) &&
+        `Voicy is installed in ${formatNumber(
+          voicy?.stats?.chatCount
+        )} chats and has recognized ${formatNumber(
+          voicy?.stats?.voiceCount
+        )} voice messages.`,
+      "It's [open source](https://github.com/backmeupplz/voicy).",
+    ],
+    charts: ({ voicy }, showMore) =>
+      voicy
         ? [
             {
-              title: 'Number of new chats per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(voicy.stats.chatDailyStats),
+              title: 'New chats per day',
+              data: countSeries(voicy.stats.chatDailyStats, showMore),
             },
             {
-              title: 'Number of messages received per day',
-              data: messageStatsToLabelsAndDatasets(voicy.stats.messageStats),
+              title: 'Messages received per day',
+              data: messageSeries(voicy.stats.messageStats, showMore),
             },
             {
-              title:
-                'Number of voice messages recognized per hour vs hours ago',
-              data: dailyStatsToLabelsAndDatasets(voicy.stats.hourlyStats),
+              title: 'Voice messages recognized per hour',
+              data: countSeries(voicy.stats.hourlyStats, showMore, 'hour'),
             },
             {
-              title: 'Voicybot.com visits',
-              data: cloudflareStatsToLabelsAndDatasets(voicy.cloudflare),
+              title: 'Voicybot.com visits per day',
+              data: cloudflareSeries(voicy.cloudflare),
             },
           ]
-        : []
-    },
+        : [],
   },
   {
     title: 'MyGround',
     code: 'myground',
-    link: 'https://github.com/backmeupplz/myground',
+    link: 'https://myground.online',
+    image: 'wide',
     description: () => [
       'Self-hosting platform and home-server base for running useful services without handing the whole stack to a cloud provider.',
       'It is the infrastructure side of the current work: local services, private access, and deployable templates.',
+      "It's [open source](https://github.com/backmeupplz/myground).",
     ],
   },
   {
     title: 'Banofbot',
     code: 'banofbot',
     link: 'https://t.me/banofbot',
-    description: () => {
-      const {
-        projectsData: { banofbot },
-      } = useSnapshot(baseProjectsData)
-      return [
-        'Telegram votekick bot for fighting spam and letting chats kick members by vote.',
-        hasPositiveNumbers(banofbot?.requestCount, banofbot?.chatCount) &&
-          `Banofbot has handled ${formatNumber(
-            banofbot?.requestCount
-          )} votekick requests in ${formatNumber(banofbot?.chatCount)} chats.`,
-        "It's [open source](https://github.com/backmeupplz/banofbot).",
-      ]
-    },
-    charts: () => {
-      const {
-        projectsData: { banofbot },
-      } = useSnapshot(baseProjectsData)
-      return banofbot
+    image: 'icon',
+    description: ({ banofbot }) => [
+      'Telegram votekick bot for fighting spam and letting chats kick members by vote.',
+      hasPositiveNumbers(banofbot?.requestCount, banofbot?.chatCount) &&
+        `Banofbot has handled ${formatNumber(
+          banofbot?.requestCount
+        )} votekick requests in ${formatNumber(banofbot?.chatCount)} chats.`,
+      "It's [open source](https://github.com/backmeupplz/banofbot).",
+    ],
+    charts: ({ banofbot }, showMore) =>
+      banofbot
         ? [
             {
-              title: 'Number of new users per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(banofbot.userDaily),
+              title: 'New users per day',
+              data: countSeries(banofbot.userDaily, showMore),
             },
             {
-              title: 'Number of new chats per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(banofbot.chatDaily),
+              title: 'New chats per day',
+              data: countSeries(banofbot.chatDaily, showMore),
             },
             {
-              title: 'Number of new requests per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(banofbot.requestDaily),
+              title: 'New votekick requests per day',
+              data: countSeries(banofbot.requestDaily, showMore),
             },
           ]
-        : []
-    },
+        : [],
   },
   {
     title: 'Randy Marsh',
     code: 'randy',
     link: 'https://t.me/randymbot',
-    description: () => {
-      const {
-        projectsData: { randym },
-      } = useSnapshot(baseProjectsData)
-      return [
-        'Telegram raffle bot for channel and group admins.',
-        hasPositiveNumbers(randym?.raffleCount, randym?.chatCount) &&
-          `Randy has run ${formatNumber(
-            randym?.raffleCount
-          )} raffles in ${formatNumber(randym?.chatCount)} chats.`,
-        "It's [open source](https://github.com/backmeupplz/randymbot).",
-      ]
-    },
+    image: 'icon',
+    description: ({ randym }) => [
+      'Telegram raffle bot for channel and group admins.',
+      hasPositiveNumbers(randym?.raffleCount, randym?.chatCount) &&
+        `Randy has run ${formatNumber(
+          randym?.raffleCount
+        )} raffles in ${formatNumber(randym?.chatCount)} chats.`,
+      "It's [open source](https://github.com/backmeupplz/randymbot).",
+    ],
   },
   {
     title: 'Todorant',
     code: 'todorant',
     link: 'https://todorant.com',
-    description: () => {
-      const {
-        projectsData: { todorant },
-      } = useSnapshot(baseProjectsData)
-      return [
-        'Todo manager built around the productivity system from my book. I no longer pitch it as the future of todo apps, but it is still part of my work and writing.',
-        hasPositiveNumbers(todorant?.db?.todoCount) &&
-          `Users on Todorant created ${formatNumber(
-            todorant?.db?.todoCount
-          )} todos.`,
-      ]
-    },
-    charts: () => {
-      const {
-        projectsData: { todorant },
-      } = useSnapshot(baseProjectsData)
-      return todorant
+    image: 'wide',
+    description: ({ todorant }) => [
+      'Todo manager built around the productivity system from my book. I no longer pitch it as the future of todo apps, but it is still part of my work and writing.',
+      hasPositiveNumbers(todorant?.db?.todoCount) &&
+        `Users on Todorant created ${formatNumber(
+          todorant?.db?.todoCount
+        )} todos.`,
+    ],
+    charts: ({ todorant }, showMore) =>
+      todorant
         ? [
             {
-              title: 'Number of new users per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(todorant.db.userDaily),
+              title: 'New users per day',
+              data: countSeries(todorant.db.userDaily, showMore),
             },
             {
-              title: 'Number of new todos per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(todorant.db.todoDaily),
+              title: 'New todos per day',
+              data: countSeries(todorant.db.todoDaily, showMore),
             },
             {
-              title: 'Todorant.com visits',
-              data: cloudflareStatsToLabelsAndDatasets(todorant.cloudflare),
+              title: 'Todorant.com visits per day',
+              data: cloudflareSeries(todorant.cloudflare),
             },
           ]
-        : []
-    },
+        : [],
   },
   {
     title: 'Shieldy',
     code: 'shieldy',
     link: 'https://t.me/shieldy_bot',
+    image: 'icon',
     publications: [
       {
         link: 'https://blog.borodutch.com/shieldy-got-acquired-by-1inch-exchange/',
@@ -255,29 +231,20 @@ const projects: Project[] = [
         name: 'Product Hunt: Shieldy',
       },
     ],
-    description: () => {
-      const {
-        projectsData: { shieldy },
-      } = useSnapshot(baseProjectsData)
-      return [
-        'Telegram anti-spam bot I built and sold to 1inch Network. Keeping it here as a real project receipt, not as current day-to-day work.',
-        hasPositiveNumbers(shieldy?.chatCount) &&
-          `Shieldy is used by ${formatNumber(shieldy?.chatCount)} chats.`,
-      ]
-    },
-    charts: () => {
-      const {
-        projectsData: { shieldy },
-      } = useSnapshot(baseProjectsData)
-      return shieldy
+    description: ({ shieldy }) => [
+      'Telegram anti-spam bot I built and sold to 1inch Network. Keeping it here as a real project receipt, not as current day-to-day work.',
+      hasPositiveNumbers(shieldy?.chatCount) &&
+        `Shieldy is used by ${formatNumber(shieldy?.chatCount)} chats.`,
+    ],
+    charts: ({ shieldy }, showMore) =>
+      shieldy
         ? [
             {
-              title: 'Number of new chats per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(shieldy.chatDaily),
+              title: 'New chats per day',
+              data: countSeries(shieldy.chatDaily, showMore),
             },
           ]
-        : []
-    },
+        : [],
   },
   {
     title: 'Borodutch.com',
@@ -292,34 +259,26 @@ const projects: Project[] = [
     title: 'Temply',
     code: 'temply',
     link: 'https://t.me/temply_bot',
-    description: () => {
-      const {
-        projectsData: { temply },
-      } = useSnapshot(baseProjectsData)
-      return [
-        'Inline Telegram bot for saving reusable text templates and quickly inserting them later. Useful for support work, channel admins, and repeated replies.',
-        hasPositiveNumbers(temply?.userCount, temply?.templatesCount) &&
-          `Temply has ${formatNumber(
-            temply?.userCount
-          )} users who created ${formatNumber(
-            temply?.templatesCount
-          )} templates.`,
-        "It's [open source](https://github.com/backmeupplz/temply).",
-      ]
-    },
-    charts: () => {
-      const {
-        projectsData: { temply },
-      } = useSnapshot(baseProjectsData)
-      return temply
+    image: 'icon',
+    description: ({ temply }) => [
+      'Inline Telegram bot for saving reusable text templates and quickly inserting them later. Useful for support work, channel admins, and repeated replies.',
+      hasPositiveNumbers(temply?.userCount, temply?.templatesCount) &&
+        `Temply has ${formatNumber(
+          temply?.userCount
+        )} users who created ${formatNumber(
+          temply?.templatesCount
+        )} templates.`,
+      "It's [open source](https://github.com/backmeupplz/temply).",
+    ],
+    charts: ({ temply }, showMore) =>
+      temply
         ? [
             {
-              title: 'Number of new users per day vs days ago',
-              data: dailyStatsToLabelsAndDatasets(temply.userDaily),
+              title: 'New users per day',
+              data: countSeries(temply.userDaily, showMore),
             },
           ]
-        : []
-    },
+        : [],
   },
 ]
 

@@ -1,14 +1,10 @@
 import { FC } from 'react'
-import { classnames } from 'classnames/tailwind'
 
-const iconButtonContainer = classnames()
 const IconButton: FC<{ icon: string; url: string }> = ({ icon, url }) => {
   return (
-    <div className={iconButtonContainer}>
-      <a href={url}>
-        <img src={`images/${icon}.svg`} alt={icon} />
-      </a>
-    </div>
+    <a href={url} rel="noopener noreferrer" target="_blank" aria-label={icon}>
+      <img src={`/images/${icon}.svg`} alt="" width={30} height={30} />
+    </a>
   )
 }
 

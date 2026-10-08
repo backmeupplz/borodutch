@@ -8,22 +8,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Charts */
-
-text {
-  fill: #fffffff0;
-}
-.chart-container,
-.frappe-chart,
-.frappe-chart svg {
-  max-width: 100%;
-  overflow: hidden;
-  width: 100% !important;
-}
-.frappe-chart .x.axis .line-vertical {
-  display: none;
-}
-
 a,
 p,
 button {
