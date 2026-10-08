@@ -1,5 +1,3 @@
-import fetch from 'unfetch'
-
 export default async function fetchJson<T>(
   url: string,
   fallback: T

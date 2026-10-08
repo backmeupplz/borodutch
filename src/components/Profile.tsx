@@ -92,7 +92,12 @@ export default function Profile() {
       <div className={imageContainer}>
         <div className={circle} />
         <div className={profileImage}>
-          <img src="/images/avatar.webp" alt="avatar" />
+          <img
+            src="/images/avatar.webp"
+            alt="Nikita Kolmogorov"
+            width={500}
+            height={500}
+          />
         </div>
         <div
           className={imageOverlay}

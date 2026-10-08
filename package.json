@@ -5,14 +5,13 @@
   "scripts": {
     "start": "vite",
     "build": "cross-env NODE_ENV=production tsc && vite build",
-    "test:stats-fallbacks": "node scripts/verifyStatsFallbacks.js",
+    "test:stats-fallbacks": "node scripts/verifyStatsFallbacks.js && node scripts/verifyProjectList.js",
     "update-blog-posts": "node scripts/updateBlogPosts.js",
     "pretty": "prettier --check src",
     "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
     "generate-css-types": "tailwindcss-classnames -o src/classnames/tailwind.ts && prettier --write \"src/classnames/tailwind.ts\"",
     "prestart": "yarn generate-css-types",
-    "prebuild": "yarn update-blog-posts && yarn generate-css-types",
-    "postinstall": "patch-package"
+    "prebuild": "yarn update-blog-posts && yarn generate-css-types"
   },
   "browserslist": {
     "production": [
@@ -28,11 +27,7 @@
     ]
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^1.0.9",
-    "frappe-charts": "^1.6.2",
     "preact": "^10.5.15",
-    "react-frappe-charts": "^4.1.0",
-    "unfetch": "^4.2.0",
     "valtio": "^1.2.6"
   },
   "devDependencies": {
@@ -51,12 +46,8 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "eslint-plugin-valtio": "^0.4.1",
-    "patch-package": "^6.4.7",
     "postcss": "^7",
-    "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.4.1",
-    "react-scripts": "^4.0.3",
-    "rollup-plugin-visualizer": "^5.5.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2",
     "tailwindcss-classnames": "^2.2.5",
     "typescript": "^4.4.4",

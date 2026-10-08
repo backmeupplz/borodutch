@@ -32,7 +32,7 @@ const headerText = classnames(
   'py-8'
 )
 export const HeaderText: FC = ({ children }) => (
-  <p className={headerText}>{children}</p>
+  <h1 className={headerText}>{children}</h1>
 )
 
 const subheaderText = classnames(
@@ -44,7 +44,7 @@ const subheaderText = classnames(
   'pb-4'
 )
 export const SubheaderText: FC = ({ children }) => (
-  <p className={subheaderText}>{children}</p>
+  <h2 className={subheaderText}>{children}</h2>
 )
 
 const numberOfUsersText = classnames(
@@ -93,7 +93,7 @@ export const TextButton: FC<{ onClick: () => void }> = ({
 
 const projectTitle = classnames('text-white', 'text-2xl')
 export const ProjectTitle: FC = ({ children }) => (
-  <p className={projectTitle}>{children}</p>
+  <h3 className={projectTitle}>{children}</h3>
 )
 
 const projectSubtitle = classnames('text-white', 'text-xl', 'mb-2')

@@ -5,4 +5,4 @@ export class AppStore extends PersistableStore {
   opened: { [code: string]: boolean } = {}
 }
 
-export const appStore = proxy(new AppStore()).makePersistent()
+export const appStore = proxy(new AppStore()).makePersistent('AppStore')

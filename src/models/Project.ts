@@ -1,5 +1,4 @@
-import { ChartData } from 'react-frappe-charts'
-import type { ProjectCount } from 'helpers/projectsData'
+import type { ProjectCount, ProjectsData } from 'helpers/projectsData'
 
 type ProjectCode =
   | keyof ProjectCount
@@ -7,18 +6,29 @@ type ProjectCode =
   | 'plainwallet'
   | 'agentboard'
   | 'absplus'
+  | 'meshplus'
+
+export interface ChartSeries {
+  labels: string[]
+  values: number[]
+}
 
 export default interface Project {
   title: string
   code: ProjectCode
   link: string
+  // Wide 1.91:1 preview (OG card or screenshot) or a square avatar, both in public/images/projects
+  image?: 'wide' | 'icon'
   publications?: {
     name: string
     link: string
   }[]
-  description: () => (string | false)[]
-  charts?: () => {
+  description: (data: ProjectsData) => (string | false | undefined)[]
+  charts?: (
+    data: ProjectsData,
+    showMore: boolean
+  ) => {
     title: string
-    data: ChartData
+    data: ChartSeries
   }[]
 }

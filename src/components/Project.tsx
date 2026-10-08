@@ -1,11 +1,12 @@
-import { FC, useEffect } from 'react'
 import {
+  BodyText,
   GradientText,
   Link,
   NumberOfProjectUsersText,
   ProjectSubtitle,
   ProjectTitle,
 } from 'components/Text'
+import { FC, useEffect } from 'react'
 import { appStore } from 'stores/AppStore'
 import {
   projectsData as baseProjectsData,
@@ -21,6 +22,7 @@ import Loader from 'components/Loader'
 import Project from 'models/Project'
 import formatNumber from 'helpers/formatNumber'
 import projectSummaryStat from 'helpers/projectSummaryStat'
+import showMoreData from 'helpers/showMoreData'
 
 const container = classnames(
   'flex',
@@ -30,6 +32,13 @@ const container = classnames(
   'p-4',
   'rounded-xl'
 )
+const overviewContainer = classnames(
+  'flex',
+  'flex-col-reverse',
+  'md:flex-row',
+  'gap-4'
+)
+const textContainer = classnames('flex-1', 'min-w-0')
 const projectHeaderContainer = classnames(
   'flex',
   'flex-row',
@@ -37,31 +46,42 @@ const projectHeaderContainer = classnames(
   'items-start',
   'mb-4'
 )
-const titleAndNumbersContainer = classnames('flex', 'flex-col')
+const titleRow = classnames('flex', 'flex-row', 'items-center', 'gap-3')
+const icon = classnames('w-10', 'h-10', 'rounded-full', 'flex-shrink-0')
+const previewLink = classnames(
+  'block',
+  'md:w-72',
+  'flex-shrink-0',
+  'self-start'
+)
+const preview = classnames(
+  'w-full',
+  'rounded-lg',
+  'border',
+  'border-opacity-25',
+  'object-cover'
+)
 const publicationList = classnames('list-inside', 'list-disc')
 const chartsContainer = classnames(
-  'flex',
-  'flex-row',
-  'flex-wrap',
-  'items-stretch',
-  'justify-center'
-)
-const chartContainer = classnames(
-  'flex',
-  'flex-col',
-  'items-center',
-  'w-full',
-  'md:w-1/2'
+  'grid',
+  'grid-cols-1',
+  'md:grid-cols-2',
+  'gap-x-8',
+  'mt-2'
 )
 
+const imageUrl = (project: Project) => `/images/projects/${project.code}.webp`
+
 const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
-  useSnapshot(appStore)
-  useSnapshot(projectDetails)
-  const opened = appStore.opened[project.code]
+  const opened = useSnapshot(appStore).opened[project.code]
+  const { failed, loaded } = useSnapshot(projectDetails)
   const { projectsData } = useSnapshot(baseProjectsData)
+  const { showMoreData: showMore } = useSnapshot(showMoreData)
   const projectStat = projectSummaryStat(projectsData, project.code)
-  const detailFailed = projectDetails.failed[project.code]
-  const detailsLoaded = projectDetails.loaded[project.code]
+  const detailFailed = failed[project.code]
+  const detailsLoaded = loaded[project.code]
+  const charts =
+    opened && detailsLoaded && project.charts?.(projectsData, showMore)
 
   useEffect(() => {
     if (opened && project.charts) {
@@ -70,41 +90,83 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
   }, [opened, project.charts, project.code])
 
   return (
-    <div className={container}>
-      <div className={projectHeaderContainer}>
-        <div className={titleAndNumbersContainer}>
-          <a href={project.link} rel="noopener noreferrer" target="_blank">
-            <ProjectTitle>{project.title}</ProjectTitle>
-          </a>
-          {projectStat && (
-            <NumberOfProjectUsersText>
-              {formatNumber(projectStat.count)} {projectStat.label}
-            </NumberOfProjectUsersText>
-          )}
+    <article className={container}>
+      <div className={overviewContainer}>
+        <div className={textContainer}>
+          <div className={projectHeaderContainer}>
+            <div className={titleRow}>
+              {project.image === 'icon' && (
+                <img
+                  className={icon}
+                  src={imageUrl(project)}
+                  alt=""
+                  width={40}
+                  height={40}
+                  loading="lazy"
+                />
+              )}
+              <div>
+                <a
+                  href={project.link}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <ProjectTitle>{project.title}</ProjectTitle>
+                </a>
+                {projectStat && (
+                  <NumberOfProjectUsersText>
+                    {formatNumber(projectStat.count)} {projectStat.label}
+                  </NumberOfProjectUsersText>
+                )}
+              </div>
+            </div>
+            {(project.publications?.length || project.charts) && (
+              <Button
+                onClick={() => {
+                  appStore.opened[project.code] = !appStore.opened[project.code]
+                }}
+                title={`${opened ? 'Hide' : 'Show'} ${
+                  project.charts ? 'stats' : 'more'
+                }`}
+              />
+            )}
+          </div>
+          <Description description={project.description(projectsData)} />
         </div>
-        {(project.publications?.length || project.charts) && (
-          <Button
-            onClick={() => {
-              appStore.opened[project.code] = !appStore.opened[project.code]
-            }}
-            title={opened ? 'Hide stats' : 'Show stats'}
-          />
+        {project.image === 'wide' && (
+          <a
+            className={previewLink}
+            href={project.link}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img
+              className={preview}
+              style={{ aspectRatio: '1200 / 630' }}
+              src={imageUrl(project)}
+              alt={`${project.title} preview`}
+              width={760}
+              height={399}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
         )}
       </div>
-      <Description description={project.description()} />
       {opened && project.charts && !detailsLoaded && !detailFailed && (
         <Loader />
       )}
-      {opened && project.charts && detailsLoaded && (
+      {opened && project.charts && !detailsLoaded && detailFailed && (
+        <BodyText>Stats are unavailable right now, try again later.</BodyText>
+      )}
+      {charts && (
         <div className={chartsContainer}>
-          {project.charts().map((chart) => (
-            <div className={chartContainer} key={chart.title}>
-              <Chart title={chart.title} data={chart.data} />
-            </div>
+          {charts.map((chart) => (
+            <Chart key={chart.title} title={chart.title} data={chart.data} />
           ))}
         </div>
       )}
-      {opened && project.publications?.length && (
+      {opened && !!project.publications?.length && (
         <>
           <ProjectSubtitle>Publications</ProjectSubtitle>
           <GradientText>
@@ -118,7 +180,7 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
           </GradientText>
         </>
       )}
-    </div>
+    </article>
   )
 }
 

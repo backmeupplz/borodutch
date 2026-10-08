@@ -12,10 +12,10 @@ fs.mkdirSync(helperOutDir, { recursive: true })
 
 for (const helper of [
   'formatNumber.ts',
-  'chartLineOptions.ts',
+  'chartScale.ts',
+  'chartSeries.ts',
   'hasPositiveNumbers.ts',
   'jevAntispamDescription.ts',
-  'jevHistoryToLabelsAndDatasets.ts',
   'normalizeUserCountData.ts',
   'projectSummaryStat.ts',
 ]) {
@@ -37,17 +37,14 @@ process.env.NODE_PATH = tmp
 require('module').Module._initPaths()
 
 const formatNumber = require(path.join(helperOutDir, 'formatNumber.js')).default
-const chartLineOptions = require(path.join(
+const { linePath, niceMax } = require(path.join(helperOutDir, 'chartScale.js'))
+const { cloudflareSeries, countSeries, jevSeries } = require(path.join(
   helperOutDir,
-  'chartLineOptions.js'
-)).default
+  'chartSeries.js'
+))
 const jevAntispamDescription = require(path.join(
   helperOutDir,
   'jevAntispamDescription.js'
-)).default
-const jevHistoryToLabelsAndDatasets = require(path.join(
-  helperOutDir,
-  'jevHistoryToLabelsAndDatasets.js'
 )).default
 const normalizeUserCountData = require(path.join(
   helperOutDir,
@@ -61,14 +58,41 @@ const projectSummaryStat = require(path.join(
 assert.strictEqual(formatNumber(0), '0')
 assert.strictEqual(formatNumber('0'), '0')
 assert.strictEqual(formatNumber(undefined), '')
+assert.strictEqual(niceMax(0), 1)
+assert.strictEqual(niceMax(658), 1000)
+assert.strictEqual(niceMax(106148769), 200000000)
+assert.strictEqual(niceMax(3), 4)
+assert.strictEqual(niceMax(5000), 5000)
+assert.strictEqual(linePath([0, 50, 100], 100), 'M0 100L50 50L100 0')
+assert.strictEqual(linePath([658], 1000), 'M50 34.2')
+
+const now = Date.parse('2026-10-08T15:00:00.000Z')
+// _id 0 is the unfinished day and null ids are dropped; the rest keep their order
 assert.deepStrictEqual(
-  chartLineOptions({ labels: ['0'], datasets: [{ values: [658] }] }),
-  { regionFill: 1, hideDots: 0 }
+  countSeries(
+    [
+      { _id: 2, count: 5 },
+      { _id: 1, count: 6 },
+      { _id: 0, count: 7 },
+      { _id: null, count: 8 },
+    ],
+    true,
+    'day',
+    now
+  ).values,
+  [5, 6]
 )
-assert.deepStrictEqual(
-  chartLineOptions({ labels: ['1', '0'], datasets: [{ values: [657, 658] }] }),
-  { regionFill: 1, hideDots: 1 }
+assert.strictEqual(
+  countSeries(
+    Array.from({ length: 40 }, (_, i) => ({ _id: 40 - i, count: i })),
+    false
+  ).values.length,
+  30
 )
+// Repeated values must still map to consecutive days (today is dropped)
+const visits = cloudflareSeries([3, 3, 3, 9], now)
+assert.deepStrictEqual(visits.values, [3, 3, 3])
+assert.strictEqual(new Set(visits.labels).size, 3)
 
 assert.deepStrictEqual(
   jevAntispamDescription({
@@ -88,25 +112,29 @@ assert.deepStrictEqual(
 assert.strictEqual(jevAntispamDescription()[1], false)
 assert.strictEqual(jevAntispamDescription({})[1], false)
 
-assert.deepStrictEqual(jevHistoryToLabelsAndDatasets([], 'knownChatCount'), {
+assert.deepStrictEqual(jevSeries([], 'knownChatCount'), {
   labels: [],
-  datasets: [{ values: [] }],
+  values: [],
 })
-assert.deepStrictEqual(
-  jevHistoryToLabelsAndDatasets(
-    [
-      {
-        date: '2026-09-22',
-        knownChatCount: 658,
-        processedMessageCount: 12345,
-        successfulDeletionCount: 5337,
-      },
-    ],
-    'processedMessageCount',
-    new Date('2026-09-22T12:00:00.000Z')
-  ),
-  { labels: ['0'], datasets: [{ values: [12345] }] }
+const jev = jevSeries(
+  [
+    {
+      date: '2026-09-22',
+      knownChatCount: 658,
+      processedMessageCount: 12345,
+      successfulDeletionCount: 5337,
+    },
+    {
+      date: '2026-09-23',
+      knownChatCount: -1,
+      processedMessageCount: 1,
+      successfulDeletionCount: 1,
+    },
+  ],
+  'knownChatCount'
 )
+assert.deepStrictEqual(jev.values, [658])
+assert.ok(jev.labels[0].includes('22'), jev.labels[0])
 
 assert.deepStrictEqual(
   normalizeUserCountData({
@@ -222,42 +250,5 @@ assert.strictEqual(
   undefined
 )
 
-const { JSDOM } = require('jsdom')
-const dom = new JSDOM('<!doctype html><div id="chart"></div>', {
-  pretendToBeVisual: true,
-})
-
-global.window = dom.window
-global.document = dom.window.document
-global.Element = dom.window.Element
-global.HTMLElement = dom.window.HTMLElement
-global.SVGElement = dom.window.SVGElement
-global.ResizeObserver = class {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-}
-Object.defineProperty(dom.window.HTMLElement.prototype, 'clientWidth', {
-  configurable: true,
-  get: () => 600,
-})
-dom.window.SVGElement.prototype.getBBox = () => ({
-  x: 0,
-  y: 0,
-  width: 0,
-  height: 0,
-})
-
-const { Chart: FrappeChart } = require('frappe-charts')
-new FrappeChart('#chart', {
-  type: 'line',
-  height: 200,
-  data: { labels: ['0'], datasets: [{ values: [658] }] },
-  lineOptions: chartLineOptions({ labels: ['0'] }),
-})
-
-setTimeout(() => {
-  assert.strictEqual(document.querySelectorAll('circle').length, 1)
-  dom.window.close()
-  fs.rmSync(tmp, { recursive: true, force: true })
-}, 800)
+fs.rmSync(tmp, { recursive: true, force: true })
+console.log('Stats fallback assertions passed')

@@ -49,15 +49,12 @@ assert.deepStrictEqual(
   ),
   [
     ['Veydrift', 'veydrift', 'https://veydrift.com'],
-    [
-      'Plain Wallet',
-      'plainwallet',
-      'https://github.com/backmeupplz/plainwallet',
-    ],
+    ['Plain Wallet', 'plainwallet', 'https://plainwallet.app'],
     ['Agentboard', 'agentboard', 'https://agentboard.win'],
+    ['Mesh+', 'meshplus', 'https://meshplus.app'],
     ['Jev Antispam', 'jevAntispam', 'https://t.me/jev_antispam_bot'],
     ['Voicy', 'voicy', 'https://t.me/voicybot'],
-    ['MyGround', 'myground', 'https://github.com/backmeupplz/myground'],
+    ['MyGround', 'myground', 'https://myground.online'],
     ['Banofbot', 'banofbot', 'https://t.me/banofbot'],
     ['Randy Marsh', 'randy', 'https://t.me/randymbot'],
     ['Todorant', 'todorant', 'https://todorant.com'],
@@ -66,4 +63,14 @@ assert.deepStrictEqual(
     ['Temply', 'temply', 'https://t.me/temply_bot'],
   ]
 )
-console.log('Project list regression assertions passed (13 projects)')
+for (const project of projects.filter((project) => project.image)) {
+  assert.ok(
+    fs.existsSync(
+      path.join(__dirname, `../public/images/projects/${project.code}.webp`)
+    ),
+    `${project.code} image is missing`
+  )
+}
+console.log(
+  `Project list regression assertions passed (${projects.length} projects)`
+)
