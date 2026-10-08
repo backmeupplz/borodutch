@@ -33,7 +33,7 @@ const projects: Project[] = [
         )} fleet missions and fought ${formatNumber(
           veydrift?.summary?.battles
         )} battles.`,
-      'Live numbers on [stats.veydrift.com](https://stats.veydrift.com).',
+      "Live numbers on [stats.veydrift.com](https://stats.veydrift.com). It's [open source](https://github.com/Borodutch/veydrift).",
     ],
     charts: ({ veydrift }) => {
       const daily = veydrift?.daily
@@ -85,6 +85,7 @@ const projects: Project[] = [
     image: 'wide',
     description: () => [
       'Tiny realtime kanban board for AI agents and the humans watching them: API keys for agents, markdown handoffs, file attachments and live updates.',
+      "It's [open source](https://github.com/backmeupplz/agentboard).",
     ],
   },
   {
@@ -94,6 +95,7 @@ const projects: Project[] = [
     image: 'wide',
     description: () => [
       'Free, open-source Android app for Audiobookshelf. Stream or download audiobooks and podcasts, with synced listening progress.',
+      "It's [open source](https://github.com/backmeupplz/absplus).",
     ],
   },
   {
@@ -246,6 +248,7 @@ const projects: Project[] = [
         `Users on Todorant created ${formatNumber(
           todorant?.db?.todoCount
         )} todos.`,
+      "It's open source: [web](https://github.com/backmeupplz/todorant-frontend), [backend](https://github.com/backmeupplz/todorant-backend), [mobile](https://github.com/backmeupplz/todorant-rn).",
     ],
     charts: ({ todorant }, showMore) =>
       todorant
@@ -284,6 +287,7 @@ const projects: Project[] = [
       'Telegram anti-spam bot I built and sold to 1inch Network. Keeping it here as a real project receipt, not as current day-to-day work.',
       hasPositiveNumbers(shieldy?.chatCount) &&
         `Shieldy is used by ${formatNumber(shieldy?.chatCount)} chats.`,
+      "It's [open source](https://github.com/backmeupplz/shieldy).",
     ],
     charts: ({ shieldy }, showMore) =>
       shieldy
