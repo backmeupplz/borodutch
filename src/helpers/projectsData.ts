@@ -11,6 +11,7 @@ export interface CountAggregation {
 export type CloudflareData = number[]
 
 export type ProjectCount = {
+  veydrift?: number
   jevAntispam?: number
   pigeon?: number
   myground?: number
@@ -77,7 +78,28 @@ export interface JevAntispamHistoryPoint {
   successfulDeletionCount: number
 }
 
+export interface VeydriftDay {
+  date: string
+  transactions: number
+  events: number
+  fleetMissions: number
+  battles: number
+  newPlayers: number
+}
+
 export interface ProjectsData {
+  veydrift?: {
+    summary: {
+      players: number
+      planets: number
+      transactions: number
+      events: number
+      fleetMissions: number
+      battles: number
+      alliances: number
+    }
+    daily?: VeydriftDay[]
+  }
   jevAntispam?: JevAntispamStats
   shieldy?: {
     chatDaily: CountAggregation[]

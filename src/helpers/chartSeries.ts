@@ -3,6 +3,7 @@ import type {
   CloudflareData,
   CountAggregation,
   JevAntispamHistoryPoint,
+  VeydriftDay,
 } from 'helpers/projectsData'
 
 const recentPoints = 30
@@ -82,4 +83,22 @@ export function jevSeries(
       ? [new Date(Date.parse(point.date) + noon), value]
       : undefined
   })
+}
+
+// Running total over the published days, walked back from the all-time total
+export function runningTotalSeries(
+  daily: readonly VeydriftDay[] = [],
+  metric: Exclude<keyof VeydriftDay, 'date'>,
+  total = 0
+) {
+  let later = 0
+  const totals: [string, number][] = []
+  for (let i = daily.length - 1; i >= 0; i--) {
+    totals.unshift([daily[i].date, total - later])
+    later += daily[i][metric]
+  }
+  return series(totals, true, ([date, value]) => [
+    new Date(Date.parse(date) + noon),
+    value,
+  ])
 }

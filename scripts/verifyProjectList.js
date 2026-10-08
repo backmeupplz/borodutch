@@ -13,7 +13,7 @@ const compiled = ts.transpileModule(source, {
 }).outputText
 // Imports are only used inside the existing dynamic descriptions/charts.
 // Keep the project definitions real without starting live statistics requests.
-const context = { exports: {}, require: () => ({}) }
+const context = { exports: {}, require: () => ({ default: () => false }) }
 vm.runInNewContext(compiled, context)
 const projects = context.exports.default
 
@@ -23,7 +23,7 @@ assert.strictEqual(absplus[0].code, 'absplus')
 assert.strictEqual(absplus[0].link, 'https://absplus.app')
 assert.strictEqual(
   absplus[0].description().join(' '),
-  'Free, open-source Android app for Audiobookshelf. Stream or download audiobooks and podcasts, with synced listening progress.'
+  "Free, open-source Android app for Audiobookshelf. Stream or download audiobooks and podcasts, with synced listening progress. It's [open source](https://github.com/backmeupplz/absplus)."
 )
 assert.strictEqual(absplus[0].charts, undefined)
 assert.strictEqual(absplus[0].publications, undefined)
@@ -69,6 +69,16 @@ for (const project of projects.filter((project) => project.image)) {
       path.join(__dirname, `../public/images/projects/${project.code}.webp`)
     ),
     `${project.code} image is missing`
+  )
+}
+// Every project links to its source code (Jev's link lives in
+// jevAntispamDescription, which verifyStatsFallbacks checks verbatim)
+for (const project of projects.filter((p) => p.code !== 'jevAntispam')) {
+  assert.ok(
+    /open source[^(]*\(https:\/\/github\.com\//.test(
+      project.description({}).filter(Boolean).join(' ')
+    ),
+    `${project.title} has no open source link`
   )
 }
 console.log(

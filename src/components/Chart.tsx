@@ -55,7 +55,7 @@ const tooltip = classnames(
   'pointer-events-none'
 )
 
-const Chart: FC<{ title: string; data: ChartSeries; tall?: boolean }> = ({
+const Chart: FC<{ title?: string; data: ChartSeries; tall?: boolean }> = ({
   title,
   data: { labels, values },
   tall,
@@ -76,7 +76,7 @@ const Chart: FC<{ title: string; data: ChartSeries; tall?: boolean }> = ({
 
   return (
     <figure className={figure}>
-      <figcaption className={caption}>{title}</figcaption>
+      {title && <figcaption className={caption}>{title}</figcaption>}
       <div className="flex">
         <div className={yAxis} aria-hidden>
           <span>{compact.format(max)}</span>
@@ -86,9 +86,9 @@ const Chart: FC<{ title: string; data: ChartSeries; tall?: boolean }> = ({
         <div
           className={plot(tall)}
           role="img"
-          aria-label={`${title}: ${formatNumber(values[last])} on ${
-            labels[last]
-          }`}
+          aria-label={`${title ? `${title}: ` : ''}${formatNumber(
+            values[last]
+          )} on ${labels[last]}`}
           onPointerMove={pick}
           onPointerDown={pick}
           onPointerLeave={() => setActive(undefined)}

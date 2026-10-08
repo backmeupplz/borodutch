@@ -38,10 +38,12 @@ require('module').Module._initPaths()
 
 const formatNumber = require(path.join(helperOutDir, 'formatNumber.js')).default
 const { linePath, niceMax } = require(path.join(helperOutDir, 'chartScale.js'))
-const { cloudflareSeries, countSeries, jevSeries } = require(path.join(
-  helperOutDir,
-  'chartSeries.js'
-))
+const {
+  cloudflareSeries,
+  countSeries,
+  jevSeries,
+  runningTotalSeries,
+} = require(path.join(helperOutDir, 'chartSeries.js'))
 const jevAntispamDescription = require(path.join(
   helperOutDir,
   'jevAntispamDescription.js'
@@ -93,6 +95,19 @@ assert.strictEqual(
 const visits = cloudflareSeries([3, 3, 3, 9], now)
 assert.deepStrictEqual(visits.values, [3, 3, 3])
 assert.strictEqual(new Set(visits.labels).size, 3)
+// Running totals walk back from the all-time total and end on it
+assert.deepStrictEqual(
+  runningTotalSeries(
+    [
+      { date: '2026-10-06', transactions: 10 },
+      { date: '2026-10-07', transactions: 20 },
+      { date: '2026-10-08', transactions: 5 },
+    ],
+    'transactions',
+    1000
+  ).values,
+  [975, 995, 1000]
+)
 
 assert.deepStrictEqual(
   jevAntispamDescription({

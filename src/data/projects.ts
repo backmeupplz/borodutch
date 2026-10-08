@@ -3,6 +3,7 @@ import {
   countSeries,
   jevSeries,
   messageSeries,
+  runningTotalSeries,
 } from 'helpers/chartSeries'
 import Project from 'models/Project'
 import formatNumber from 'helpers/formatNumber'
@@ -15,9 +16,57 @@ const projects: Project[] = [
     code: 'veydrift',
     link: 'https://veydrift.com',
     image: 'wide',
-    description: () => [
+    description: ({ veydrift }) => [
       'Onchain multiplayer space strategy game on Base, built around competing for planets and navigating a shared universe.',
+      hasPositiveNumbers(
+        veydrift?.summary?.players,
+        veydrift?.summary?.transactions,
+        veydrift?.summary?.fleetMissions,
+        veydrift?.summary?.battles
+      ) &&
+        `${formatNumber(
+          veydrift?.summary?.players
+        )} commanders have sent ${formatNumber(
+          veydrift?.summary?.transactions
+        )} onchain transactions, flown ${formatNumber(
+          veydrift?.summary?.fleetMissions
+        )} fleet missions and fought ${formatNumber(
+          veydrift?.summary?.battles
+        )} battles.`,
+      "Live numbers on [stats.veydrift.com](https://stats.veydrift.com). It's [open source](https://github.com/Borodutch/veydrift).",
     ],
+    charts: ({ veydrift }) => {
+      const daily = veydrift?.daily
+      const total = veydrift?.summary
+      return daily?.length && total
+        ? [
+            {
+              title: 'Total onchain transactions',
+              data: runningTotalSeries(
+                daily,
+                'transactions',
+                total.transactions
+              ),
+            },
+            {
+              title: 'Total onchain events',
+              data: runningTotalSeries(daily, 'events', total.events),
+            },
+            {
+              title: 'Total fleet missions',
+              data: runningTotalSeries(
+                daily,
+                'fleetMissions',
+                total.fleetMissions
+              ),
+            },
+            {
+              title: 'Total battles',
+              data: runningTotalSeries(daily, 'battles', total.battles),
+            },
+          ]
+        : []
+    },
   },
   {
     title: 'Plain Wallet',
@@ -36,6 +85,7 @@ const projects: Project[] = [
     image: 'wide',
     description: () => [
       'Tiny realtime kanban board for AI agents and the humans watching them: API keys for agents, markdown handoffs, file attachments and live updates.',
+      "It's [open source](https://github.com/backmeupplz/agentboard).",
     ],
   },
   {
@@ -45,6 +95,7 @@ const projects: Project[] = [
     image: 'wide',
     description: () => [
       'Free, open-source Android app for Audiobookshelf. Stream or download audiobooks and podcasts, with synced listening progress.',
+      "It's [open source](https://github.com/backmeupplz/absplus).",
     ],
   },
   {
@@ -190,13 +241,14 @@ const projects: Project[] = [
     title: 'Todorant',
     code: 'todorant',
     link: 'https://todorant.com',
-    image: 'wide',
+    image: 'icon',
     description: ({ todorant }) => [
       'Todo manager built around the productivity system from my book. I no longer pitch it as the future of todo apps, but it is still part of my work and writing.',
       hasPositiveNumbers(todorant?.db?.todoCount) &&
         `Users on Todorant created ${formatNumber(
           todorant?.db?.todoCount
         )} todos.`,
+      "It's open source: [web](https://github.com/backmeupplz/todorant-frontend), [backend](https://github.com/backmeupplz/todorant-backend), [mobile](https://github.com/backmeupplz/todorant-rn).",
     ],
     charts: ({ todorant }, showMore) =>
       todorant
@@ -235,6 +287,7 @@ const projects: Project[] = [
       'Telegram anti-spam bot I built and sold to 1inch Network. Keeping it here as a real project receipt, not as current day-to-day work.',
       hasPositiveNumbers(shieldy?.chatCount) &&
         `Shieldy is used by ${formatNumber(shieldy?.chatCount)} chats.`,
+      "It's [open source](https://github.com/backmeupplz/shieldy).",
     ],
     charts: ({ shieldy }, showMore) =>
       shieldy
