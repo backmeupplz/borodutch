@@ -16,7 +16,7 @@ const App = () => {
       <Projects />
       <Footer>
         Thanks for scrolling!
-        <br />© Borodutch Labs Inc
+        <br />Borodutch Labs Inc
       </Footer>
     </Root>
   )
