@@ -14,7 +14,10 @@ const App = () => {
       <Intro />
       <BlogPosts />
       <Projects />
-      <Footer>Thanks for scrolling!</Footer>
+      <Footer>
+        Thanks for scrolling!
+        <br />© Borodutch Labs Inc
+      </Footer>
     </Root>
   )
 }
