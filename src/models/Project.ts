@@ -3,6 +3,7 @@ import type { ProjectCount, ProjectsData } from 'helpers/projectsData'
 type ProjectCode =
   | keyof ProjectCount
   | 'plainwallet'
+  | 'plain'
   | 'agentboard'
   | 'absplus'
   | 'meshplus'
