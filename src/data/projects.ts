@@ -79,6 +79,16 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'plain',
+    code: 'plain',
+    link: 'https://getplain.org',
+    image: 'wide',
+    description: () => [
+      'One small binary that compiles, tests, deploys, verifies and upgrades Solidity contracts. It runs Foundry projects as they are, and editing a test and rerunning the suite takes about a second instead of a minute.',
+      "It's [open source](https://github.com/backmeupplz/plain).",
+    ],
+  },
+  {
     title: 'Agentboard',
     code: 'agentboard',
     link: 'https://agentboard.win',
