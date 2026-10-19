@@ -6,7 +6,7 @@
     "start": "vite",
     "build": "cross-env NODE_ENV=production tsc && vite build",
     "test:stats-fallbacks": "node scripts/verifyStatsFallbacks.js && node scripts/verifyProjectList.js",
-    "update-blog-posts": "node scripts/updateBlogPosts.js",
+    "update-blog-posts": "node scripts/updateBlogPosts.js && prettier --write src/data/blogPosts.ts",
     "pretty": "prettier --check src",
     "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
     "generate-css-types": "tailwindcss-classnames -o src/classnames/tailwind.ts && prettier --write \"src/classnames/tailwind.ts\"",
