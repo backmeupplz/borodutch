@@ -51,6 +51,7 @@ assert.deepStrictEqual(
     ['Veydrift', 'veydrift', 'https://veydrift.com'],
     ['Plain Wallet', 'plainwallet', 'https://plainwallet.app'],
     ['plain', 'plain', 'https://getplain.org'],
+    ['Quilcast', 'quilcast', 'https://quilcast.com'],
     ['Agentboard', 'agentboard', 'https://agentboard.win'],
     ['Mesh+', 'meshplus', 'https://meshplus.app'],
     ['Jev Antispam', 'jevAntispam', 'https://t.me/jev_antispam_bot'],

@@ -4,6 +4,7 @@ type ProjectCode =
   | keyof ProjectCount
   | 'plainwallet'
   | 'plain'
+  | 'quilcast'
   | 'agentboard'
   | 'absplus'
   | 'meshplus'
