@@ -89,6 +89,16 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'Quilcast',
+    code: 'quilcast',
+    link: 'https://quilcast.com',
+    image: 'wide',
+    description: () => [
+      "Small Farcaster web client that talks straight to Quilibrium's Hypersnap network from your browser. You can create an account right on the page for about $0.20 of ETH on Optimism, and your keys never leave the browser.",
+      "It's [open source](https://github.com/backmeupplz/quilcast).",
+    ],
+  },
+  {
     title: 'Agentboard',
     code: 'agentboard',
     link: 'https://agentboard.win',
