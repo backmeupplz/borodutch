@@ -4,15 +4,15 @@
 
 ## Local launch
 
-1. Install dependencies with `yarn`
-2. Run the server with `yarn start`
+1. Install dependencies with `bun install`
+2. Run the server with `bun run start`
 
 ## Available Scripts
 
-- `yarn start` — runs the app in the development mode
-- `yarn build` — builds the app for production to the `docs` folder
-- `yarn lint` — checks if the code is linted and formatted
-- `yarn generate-css-types` — generates the CSS types for `tailwind-css`
+- `bun run start` — runs the app in the development mode
+- `bun run build` — builds the app for production to the `docs` folder
+- `bun run lint` — checks if the code is linted and formatted
+- `bun run generate-css-types` — generates the CSS types for `tailwind-css`
 
 ## CD
 

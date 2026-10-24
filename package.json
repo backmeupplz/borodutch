@@ -8,10 +8,10 @@
     "test:stats-fallbacks": "node scripts/verifyStatsFallbacks.js && node scripts/verifyProjectList.js",
     "update-blog-posts": "node scripts/updateBlogPosts.js && prettier --write src/data/blogPosts.ts",
     "pretty": "prettier --check src",
-    "lint": "yarn pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
+    "lint": "bun run pretty && eslint --max-warnings 0 --ext ts,tsx,json src",
     "generate-css-types": "tailwindcss-classnames -o src/classnames/tailwind.ts && prettier --write \"src/classnames/tailwind.ts\"",
-    "prestart": "yarn generate-css-types",
-    "prebuild": "yarn update-blog-posts && yarn generate-css-types"
+    "prestart": "bun run generate-css-types",
+    "prebuild": "bun run update-blog-posts && bun run generate-css-types"
   },
   "browserslist": {
     "production": [
@@ -53,6 +53,5 @@
     "typescript": "^4.4.4",
     "vite": "^6.0.0",
     "vite-tsconfig-paths": "^3.3.17"
-  },
-  "packageManager": "yarn@3.1.0"
+  }
 }
