@@ -22,12 +22,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'yarn'
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
       - name: Install modules
-        run: yarn install --immutable
+        run: bun install --frozen-lockfile
         shell: bash
       - name: Build code
-        run: yarn build
+        run: bun run build
         shell: bash
       - name: Setup Pages
         uses: actions/configure-pages@v5
