@@ -9,6 +9,9 @@ jobs:
   compile-code:
     # Our own PRs run on the Mac runners; outsiders' PRs (AGit via the github bot) stay on Linux
     runs-on: ${{ contains(fromJSON('["backmeupplz","renovate","claude"]'), github.event.pull_request.user.login) && 'macos-latest' || 'ubuntu-latest' }}
+    # yarn 3 caches packages per checkout by default; the global cache persists between runs on the Mac runners
+    env:
+      YARN_ENABLE_GLOBAL_CACHE: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,6 +30,6 @@ jobs:
         run: yarn install --immutable
       # Independent checks run in parallel; any failure fails the step
       - run: |
-          yarn -s tsc --skipLibCheck &
-          yarn -s lint &
+          yarn tsc --skipLibCheck &
+          yarn lint &
           for job in $(jobs -p); do wait $job || exit 1; done
