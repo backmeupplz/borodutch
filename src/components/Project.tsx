@@ -72,7 +72,9 @@ const chartsContainer = classnames(
 
 // Imported through Vite so each image gets a content-hashed URL: a changed
 // image is never served from a stale browser or Cloudflare cache
-const images = import.meta.globEager('../assets/projects/*.webp')
+const images = import.meta.glob('../assets/projects/*.webp', {
+  eager: true,
+}) as Record<string, { default: string }>
 const imageUrl = (project: Project) =>
   images[`../assets/projects/${project.code}.webp`]?.default as string
 
