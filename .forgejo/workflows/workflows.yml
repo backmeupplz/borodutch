@@ -1,21 +1,30 @@
 name: Compile and lint code
-
 on:
   pull_request:
     types: [synchronize, opened]
-
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   compile-code:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install modules
+      # node_modules itself is cached: a hit skips the install entirely
+      - id: modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .yarn/install-state.gz
+          key: modules-${{ runner.os }}-22-${{ hashFiles('yarn.lock') }}
+      - if: steps.modules.outputs.cache-hit != 'true'
         run: yarn install --immutable
-      - name: Compile code
-        run: yarn tsc --skipLibCheck
-      - name: Lint code
-        run: yarn lint
+      # Independent checks run in parallel; any failure fails the step
+      - run: |
+          yarn -s tsc --skipLibCheck &
+          yarn -s lint &
+          for job in $(jobs -p); do wait $job || exit 1; done
