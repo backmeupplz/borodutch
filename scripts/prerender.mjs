@@ -56,6 +56,10 @@ try {
     const html = (await page.content())
       .replaceAll(`${origin}/`, '/')
       .replace(/<link rel="stylesheet"[^>]*? href="(\/assets\/[^"]+\.css)"[^>]*>/, (_, href) => `<style>${readFileSync(join(dir, href), 'utf8')}</style>`)
+      // Cloudflare's Rocket Loader would delay the app's script until its own loader ran
+      .replace(/<script type="module"(?![^>]*data-cfasync)/g, '<script type="module" data-cfasync="false"')
+      // Cloudflare would swap email links for a script that decodes them; these comments keep them as they are
+      .replace(/<a [^>]*href="mailto:[^"]*"[^>]*>[\s\S]*?<\/a>/g, (a) => `<!--email_off-->${a}<!--/email_off-->`)
     if (errors.length) throw new Error(`${route}: ${errors.join('; ')}`)
     if (html.includes(origin)) throw new Error(`${route}: the page wrote ${origin} into its HTML`)
     const out = fileFor(route) ?? join(dir, `${route}.html`)

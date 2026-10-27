@@ -92,7 +92,9 @@
         ]
       }
     </script>
-    <script defer src="https://lumen.borodutch.com/l.js"></script>
+    <!-- data-cfasync="false": Cloudflare's Rocket Loader leaves the script alone instead of delaying it (the app's
+         own script gets it in scripts/prerender.mjs, since Vite rewrites that tag) -->
+    <script defer data-cfasync="false" src="https://lumen.borodutch.com/l.js"></script>
   </head>
   <body class="bg-black">
     <noscript>
