@@ -3,7 +3,7 @@ module.exports = {
   purge: ['./public/index.html', './src/**/!(tailwind).{ts,tsx}'],
   theme: {
     fontFamily: {
-      sans: ['Noto Sans'],
+      sans: ['Noto Sans', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
     },
     extend: {
       colors: {

@@ -71,9 +71,9 @@ export default function Profile() {
           people used my apps today
         </NumberOfUsersAuxiliaryText>
         <BodyText>
-          Updated daily. Curious how I calculate this number? Check out the code{' '}
+          Updated daily. Curious how I calculate this number? Check out{' '}
           <Link url="https://github.com/backmeupplz/borodutch-stats/blob/master/src/helpers/userCount.ts">
-            here
+            the code that counts it
           </Link>
           .
         </BodyText>

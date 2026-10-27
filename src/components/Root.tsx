@@ -13,7 +13,7 @@ const root = classnames(
 )
 const Root: FC = ({ children }) => {
   return (
-    <div
+    <main
       className={root}
       style={
         {
@@ -25,7 +25,7 @@ const Root: FC = ({ children }) => {
       }
     >
       {children}
-    </div>
+    </main>
   )
 }
 
