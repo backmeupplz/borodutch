@@ -69,12 +69,22 @@ const projects: Project[] = [
     },
   },
   {
+    title: 'Tugport',
+    code: 'tugport',
+    link: 'https://tugport.com',
+    image: 'wide',
+    description: () => [
+      'Self-hosted alternative to Heroku and Vercel in one Rust binary: it builds every git push, switches traffic once the new version is healthy, and moves an Easypanel or Coolify server over in one command. My main server runs on it.',
+      "It's [open source](https://github.com/backmeupplz/tugport).",
+    ],
+  },
+  {
     title: 'Plain Wallet',
     code: 'plainwallet',
     link: 'https://plainwallet.app',
     image: 'wide',
     description: () => [
-      'Very minimal EVM wallet for Chrome, Firefox, Safari, Android, iPhone and Mac: about 1,400 lines of TypeScript you can read in an evening.',
+      'Very minimal EVM wallet for Chrome, Firefox, Safari, Android, iPhone and Mac: about 2,850 lines of TypeScript you can read in an evening.',
       "It's [open source](https://github.com/backmeupplz/plainwallet).",
     ],
   },

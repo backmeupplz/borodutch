@@ -2,6 +2,7 @@ import type { ProjectCount, ProjectsData } from 'helpers/projectsData'
 
 type ProjectCode =
   | keyof ProjectCount
+  | 'tugport'
   | 'plainwallet'
   | 'plain'
   | 'quilcast'

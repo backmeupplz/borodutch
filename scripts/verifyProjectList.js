@@ -49,6 +49,7 @@ assert.deepStrictEqual(
   ),
   [
     ['Veydrift', 'veydrift', 'https://veydrift.com'],
+    ['Tugport', 'tugport', 'https://tugport.com'],
     ['Plain Wallet', 'plainwallet', 'https://plainwallet.app'],
     ['plain', 'plain', 'https://getplain.org'],
     ['Quilcast', 'quilcast', 'https://quilcast.com'],
