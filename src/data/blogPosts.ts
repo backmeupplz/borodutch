@@ -7,6 +7,14 @@ export interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    title:
+      'I moved my whole server off Easypanel with one command, and five things broke',
+    description:
+      "On October 24 I moved 14 projects and 57 services from Easypanel to Tugport with one command. Here's how the move works, the five bugs it found, and the mistak...",
+    link: 'https://blog.borodutch.com/moved-my-server-off-easypanel-with-one-command/',
+    date: '2026-10-27T16:00:00.000Z',
+  },
+  {
     title: 'I rebuilt Voicy with agents instead of rewriting it myself',
     description:
       'How I used Symphony, OpenClaw, Codex, a home server, Telegram Web QA, and a Windows GPU worker to revive Voicy as an agent-driven maintenance loop.',
@@ -33,13 +41,6 @@ const blogPosts: BlogPost[] = [
       "I love AI; it's the most important invention of the century. It has already unlocked so much creativity and technical progress, and what's next is yet to be se...",
     link: 'https://blog.borodutch.com/humans-must-not-apply/',
     date: '2025-03-09T17:55:25.000Z',
-  },
-  {
-    title: 'My 2024 wrap-up is free',
-    description:
-      "How 2024 affected my thinking, what I did 180 on, which books I've read are the best, and my plans for 2025",
-    link: 'https://blog.borodutch.com/my-2024-wrap-is-free/',
-    date: '2025-01-02T23:17:44.000Z',
   },
 ]
 
