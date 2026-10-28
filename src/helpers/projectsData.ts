@@ -178,6 +178,12 @@ export interface ProjectsData {
     userDaily: CountAggregation[]
     userCount: number
   }
+  videoDownloadBot?: {
+    userDaily: CountAggregation[]
+    userCount: number
+    chatDaily: CountAggregation[]
+    chatCount: number
+  }
   mt?: {
     userDaily: CountAggregation[]
     userCount: number

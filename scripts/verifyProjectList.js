@@ -60,6 +60,7 @@ assert.deepStrictEqual(
     ['MyGround', 'myground', 'https://myground.online'],
     ['Banofbot', 'banofbot', 'https://t.me/banofbot'],
     ['Randy Marsh', 'randy', 'https://t.me/randymbot'],
+    ['VideoDownloadBot', 'videoDownloadBot', 'https://t.me/videodownloadbot'],
     ['Todorant', 'todorant', 'https://todorant.com'],
     ['Shieldy', 'shieldy', 'https://t.me/shieldy_bot'],
     ['Borodutch.com', 'borodutch', 'https://borodutch.com'],

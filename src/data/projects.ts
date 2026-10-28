@@ -268,6 +268,36 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'VideoDownloadBot',
+    code: 'videoDownloadBot',
+    link: 'https://t.me/videodownloadbot',
+    image: 'icon',
+    description: ({ videoDownloadBot }) => [
+      'Telegram bot that downloads videos from YouTube, TikTok, Instagram, X and hundreds of other sites. Send it a link, or mention it in any chat.',
+      hasPositiveNumbers(
+        videoDownloadBot?.userCount,
+        videoDownloadBot?.chatCount
+      ) &&
+        `${formatNumber(videoDownloadBot?.userCount)} users in ${formatNumber(
+          videoDownloadBot?.chatCount
+        )} chats since counting started in October 2026.`,
+      "It's [open source](https://github.com/Borodutch/VideoDownloadBot).",
+    ],
+    charts: ({ videoDownloadBot }, showMore) =>
+      videoDownloadBot
+        ? [
+            {
+              title: 'New users per day',
+              data: countSeries(videoDownloadBot.userDaily, showMore),
+            },
+            {
+              title: 'New chats per day',
+              data: countSeries(videoDownloadBot.chatDaily, showMore),
+            },
+          ]
+        : [],
+  },
+  {
     title: 'Todorant',
     code: 'todorant',
     link: 'https://todorant.com',

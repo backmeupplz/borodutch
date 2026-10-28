@@ -51,6 +51,11 @@ export default function projectSummaryStat(
       )
     case 'temply':
       return stat(projectsData.temply?.userCount, 'users')
+    case 'videoDownloadBot':
+      return (
+        stat(projectsData.videoDownloadBot?.userCount, 'users') ||
+        stat(projectsData.videoDownloadBot?.chatCount, 'chats')
+      )
     default:
       return undefined
   }
