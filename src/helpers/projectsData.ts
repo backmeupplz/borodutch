@@ -199,8 +199,10 @@ export const projectsData = proxy({
   projectsData: {} as ProjectsData,
 })
 
+// Details already loaded for an opened project are a superset of its summary entry: keep them when the summary
+// lands late, or its charts lose their history
 void fetchJson<ProjectsData>(`${baseUrl}/summary`, {}).then((data) => {
-  projectsData.projectsData = data
+  projectsData.projectsData = { ...data, ...projectsData.projectsData }
 })
 
 export const projectDetails = proxy({
@@ -216,6 +218,7 @@ export function loadProjectData(code: string) {
     return
   }
   loadingProjects[code] = true
+  projectDetails.failed[code] = false
   void fetchJson<ProjectsData>(`${baseUrl}/stats/${code}`, {}).then(
     (details) => {
       loadingProjects[code] = false

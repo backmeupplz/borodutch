@@ -165,6 +165,9 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
       {opened && project.charts && !detailsLoaded && detailFailed && (
         <BodyText>Stats are unavailable right now, try again later.</BodyText>
       )}
+      {charts && !charts.some((chart) => chart.data.values.length) && (
+        <BodyText>No stats yet, check back tomorrow.</BodyText>
+      )}
       {charts && (
         <div className={chartsContainer}>
           {charts.map((chart) => (
