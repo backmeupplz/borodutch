@@ -22,6 +22,6 @@ export default function jevAntispamDescription(
   return [
     'Telegram anti-spam bot powered by the Jev model.',
     liveNumbers,
-    'Try it [on Telegram](https://t.me/jev_antispam_bot). It is [open source](https://github.com/backmeupplz/jev_antispam_bot).',
+    'Try it [on Telegram](https://t.me/jev_antispam_bot), more on [jev.borodutch.com](https://jev.borodutch.com). It is [open source](https://github.com/backmeupplz/jev_antispam_bot).',
   ]
 }

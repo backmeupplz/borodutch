@@ -233,7 +233,7 @@ const projects: Project[] = [
         `Banofbot has handled ${formatNumber(
           banofbot?.requestCount
         )} votekick requests in ${formatNumber(banofbot?.chatCount)} chats.`,
-      "It's [open source](https://github.com/backmeupplz/banofbot).",
+      "More on [banofbot.borodutch.com](https://banofbot.borodutch.com). It's [open source](https://github.com/backmeupplz/banofbot).",
     ],
     charts: ({ banofbot }, showMore) =>
       banofbot
@@ -264,7 +264,7 @@ const projects: Project[] = [
         `Randy has run ${formatNumber(
           randym?.raffleCount
         )} raffles in ${formatNumber(randym?.chatCount)} chats.`,
-      "It's [open source](https://github.com/backmeupplz/randymbot).",
+      "More on [randy.borodutch.com](https://randy.borodutch.com). It's [open source](https://github.com/backmeupplz/randymbot).",
     ],
   },
   {
@@ -281,7 +281,7 @@ const projects: Project[] = [
         `${formatNumber(videoDownloadBot?.userCount)} users in ${formatNumber(
           videoDownloadBot?.chatCount
         )} chats since counting started in October 2026.`,
-      "It's [open source](https://github.com/Borodutch/VideoDownloadBot).",
+      "More on [videodl.borodutch.com](https://videodl.borodutch.com). It's [open source](https://github.com/Borodutch/VideoDownloadBot).",
     ],
     charts: ({ videoDownloadBot }, showMore) =>
       videoDownloadBot
