@@ -381,7 +381,7 @@ const projects: Project[] = [
         )} users who created ${formatNumber(
           temply?.templatesCount
         )} templates.`,
-      "It's [open source](https://github.com/backmeupplz/temply).",
+      "More on [temply.borodutch.com](https://temply.borodutch.com). It's [open source](https://github.com/backmeupplz/temply).",
     ],
     charts: ({ temply }, showMore) =>
       temply
