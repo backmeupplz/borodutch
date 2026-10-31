@@ -27,11 +27,11 @@
     ]
   },
   "dependencies": {
-    "preact": "^10.5.15",
+    "preact": "^10.29.8",
     "valtio": "^1.2.6"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.1.5",
+    "@preact/preset-vite": "^2.10.6",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
