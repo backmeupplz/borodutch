@@ -22,6 +22,7 @@ import Loader from 'components/Loader'
 import Project from 'models/Project'
 import formatNumber from 'helpers/formatNumber'
 import projectSummaryStat from 'helpers/projectSummaryStat'
+import repoStatsLine from 'helpers/repoStatsLine'
 import showMoreData from 'helpers/showMoreData'
 
 const container = classnames(
@@ -84,6 +85,7 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
   const { projectsData } = useSnapshot(baseProjectsData)
   const { showMoreData: showMore } = useSnapshot(showMoreData)
   const projectStat = projectSummaryStat(projectsData, project.code)
+  const repoStats = repoStatsLine(projectsData.github?.projects[project.code])
   const detailFailed = failed[project.code]
   const detailsLoaded = loaded[project.code]
   const charts =
@@ -122,6 +124,11 @@ const ProjectComponent: FC<{ project: Project }> = ({ project }) => {
                 {projectStat && (
                   <NumberOfProjectUsersText>
                     {formatNumber(projectStat.count)} {projectStat.label}
+                  </NumberOfProjectUsersText>
+                )}
+                {repoStats && (
+                  <NumberOfProjectUsersText>
+                    {repoStats}
                   </NumberOfProjectUsersText>
                 )}
               </div>

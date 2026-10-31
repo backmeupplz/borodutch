@@ -87,7 +87,17 @@ export interface VeydriftDay {
   newPlayers: number
 }
 
+export interface RepoStats {
+  stars: number
+  downloads: number
+}
+
 export interface ProjectsData {
+  // GitHub stars and release (GitHub + Forgejo) and package downloads
+  github?: RepoStats & {
+    repos: number
+    projects: { [code: string]: RepoStats | undefined }
+  }
   veydrift?: {
     summary: {
       players: number
