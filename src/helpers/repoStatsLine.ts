@@ -1,13 +1,17 @@
 import formatNumber from 'helpers/formatNumber'
 import type { RepoStats } from 'helpers/projectsData'
 
-const count = (n: number, word: string) =>
-  n > 0 && `${formatNumber(n)} ${word}${n === 1 ? '' : 's'}`
+// Small numbers hurt more than they help, so only show the impressive ones
+const count = (n: number, min: number, word: string) =>
+  n >= min && `${formatNumber(n)} ${word}s`
 
-// "956 GitHub stars · 1 234 downloads", or '' when both are zero
+// "956 GitHub stars · 41 228 downloads", or '' when neither clears its bar
 export default function repoStatsLine(stats?: RepoStats) {
   return stats
-    ? [count(stats.stars, 'GitHub star'), count(stats.downloads, 'download')]
+    ? [
+        count(stats.stars, 100, 'GitHub star'),
+        count(stats.downloads, 10_000, 'download'),
+      ]
         .filter(Boolean)
         .join(' · ')
     : ''
