@@ -139,6 +139,16 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'Vancouver in code',
+    code: 'vancouver',
+    link: 'https://vancouver.borodutch.com',
+    image: 'wide',
+    description: () => [
+      'The whole Lower Mainland drawn in code as an isometric city you can fly around in your browser, built from OpenStreetMap and LiDAR with every building, street and tree. Live weather and daylight, real TransLink buses and trains, planes overhead, ships in the harbour, traffic, a lofi radio and a delivery van you can drive all run on top of it as plugins.',
+      "It's [open source](https://github.com/backmeupplz/vancouver).",
+    ],
+  },
+  {
     title: 'Jev Antispam',
     code: 'jevAntispam',
     link: 'https://t.me/jev_antispam_bot',

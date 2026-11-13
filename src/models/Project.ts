@@ -9,6 +9,7 @@ type ProjectCode =
   | 'agentboard'
   | 'absplus'
   | 'meshplus'
+  | 'vancouver'
 
 export interface ChartSeries {
   labels: string[]
