@@ -149,6 +149,35 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'Sendclap',
+    code: 'sendclap',
+    link: 'https://sendclap.com',
+    image: 'wide',
+    description: () => [
+      "One page for memberships, tips and digital products, paid by card or crypto at a flat 1% fee. Card payments go straight to the creator's own Stripe account, and crypto from any token on any chain lands as USDC on Base in their wallet, so Sendclap never holds the money.",
+      'Its [SDKs are open source](https://github.com/backmeupplz/sendclap-sdk).',
+    ],
+  },
+  {
+    title: 'Maple Minute',
+    code: 'mapleminute',
+    link: 'https://mapleminute.com',
+    image: 'wide',
+    description: () => [
+      'Federal incorporation for Ontario and BC businesses in one form for $19.99 plus government fees, with a yearly plan that files everything after.',
+    ],
+  },
+  {
+    title: 'Spinwell',
+    code: 'spinwell',
+    link: 'https://spinwell.app',
+    image: 'wide',
+    description: () => [
+      'A small, fast player for your own Navidrome or OpenSubsonic server, native on Android and iPhone. Browse albums, artists and playlists, download music for offline listening and pick up right where you left off. No ads, no analytics.',
+      "It's [open source](https://github.com/backmeupplz/spinwell).",
+    ],
+  },
+  {
     title: 'Jev Antispam',
     code: 'jevAntispam',
     link: 'https://t.me/jev_antispam_bot',

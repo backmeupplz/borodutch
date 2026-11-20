@@ -10,6 +10,9 @@ type ProjectCode =
   | 'absplus'
   | 'meshplus'
   | 'vancouver'
+  | 'sendclap'
+  | 'mapleminute'
+  | 'spinwell'
 
 export interface ChartSeries {
   labels: string[]

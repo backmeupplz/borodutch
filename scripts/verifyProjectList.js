@@ -55,6 +55,10 @@ assert.deepStrictEqual(
     ['Quilcast', 'quilcast', 'https://quilcast.com'],
     ['Agentboard', 'agentboard', 'https://agentboard.win'],
     ['Mesh+', 'meshplus', 'https://meshplus.app'],
+    ['Vancouver in code', 'vancouver', 'https://vancouver.borodutch.com'],
+    ['Sendclap', 'sendclap', 'https://sendclap.com'],
+    ['Maple Minute', 'mapleminute', 'https://mapleminute.com'],
+    ['Spinwell', 'spinwell', 'https://spinwell.app'],
     ['Jev Antispam', 'jevAntispam', 'https://t.me/jev_antispam_bot'],
     ['Voicy', 'voicy', 'https://t.me/voicybot'],
     ['MyGround', 'myground', 'https://myground.online'],
@@ -76,8 +80,11 @@ for (const project of projects.filter((project) => project.image)) {
   )
 }
 // Every project links to its source code (Jev's link lives in
-// jevAntispamDescription, which verifyStatsFallbacks checks verbatim)
-for (const project of projects.filter((p) => p.code !== 'jevAntispam')) {
+// jevAntispamDescription, which verifyStatsFallbacks checks verbatim;
+// Maple Minute is closed source)
+for (const project of projects.filter(
+  (p) => !['jevAntispam', 'mapleminute'].includes(p.code)
+)) {
   assert.ok(
     /open source[^(]*\(https:\/\/github\.com\//.test(
       project.description({}).filter(Boolean).join(' ')
