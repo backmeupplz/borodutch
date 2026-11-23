@@ -59,6 +59,7 @@ assert.deepStrictEqual(
     ['Sendclap', 'sendclap', 'https://sendclap.com'],
     ['Maple Minute', 'mapleminute', 'https://mapleminute.com'],
     ['Spinwell', 'spinwell', 'https://spinwell.app'],
+    ['Plain APK', 'plainapk', 'https://plainapk.com'],
     ['Jev Antispam', 'jevAntispam', 'https://t.me/jev_antispam_bot'],
     ['Voicy', 'voicy', 'https://t.me/voicybot'],
     ['MyGround', 'myground', 'https://myground.online'],

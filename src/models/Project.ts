@@ -13,6 +13,7 @@ type ProjectCode =
   | 'sendclap'
   | 'mapleminute'
   | 'spinwell'
+  | 'plainapk'
 
 export interface ChartSeries {
   labels: string[]

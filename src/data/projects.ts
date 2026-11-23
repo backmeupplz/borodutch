@@ -178,6 +178,16 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'Plain APK',
+    code: 'plainapk',
+    link: 'https://plainapk.com',
+    image: 'wide',
+    description: () => [
+      'A plain Android app store that installs apps straight from their GitHub, Forgejo and GitLab releases and keeps them updated silently in the background. It has no backend, no account and no trackers, and its catalogue covers every IzzyOnDroid and F-Droid app that ships an APK in its releases.',
+      "It's [open source](https://github.com/backmeupplz/plainapk).",
+    ],
+  },
+  {
     title: 'Jev Antispam',
     code: 'jevAntispam',
     link: 'https://t.me/jev_antispam_bot',
