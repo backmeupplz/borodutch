@@ -188,6 +188,16 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'plainscreener',
+    code: 'plainscreener',
+    link: 'https://plainscreener.com',
+    image: 'wide',
+    description: () => [
+      'A fast DEX screener for Base with live charts, trades, liquidity and volume for every Uniswap, Aerodrome and PancakeSwap pool. It indexes everything straight from the chain with no third-party price API, renders pages on the server and draws its charts with one small Rust library that runs both there and in the browser.',
+      "It's [open source](https://github.com/backmeupplz/plainscreener).",
+    ],
+  },
+  {
     title: 'Jev Antispam',
     code: 'jevAntispam',
     link: 'https://t.me/jev_antispam_bot',
