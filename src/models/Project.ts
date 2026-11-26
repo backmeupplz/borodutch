@@ -13,6 +13,7 @@ type ProjectCode =
   | 'sendclap'
   | 'mapleminute'
   | 'spinwell'
+  | 'homestill'
   | 'plainapk'
   | 'plainscreener'
 

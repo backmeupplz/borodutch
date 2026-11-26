@@ -178,6 +178,16 @@ const projects: Project[] = [
     ],
   },
   {
+    title: 'Homestill',
+    code: 'homestill',
+    link: 'https://homestill.app',
+    image: 'wide',
+    description: () => [
+      'A small, fast Home Assistant app, native on Android and iPhone, that does two things: controls your devices room by room and shows your cameras live with low latency. No dashboards to build, no account, no analytics; it talks only to your own server. Not affiliated with Home Assistant.',
+      "It's [open source](https://github.com/backmeupplz/homestill).",
+    ],
+  },
+  {
     title: 'Plain APK',
     code: 'plainapk',
     link: 'https://plainapk.com',
